@@ -1,0 +1,44 @@
+﻿@import '../../Assets/Theme.scss';
+.agrega-button-group {
+
+    .button-container {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        margin-left: -65px;
+        width: 130px;
+        height: 40px;
+        text-align: center;
+
+        button {
+            outline: none;
+            height: 40px;
+            text-align: center;
+            width: 110px;
+            border-radius: 40px;
+            background: #fff;
+            border: 2px solid $main;
+            color: $main;
+            letter-spacing: 1px;
+            text-shadow: 0;
+
+            font: {
+                size: 12px;
+                weight: bold;
+            }
+
+            cursor: pointer;
+            transition: all 0.25s ease;
+
+            &:hover {
+                color: white;
+                background: $main;
+            }
+
+            &:active {
+                letter-spacing: 2px;
+            }
+        }
+    }
+}
+

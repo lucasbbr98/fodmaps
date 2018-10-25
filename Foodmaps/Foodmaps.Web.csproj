@@ -1,0 +1,118 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\external\favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="src\app\App.ts" />
+    <None Remove="src\app\Navbar\Navbar.ts" />
+    <None Remove="src\Directives\Directives.ts" />
+    <None Remove="src\Directives\SearchPipe\SearchPipe.ts" />
+    <None Remove="src\Directives\StrengthBar\StrengthBar.ts" />
+    <None Remove="src\Global\GlobalComponent.ts" />
+    <None Remove="src\main.ts" />
+    <None Remove="src\Routes\404.module.ts" />
+    <None Remove="src\Routes\404.module.ts~RF169d228.TMP" />
+    <None Remove="src\Routes\404\404.ts" />
+    <None Remove="src\Routes\Account.module.ts" />
+    <None Remove="src\Routes\Account\Actions\PatientInfo.ts" />
+    <None Remove="src\Routes\Account\Actions\Patients.ts" />
+    <None Remove="src\Routes\Account\Actions\Researches\Researches.ts" />
+    <None Remove="src\Routes\Account\Login\Login.ts" />
+    <None Remove="src\Routes\Account\Profile\Profile.ts" />
+    <None Remove="src\Routes\Account\Register\Additional\RegisterAdditional.ts" />
+    <None Remove="src\Routes\Account\Register\Register.ts" />
+    <None Remove="src\Routes\Admin\Admin.ts" />
+    <None Remove="src\Routes\Contact.module.ts" />
+    <None Remove="src\Routes\Events.module.ts" />
+    <None Remove="src\Routes\Home.module.ts" />
+    <None Remove="src\Routes\Home\Home.ts" />
+    <None Remove="src\Routes\Home\Home.ts~RF15f2c15.TMP" />
+    <None Remove="src\Routes\ModuleHelper.ts" />
+    <None Remove="src\Directives\Button\Button.ts" />
+    <None Remove="src\Directives\TextBox\TextBox.ts" />
+    <None Remove="src\Directives\TextSpin\TextSpinner.ts" />
+    <None Remove="src\Routes\Modules\Admin.ts" />
+    <None Remove="src\Routes\Modules\Events.ts~RF1bde0f5.TMP" />
+    <None Remove="src\Routes\Modules\ModuleHelper.ts~RF1bca652.TMP" />
+    <None Remove="src\Routes\Modules\Questionnaire.ts" />
+    <None Remove="src\Routes\Questionnaire\Questions\QuestionnaireQuestions.ts" />
+    <None Remove="src\Routes\Terms\Terms.ts" />
+    <None Remove="src\Services\Drag\DragService.ts" />
+    <None Remove="src\Services\Errors\ErrorService.ts" />
+    <None Remove="src\Services\LoaderService.ts" />
+    <None Remove="src\Services\Models\BuilderModels.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.4" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+    <PackageReference Include="StructureMap.AspNetCore" Version="1.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Foodmaps.Jwt\Foodmaps.Jwt.csproj" />
+    <ProjectReference Include="..\Foodmaps.Models\Foodmaps.Models.csproj" />
+    <ProjectReference Include="..\Foodmaps.MySQL\Foodmaps.MySQL.csproj" />
+    <ProjectReference Include="..\Foodmaps.Services\Foodmaps.Services.csproj" />
+    <ProjectReference Include="..\Foodmaps.Setup\Foodmaps.Setup.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\App.ts" />
+    <TypeScriptCompile Include="src\app\Navbar\Navbar.ts" />
+    <TypeScriptCompile Include="src\Directives\Directives.ts" />
+    <TypeScriptCompile Include="src\Directives\SearchPipe\SearchPipe.ts" />
+    <TypeScriptCompile Include="src\Directives\StrengthBar\StrengthBar.ts" />
+    <TypeScriptCompile Include="src\Global\GlobalComponent.ts" />
+    <TypeScriptCompile Include="src\Main.ts" />
+    <TypeScriptCompile Include="src\Routes\Account\Actions\Patients\Info\PatientInfo.ts" />
+    <TypeScriptCompile Include="src\Routes\Account\Actions\Patients\Patients.ts" />
+    <TypeScriptCompile Include="src\Routes\Account\Actions\Researches\Researches.ts" />
+    <TypeScriptCompile Include="src\Routes\Account\Profile\Profile.ts" />
+    <TypeScriptCompile Include="src\Routes\Account\Register\Additional\RegisterAdditional.ts" />
+    <TypeScriptCompile Include="src\Routes\Admin\Admin.ts" />
+    <TypeScriptCompile Include="src\Routes\Modules\Admin.ts" />
+    <TypeScriptCompile Include="src\Routes\Modules\Home.ts" />
+    <TypeScriptCompile Include="src\Routes\Modules\Account.ts" />
+    <TypeScriptCompile Include="src\Routes\Modules\404.ts" />
+    <TypeScriptCompile Include="src\Routes\404\404.ts" />
+    <TypeScriptCompile Include="src\Routes\Account\Login\Login.ts" />
+    <TypeScriptCompile Include="src\Routes\Account\Register\Register.ts" />
+    <TypeScriptCompile Include="src\Routes\Home\Home.ts" />
+    <TypeScriptCompile Include="src\Routes\Modules\ModuleHelper.ts" />
+    <TypeScriptCompile Include="src\Directives\Button\Button.ts" />
+    <TypeScriptCompile Include="src\Directives\TextBox\TextBox.ts" />
+    <TypeScriptCompile Include="src\Directives\TextSpin\TextSpinner.ts" />
+    <TypeScriptCompile Include="src\Routes\Modules\Questionnaire.ts" />
+    <TypeScriptCompile Include="src\Routes\Questionnaire\Dashboard\QuestionnaireDashboard.ts" />
+    <TypeScriptCompile Include="src\Routes\Questionnaire\Questions\QuestionnaireQuestions.ts" />
+    <TypeScriptCompile Include="src\Routes\Terms\Terms.ts" />
+    <TypeScriptCompile Include="src\Services\Drag\DragService.ts" />
+    <TypeScriptCompile Include="src\Services\Errors\ErrorService.ts" />
+    <TypeScriptCompile Include="src\Services\LoaderService.ts" />
+    <TypeScriptCompile Include="src\Services\Models\BuilderModels.ts" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Amazon.ElasticBeanstalk.Tools" Version="1.1.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\external\favicon.ico" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="src\Routes\Account\Actions\Researches\Info\" />
+  </ItemGroup>
+</Project>
+

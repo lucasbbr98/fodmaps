@@ -1,0 +1,115 @@
+﻿@import '../../../../Assets/Theme.scss';
+input {
+    padding: 4px 8px;
+    border-radius: $borderRadius;
+    display: block;
+    padding: 0.125em 0.125em 0.0625em;
+    font-size: 1em;
+    line-height: 1.9;
+    width: 100%;
+    border-top-width: 0;
+    border-top-color: transparent;
+    border-left-width: 0;
+    border-left-color: transparent;
+    border-right-width: 0;
+    border-right-color: transparent;
+    border-bottom: 1.5px solid $gray;
+    background: none;
+    box-shadow: none;
+    -webkit-transition: all 0.28s ease;
+    transition: all 0.28s ease;
+}
+
+
+input[type="radio"] + label,
+input[type="checkbox"] + label:before {
+    width: 100%;
+    padding: 1em;
+    line-height: 1.4;
+    background-color: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: $borderRadius;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}
+
+
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+    outline: 0;
+    border-color: $main;
+}
+
+input[type="radio"] {
+    display: none;
+
+    + label:first-of-type {
+        border-top-left-radius: $borderRadius;
+        border-bottom-left-radius: $borderRadius;
+    }
+
+    + label:last-of-type {
+        border-top-right-radius: $borderRadius;
+        border-bottom-right-radius: $borderRadius;
+    }
+}
+
+input[type="radio"] + label,
+select {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    float: left;
+    border-radius: 0;
+}
+
+input[type="radio"]:checked + label,
+input:checked + label:before {
+    background-color: $main;
+    color: #fff;
+    border-color: $main;
+}
+
+input[type="checkbox"] {
+
+    + label {
+        position: relative;
+        display: block;
+        padding-left: 1.6em;
+    }
+
+    + label:before {
+        position: absolute;
+        top: 0.2em;
+        left: 0;
+        display: block;
+        width: 1em;
+        height: 1em;
+        padding: 0;
+        content: "";
+    }
+
+    + label:after {
+        position: absolute;
+        top: 0.45em;
+        left: 0.2em;
+        font-size: 0.8em;
+        color: #fff;
+        opacity: 0;
+        font-family: FontAwesome;
+        content: "\f00c";
+    }
+}
+
+
+input[type="text"]:focus {
+    border-color: $main;
+    -webkit-box-shadow: 0 8px 6px -6px $main;
+    -moz-box-shadow: 0 8px 6px -6px $main;
+    box-shadow: 0 8px 6px -6px $main;
+    //box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
+    outline: none;
+}

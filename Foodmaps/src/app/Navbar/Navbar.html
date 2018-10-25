@@ -1,0 +1,36 @@
+﻿<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div class="navbar navbar-inverse navbar-fixed-top fodmaps-navbar">
+    <a routerLink="/" routerLinkActive="active" class="pull-left fodmaps-logo">
+        <img src="../../Assets/Images/General/Logo/logo.png" alt="logo" height="40" />
+    </a>
+    <div class="container">
+        <div class="navbar-header">
+            <button #navbarToggler type="button" class="navbar-toggle fodmaps-navbar-button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Ver mais">
+                <span class="icon-bar fodmaps-icon-bar"></span>
+                <span class="icon-bar fodmaps-icon-bar"></span>
+                <span class="icon-bar fodmaps-icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right" *ngIf="!loggedIn">
+                <li class="pull-right">
+                    <a (click)="goTo('/conta/login')">Login</a>
+                </li>
+                <li class="pull-right">
+                    <a (click)="goTo('/conta/cadastro')">Cadastre-se</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" *ngIf="loggedIn">
+                <li>
+                    <a (click)="goTo('/conta/perfil')">{{ user.name }}</a>
+                </li>
+                <li *ngIf="isInRole('Admin')">
+                    <a (click)="goTo('/admin/panel')">Admin</a>
+                </li>
+                <li>
+                    <a (click)="goTo('/questionario/painel')">Questionário</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

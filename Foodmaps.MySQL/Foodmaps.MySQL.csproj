@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="SqlQueries.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SqlQueries.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Core" Version="3.3.21.15" />
+    <PackageReference Include="AWSSDK.S3" Version="3.3.17.1" />
+    <PackageReference Include="Dapper" Version="1.50.4" />
+    <PackageReference Include="MySql.Data" Version="8.0.9-dmr" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Foodmaps.Jwt\Foodmaps.Jwt.csproj" />
+    <ProjectReference Include="..\Foodmaps.Models\Foodmaps.Models.csproj" />
+    <ProjectReference Include="..\Foodmaps.Services\Foodmaps.Services.csproj" />
+  </ItemGroup>
+
+</Project>

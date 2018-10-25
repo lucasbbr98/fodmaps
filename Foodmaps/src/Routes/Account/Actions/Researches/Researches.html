@@ -1,0 +1,19 @@
+﻿<div class="container">
+    <div class="row text-center">
+        <div class="col-xs-12">
+            <h3>Pesquisas Cadastradas</h3>
+        </div>
+    </div>
+</div>
+<div class="search-container" data-behaviour="search-on-list">
+    <input [(ngModel)]="searchText" type="text" class="input-query" placeholder="Digite o nome..." />
+    <span class="counter"></span>
+    <div class="list-wrap">
+        <ul class="list" *ngIf="researches">
+            <li class="list-item" data-search-on-list="list-item" *ngFor="let research of researches | searchResearches : searchText"  (click)="seeResearch(research)">
+                <a class="list-item-link">{{research.name}}</a>
+            </li>
+        </ul>
+        <h3 style="color: #808080; margin-top: 20px;" *ngIf="!researches">Nenhuma pesquisa encontrada</h3>
+    </div>
+</div>

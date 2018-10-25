@@ -1,0 +1,32 @@
+﻿{
+  "angularCompilerOptions": {
+    "entryModule": "./src/app/App#AppModule",
+    "genDir": "./ngfactory",
+    "skipMetadataEmit": true
+  },
+  "compilerOptions": {
+    "baseUrl": ".",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "noEmitHelpers": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "target": "es5",
+    "module": "es6",
+    "moduleResolution": "node",
+    "allowUnreachableCode": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [ "node" ]
+  },
+  "include": [ "src" ],
+  "compileOnSave": false
+}

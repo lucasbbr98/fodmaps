@@ -1,0 +1,12 @@
+﻿<div class="form-group agrega-button-group">
+    <div class="button-container">
+        <button [type]= "type"
+                [name]="name"
+                class="{{className}}"
+                [disabled]="disabled"
+                (click)="onClickEvent.emit($event)"
+                aria-label="name">
+            {{name}}
+        </button>
+    </div>
+</div>

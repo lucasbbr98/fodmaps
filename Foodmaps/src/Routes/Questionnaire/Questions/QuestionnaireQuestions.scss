@@ -1,0 +1,469 @@
+﻿* {
+    // IMPORTANT
+    box-sizing: border-box;
+}
+
+h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+$primary-color: #4285f4;
+
+.quest-wrapper aw-wizard-navigation-bar.horizontal.small ul.steps-indicator li:after {
+    position: absolute;
+    left: -17px;
+    width: 14px;
+    height: 14px;
+    content: '';
+    line-height: 14px;
+    -webkit-transition: .25s;
+    transition: .25s;
+    border-radius: 100%;
+    background-color: #e6e6e6;
+}
+
+.quest-wrapper .horizontal.small ul.steps-indicator li:not(:last-child):before {
+    background-color: #e6e6e6;
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 0;
+    top: 0;
+    left: 0;
+}
+
+.question-img {
+    max-width: 300px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 2px;
+    padding: 15px;
+}
+
+.card-shadow {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card-shadow:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+
+.back {
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 10px 0 40px;
+}
+
+.back h4 {
+    color: #4A4F6A;
+    font-size: 16px;
+    transition: transform 500ms 0s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.back span {
+    opacity: 0;
+    color: #858BA9;
+    font-size: 12px;
+    font-weight: 300;
+    display: inline-block;
+    transform: translateY(10px);
+    transition: transform 500ms 0s cubic-bezier(0.2, 0, 0, 1), opacity 500ms 0s cubic-bezier(0.2, 0, 0, 1)
+}
+
+.back div {
+    top: 11px;
+    left: 0;
+    content: '';
+    width: 30px;
+    height: 30px;
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(1);
+    background-color: #E9E7F2;
+    transition: transform 400ms 0s cubic-bezier(0.2, 0, 0, 1.6);
+}
+
+.back div::after {
+    top: 0;
+    left: 0;
+    content: '';
+    width: 60px;
+    height: 30px;
+    position: absolute;
+    background-position: 0 0;
+    background-image: url('https://s3-eu-west-1.amazonaws.com/thomascullen-codepen/back.svg');
+    transition: transform 400ms 0s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.back:hover h4 {
+    color: #171922;
+}
+
+.back:hover h4,
+.back:hover span {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.back:hover div {
+    transform: scale(1.1);
+    background-color: white;
+    box-shadow: 0 2px 10px 0 rgba(185,182,198,0.00), 0 1px 3px 0 rgba(175,172,189,0.25);
+}
+
+.back:hover div::after {
+    transform: translateX(-30px);
+}
+
+// BTN BACK e FORWARD
+.btn-control {
+    margin-top: 50px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    padding: 14px 20px;
+    border-radius: 4px;
+    background-color: #37B595;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    font-size: 18px;
+    line-height: 22px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-control:hover {
+    background-color: #1A7F75;
+}
+
+button.previous {
+    background-color: #A2ACAF;
+}
+
+button.previous:hover {
+    background-color: #5A5F61;
+}
+
+
+// BTN RATINGS
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.radio-tile-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    //set dimensions for invisible container
+    .input-container {
+        position: relative;
+        height: 5rem;
+        width: 5rem;
+        margin: 0.5rem;
+        //make actual radio input invisible
+        // + stretch to fill container
+        .radio-button {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            cursor: pointer;
+        }
+        //default tile styles
+        .radio-tile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            border: 2px solid $primary-color;
+            padding: 1rem;
+            transition: transform 300ms ease;
+            border-radius: 50px;
+            font-size: 25px;
+        }
+
+        .icon svg {
+            fill: $primary-color;
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .radio-tile-label {
+            text-align: center;
+            font-size: 1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: $primary-color;
+        }
+        //active tile styles
+        .radio-button:checked + .radio-tile {
+            background-color: $primary-color;
+            border: 2px solid $primary-color;
+            color: white;
+            transform: scale(1.1, 1.1);
+
+            .icon svg {
+                fill: white;
+                background-color: $primary-color;
+            }
+
+            .radio-tile-label {
+                color: white;
+                background-color: $primary-color;
+            }
+        }
+
+        .checked + .radio-tile {
+            background-color: $primary-color;
+            border: 2px solid $primary-color;
+            color: white;
+            transform: scale(1.1, 1.1);
+
+            .icon svg {
+                fill: white;
+                background-color: $primary-color;
+            }
+
+            .radio-tile-label {
+                color: white;
+                background-color: $primary-color;
+            }
+        }
+    }
+}
+
+// SELECT
+/* Container used for styling the custom select, the buttom class adds the bg gradient, corners, etc. */
+.dropdown {
+    position: relative;
+    display: block;
+    margin-top: 0.5em;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 250px;
+}
+
+/* This is the native select, we're making everything the text invisible so we can see the button styles in the wrapper */
+.dropdown select {
+    width: 100%;
+    margin: 0;
+    background: none;
+    border: 1px solid transparent;
+    outline: none;
+    /* Prefixed box-sizing rules necessary for older browsers */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /* Remove select styling */
+    appearance: none;
+    -webkit-appearance: none;
+    /* Magic font size number to prevent iOS text zoom */
+    font-size: 1.25em;
+    /* General select styles: change as needed */
+    /* font-weight: bold; */
+    color: #444;
+    padding: .6em 1.9em .5em .8em;
+    line-height: 1.3;
+    height: 4rem;
+}
+
+.dropdown select,
+label {
+    font-family: AvenirNextCondensed-DemiBold, Corbel, "Lucida Grande","Trebuchet Ms", sans-serif;
+}
+
+/* Custom arrow sits on top of the select - could be an image, SVG, icon font, etc. or the arrow could just baked into the bg image on the select */
+
+.dropdown::after {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 8px;
+    top: 50%;
+    right: 1em;
+    margin-top: -4px;
+    z-index: 2;
+    background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 12'%3E%3Cpolygon fill='rgb(102,102,102)' points='8,12 0,0 16,0'/%3E%3C/svg%3E") 0 0 no-repeat;
+    /* These hacks make the select behind the arrow clickable in some browsers */
+    pointer-events: none;
+}
+
+/* This hides native dropdown button arrow in IE 10/11+ so it will have the custom appearance, IE 9 and earlier get a native select */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .dropdown select::-ms-expand {
+        display: none;
+    }
+    /* Removes the odd blue bg color behind the text in IE 10/11 and sets the text to match the focus style text */
+    select:focus::-ms-value {
+        background: transparent;
+        color: #222;
+    }
+}
+
+/* Firefox >= 2 -- Older versions of FF (v2 - 6) won't let us hide the native select arrow, so we'll just hide the custom icon and go with native styling */
+/* Show only the native arrow */
+body:last-child .dropdown::after, x:-moz-any-link {
+    display: none;
+}
+/* reduce padding */
+body:last-child .dropdown select, x:-moz-any-link {
+    padding-right: .8em;
+}
+
+/* Firefox 7+ -- Will let us hide the arrow, but inconsistently (see FF 30 comment below). We've found the simplest way to hide the native styling in FF is to make the select bigger than its container. */
+/* The specific FF selector used below successfully overrides the previous rule that turns off the custom icon; other FF hacky selectors we tried, like `*>.dropdown::after`, did not undo the previous rule */
+
+/* Set overflow:hidden on the wrapper to clip the native select's arrow, this clips hte outline too so focus styles are less than ideal in FF */
+_::-moz-progress-bar, body:last-child .dropdown {
+    overflow: hidden;
+}
+/* Show only the custom icon */
+_::-moz-progress-bar, body:last-child .dropdown:after {
+    display: block;
+}
+
+_::-moz-progress-bar, body:last-child .dropdown select {
+    /* increase padding to make room for menu icon */
+    padding-right: 1.9em;
+    /* `window` appearance with these text-indent and text-overflow values will hide the arrow FF up to v30 */
+    -moz-appearance: window;
+    text-indent: 0.01px;
+    text-overflow: "";
+    /* for FF 30+ on Windows 8, we need to make the select a bit longer to hide the native arrow */
+    width: 110%;
+}
+
+/* At first we tried the following rule to hide the native select arrow in Firefox 30+ in Windows 8, but we'd rather simplify the CSS and widen the select for all versions of FF since this is a recurring issue in that browser */
+/* @supports (-moz-appearance:meterbar) and (background-blend-mode:difference,normal) {
+.dropdown select { width:110%; }
+}   */
+
+
+/* Firefox 7+ focus style - This works around the issue that -moz-appearance: window kills the normal select focus. Using semi-opaque because outline doesn't handle rounded corners */
+_::-moz-progress-bar, body:last-child .dropdown select:focus {
+    outline: 2px solid rgba(180,222,250, .7);
+}
+
+
+/* Opera - Pre-Blink nix the custom arrow, go with a native select button */
+x:-o-prefocus, .dropdown::after {
+    display: none;
+}
+
+
+/* Hover style */
+.dropdown:hover {
+    border: 1px solid #888;
+}
+
+/* Focus style */
+select:focus {
+    outline: none;
+    box-shadow: 0 0 1px 3px rgba(180,222,250, 1);
+    background-color: transparent;
+    color: #222;
+    border: 1px solid #aaa;
+}
+
+
+/* Firefox focus has odd artifacts around the text, this kills that */
+select:-moz-focusing {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
+option {
+    font-weight: normal;
+}
+
+
+/* These are just demo button-y styles, style as you like */
+.button {
+    border: 1px solid #bbb;
+    border-radius: .3em;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+    background: #f3f3f3; /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
+}
+
+
+@media only screen and (max-width: 600px) {
+    .card-shadow {
+        box-shadow: none;
+    }
+
+    .card-shadow:hover {
+        box-shadow: none;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    h3 {
+        font-size: 20px;
+    }
+
+    .question-img {
+        max-width: 200px;
+    }
+
+    .card-shadow {
+        box-shadow: none;
+    }
+
+    .card-shadow:hover {
+        box-shadow: none;
+    }
+
+    .dropdown select {
+        height: 4rem;
+    }
+
+    .btn-control {
+        margin-top: 35px;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .mediaCssFixer {
+        width: 120%;
+    }
+
+    .back {
+        margin-left: 100px;
+    }
+
+    .centered-content {
+        margin-left: 35px;
+    }
+}
+
+@media only screen and (max-width:325px) {
+    .mediaCssFixer {
+        width: 130%;
+    }
+}

@@ -1,0 +1,74 @@
+﻿<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div class="container form register-additional-form">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>Estamos quase prontos!</h2>
+        </div>
+        <div class="col-xs-12">
+            <h4>Só precisamos saber mais alguns detalhes para que tudo funcione corretamente.</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h4>Qual a sua profissão?</h4>
+        </div>
+
+        <div class="col-xs-12">
+            <label for="user-job">Profissão</label>
+            <select name="user-job" id="user-job" [(ngModel)]="selectedJob">
+                <option *ngFor="let j of jobs" [ngValue]="j">{{j.name}}</option>
+            </select>
+        </div>
+
+        <div class="col-xs-12  margin-top">
+            <h4>Em qual instituição você se formou?</h4>
+        </div>
+        <div class="col-xs-12  margin-top">
+            <ag-textbox placeholder="Instituição"
+                        type="text"
+                        autofocus="true"
+                        [(ngModel)]="university"
+                        min="3"
+                        max="40"
+                        shorterror="Instituição entre 3-40 caracteres"
+                        longerror="Instituição entre 3-40 caracteres">
+            </ag-textbox>
+        </div>
+    </div>
+    <div class="row" *ngIf="selectedJob">
+        <div class="col-xs-12  margin-top" *ngIf="selectedJob.id == 1">
+            <h4>Qual o seu CRN?</h4>
+        </div>
+        <div class="col-xs-12  margin-top" *ngIf="selectedJob.id == 2">
+            <h4>Qual o seu CRM?</h4>
+        </div>
+        <div class="col-xs-12  margin-top" *ngIf="selectedJob.id == 1 || selectedJob.id == 2">
+            <ag-textbox placeholder="Identificação"
+                        type="string"
+                        autofocus="true"
+                        [(ngModel)]="identifier"
+                        pattern="^[0-9]*$"
+                        patternerror="Digite apenas números">
+            </ag-textbox>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h4>Qual o seu CEP?</h4>
+        </div>
+        <div class="col-xs-12 margin-top">
+            <ag-textbox placeholder="CEP"
+                        type="string"
+                        autofocus="true"
+                        aMask="99999-999"
+                        [(ngModel)]="cep">
+            </ag-textbox>
+        </div>
+    </div>
+    <div class="row margin-top">
+        <ag-button name="Enviar"
+                   type="submit"
+                   (click)="save()">
+        </ag-button>
+    </div>
+</div>

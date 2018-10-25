@@ -1,0 +1,194 @@
+﻿<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div class="container" *ngIf="!showAddPatient">
+    <div class="card-profile">
+        <div class="card-profile_visual"></div>
+        <div class="card-profile_user-infos">
+            <span class="infos_name">{{user.name}} {{user.surname}}</span>
+            <span class="infos_nick">Nutricionista</span>
+            <a class="buttonRight" (click)="showAddPatient = true"></a>
+            <a class="buttonLeft" (click)="showAddResearch = true"></a>
+
+        </div>
+        <div class="card-profile_user-stats">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="stats-holder" style="right:30px;">
+                        <div class="user-stats" (click)="showResearches()">
+                            <strong>Pesquisas</strong>
+                            <span>{{researchCount}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="stats-holder" style="left:30px;">
+                        <div class="user-stats" (click)="showPatients()">
+                            <strong>Pacientes</strong>
+                            <span>{{patientCount}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container form register-form" *ngIf="showAddPatient" style="z-index: 20;">
+    <div class="row">
+        <div class="col-xs-2 col-xs-offset-10">
+            <a class="close-btn" (click)="showAddPatient = false">x</a>
+        </div>
+        <div class="col-xs-12">
+            <h1 class="title">Novo paciente</h1>
+        </div>
+    </div>
+    <div class="row margin-top">
+        <div class="col-xs-12 col-sm-6">
+            <ag-textbox placeholder="Nome"
+                        type="text"
+                        autofocus="true"
+                        [(ngModel)]="model.name"
+                        min="3"
+                        max="40"
+                        pattern="^[ A-Za-z\u00C0-\u00ff]+$"
+                        shorterror="Nome entre 3-40 caracteres"
+                        longerror="Nome entre 3-40 caracteres"
+                        patternerror="Nome só pode conter letras e espaços">
+            </ag-textbox>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <ag-textbox placeholder="Sobrenome"
+                        type="text"
+                        autofocus="false"
+                        [(ngModel)]="model.surname"
+                        min="2"
+                        max="70"
+                        pattern="^[ A-Za-z\u00C0-\u00ff]+$"
+                        shorterror="Sobrenome entre 2-70 caracteres"
+                        longerror="Sobrenome entre 2-70 caracteres"
+                        patternerror="Nome só pode conter letras e espaços">
+            </ag-textbox>
+        </div>
+    </div>
+    <div class="row text-center margin-top">
+        <h4 class="text-center bold">Data de nascimento</h4>
+        <div class="col-xs-12 col-sm-4">
+            <label for="bday">Dia</label>
+            <select id="bday" class="round-select fodmaps-select" type="number" name="bday" [(ngModel)]="bday" required>
+                <option [ngValue]="null">Selecione uma opção</option>
+                <option *ngFor="let day of days"
+                        [ngValue]="day">
+                    {{day}}
+                </option>
+            </select>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <label for="bmonth">Mês</label>
+            <select class="round-select" name="bmonth" id="bmonth" [(ngModel)]="bmonth" required>
+                <option [ngValue]="null">Selecione uma opção</option>
+                <option [ngValue]="01">Janeiro</option>
+                <option [ngValue]="02">Fevereiro</option>
+                <option [ngValue]="03">Março</option>
+                <option [ngValue]="04">Abril</option>
+                <option [ngValue]="05">Maio</option>
+                <option [ngValue]="06">Junho</option>
+                <option [ngValue]="07">Julho</option>
+                <option [ngValue]="08">Agosto</option>
+                <option [ngValue]="09">Setembro</option>
+                <option [ngValue]="10">Outubro</option>
+                <option [ngValue]="11">Novembro</option>
+                <option [ngValue]="12">Dezembro</option>
+            </select>
+        </div>
+        <div class="col-xs-12 col-sm-3 fix-position">
+            <ag-textbox placeholder="Ano"
+                        type="number"
+                        autofocus="false"
+                        [valid]="validBYear"
+                        [(ngModel)]="byear"
+                        pattern="[0-9]*">
+            </ag-textbox>
+        </div>
+        <div class="col-xs-12">
+            <span class="text-danger">{{byearError}}</span>
+        </div>
+    </div>
+    <h4 class="text-center bold">Gênero</h4>
+    <div class="row margin-top">
+        <div class="col-xs-12 text-center">
+            <div class="input-group margin-center">
+                <input type="radio" name="gender" value="Masculino" id="gender-male" [(ngModel)]="model.gender" />
+                <label for="gender-male">Masculino</label>
+                <input type="radio" name="gender" value="Feminino" id="gender-female" [(ngModel)]="model.gender" />
+                <label for="gender-female">Feminino</label>
+            </div>
+        </div>
+    </div>
+    <div class="row margin-top">
+        <div class="col-xs-12 col-sm-6">
+            <ag-textbox placeholder="Altura (cm)"
+                        type="number"
+                        autofocus="true"
+                        [(ngModel)]="model.height"
+                        min="1"
+                        max="250"
+                        shorterror="Minímo 1 centímetro"
+                        longerror="Máximo 250 centímetros">
+            </ag-textbox>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <ag-textbox placeholder="Peso (kg)"
+                        type="number"
+                        autofocus="true"
+                        [(ngModel)]="model.weight"
+                        min="1"
+                        max="300"
+                        shorterror="Minímo 1 kilograma"
+                        longerror="Máximo 300 kilogramas">
+            </ag-textbox>
+        </div>
+    </div>
+    <div class="row margin-top">
+        <ag-button name="Enviar"
+                   type="submit"
+                   (click)="createNewPatient()">
+        </ag-button>
+    </div>
+</div>
+
+<div class="container form register-form" *ngIf="showAddResearch" style="z-index: 20; margin-top:32px;">
+    <div class="row">
+        <div class="col-xs-2 col-xs-offset-10">
+            <a class="close-btn" (click)="showAddResearch = false">x</a>
+        </div>
+        <div class="col-xs-12">
+            <h1 class="title">Nova pesquisa</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Digite um nome para criar uma nova pesquisa</h3>
+        </div>
+    </div>
+    <div class="row margin-top">
+        <div class="col-xs-12">
+            <ag-textbox placeholder="Nome"
+                        type="text"
+                        autofocus="true"
+                        [(ngModel)]="qModel.name"
+                        min="3"
+                        max="40"
+                        shorterror="Nome entre 3-40 caracteres"
+                        longerror="Nome entre 3-40 caracteres">
+            </ag-textbox>
+        </div>
+    </div>
+    <div class="row margin-top">
+        <ag-button name="Enviar"
+                   type="submit"
+                   (click)="createNewResearch()">
+        </ag-button>
+    </div>
+</div>
+
+
+

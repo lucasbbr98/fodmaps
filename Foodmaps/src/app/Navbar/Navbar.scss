@@ -1,0 +1,32 @@
+﻿@import "../../Assets/Theme.scss";
+
+.fodmaps-navbar {
+    padding: 0 8px;
+    background-color: #fff;
+    border-color: $gray;
+
+    li {
+        a {
+            font-size: 15px;
+            color: $black;
+        }
+
+        a:hover {
+            color: $main;
+        }
+    }
+}
+.navbar {
+    .fodmaps-navbar-button:hover {
+        background-color: $black;
+    }
+
+    .fodmaps-icon-bar {
+        background-color: $main;
+    }
+}
+
+.fodmaps-logo {
+    padding-left: 15px;
+    padding-top: 5px;
+}

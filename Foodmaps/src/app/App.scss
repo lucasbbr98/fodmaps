@@ -1,0 +1,44 @@
+﻿
+body {
+    padding-bottom: 20px;
+    font-family: 'Open Sans', arial, sans-serif;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0 0 0 0;
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.mobile-fix {
+    margin-top: 50px;
+}
+
+example-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-container > * {
+    width: 100%;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+

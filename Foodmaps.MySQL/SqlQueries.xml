@@ -1,0 +1,1043 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <SQL>
+    <System>
+      <ConnectionString>
+        server=localhost;user id=root;password=Pmlt2998!;database=foodmaps;SslMode=None;Allow User Variables=True;
+      </ConnectionString>
+    </System>
+    <addresses>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `addresses` WHERE `Id` = @Id AND ObsoletedOn IS NULL
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `addresses`
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `addresses`
+					(
+					  `CEP`,
+						`State`,
+						`CreatedBy`,
+						`City`,
+						`Hood`,
+						`Street`
+					) 
+					VALUES 
+					(
+					  @CEP,
+						@State,
+						@CreatedBy,
+						@City,
+						@Hood,
+						@Street
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `addresses`
+					(
+					  `CEP`,
+						`State`,
+						`CreatedBy`,
+						`City`,
+						`Hood`,
+						`Street`
+					) 
+					VALUES 
+					(
+					  @CEP,
+						@State,
+						@CreatedBy,
+						@City,
+						@Hood,
+						@Street
+					);
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `addresses` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `addresses` 
+					SET 
+					  `CEP` = @CEP,
+						`State` = @State,
+						`ModifiedBy` = @ModifiedBy,
+						`City` = @City,
+						`ObsoletedBy` = @ObsoletedBy,
+						`ObsoletedOn` = @ObsoletedOn,
+						`Hood` = @Hood,
+						`Street` = @Street 
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+    </addresses>
+    <answers>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `answers` WHERE `Id` = @Id AND ObsoletedOn IS NULL
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `answers`
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `answers`
+					(
+					  `QuestionnaireId`,
+						`Value`,
+						`CreatedBy`,
+						`Frequency`,
+						`FoodId`
+					) 
+					VALUES 
+					(
+					  @QuestionnaireId,
+						@Value,
+						@CreatedBy,
+						@Frequency,
+						@FoodId
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `answers`
+					(
+					   `QuestionnaireId`,
+						`Value`,
+						`CreatedBy`,
+						`Frequency`,
+						`FoodId`
+					) 
+					VALUES 
+					(
+					  @QuestionnaireId,
+						@Value,
+						@CreatedBy,
+						@Frequency,
+						@FoodId
+					);
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `answers` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `answers` 
+					SET 
+					  `QuestionnaireId` = @QuestionnaireId,
+						`Value` = @Value,
+						`ObsoletedBy` = @ObsoletedBy,
+            `ModifiedBy` = @ModifiedBy,
+						`Frequency` = @Frequency,
+						`FoodId` = @FoodId
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+    </answers>
+    <authentication>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `authentication` WHERE `Id` = @Id AND ObsoletedOn IS NULL
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `authentication`
+				]]>
+      </GetAll>
+      <GetByPasswordToken>
+        <![CDATA[
+					SELECT * FROM `authentication` WHERE `PasswordToken` = @PasswordToken
+				]]>
+      </GetByPasswordToken>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `authentication`
+					(
+					    `CreatedBy`,
+						`Failures`,
+						`LastFailure`,
+						`ModifiedBy`,
+						`ObsoletedBy`,
+						`ObsoletedOn`,
+						`Password`,
+						`PasswordToken`,
+						`Salt`,
+						`UserId`
+					) 
+					VALUES 
+					(
+					    @CreatedBy,
+						@Failures,
+						@LastFailure,
+						@ModifiedBy,
+						@ObsoletedBy,
+						@ObsoletedOn,
+						@Password,
+						@PasswordToken,
+						@Salt,
+						@UserId
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `authentication`
+					(
+					    `CreatedBy`,
+						`Failures`,
+						`LastFailure`,
+						`ModifiedBy`,
+						`ObsoletedBy`,
+						`ObsoletedOn`,
+						`Password`,
+						`PasswordToken`,
+						`Salt`,
+						`UserId`
+					) 
+					VALUES 
+					(
+					    @CreatedBy,
+						@Failures,
+						@LastFailure,
+						@ModifiedBy,
+						@ObsoletedBy,
+						@ObsoletedOn,
+						@Password,
+						@PasswordToken,
+						@Salt,
+						@UserId
+					)
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `authentication` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `authentication` 
+					SET 
+					    `Failures` = @Failures,
+						`LastFailure` = @LastFailure,
+						`ModifiedBy` = @ModifiedBy,
+						`ObsoletedBy` = @ObsoletedBy,
+						`ObsoletedOn` = @ObsoletedOn,
+						`Password` = @Password,
+						`PasswordToken` = @PasswordToken,
+						`Salt` = @Salt,
+						`UserId` = @UserId 
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+    </authentication>
+    <colors>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `colors` WHERE `Id` = @Id
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `colors`
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `colors`
+					(
+					    `CreatedBy`,
+						`Hex`,
+						`ModifiedBy`,
+						`Name`,
+						`ObsoletedBy`,
+						`ObsoletedOn`,
+						`Rgb`
+					) 
+					VALUES 
+					(
+					    @CreatedBy,
+						@Hex,
+						@ModifiedBy,
+						@Name,
+						@ObsoletedBy,
+						@ObsoletedOn,
+						@Rgb
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `colors`
+					(
+					    `CreatedBy`,
+						`Hex`,
+						`ModifiedBy`,
+						`Name`,
+						`ObsoletedBy`,
+						`ObsoletedOn`,
+						`Rgb`
+					) 
+					VALUES 
+					(
+					    @CreatedBy,
+						@Hex,
+						@ModifiedBy,
+						@Name,
+						@ObsoletedBy,
+						@ObsoletedOn,
+						@Rgb
+					)
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `colors` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `colors` 
+					SET 
+					    `Hex` = @Hex,
+						`ModifiedBy` = @ModifiedBy,
+						`Name` = @Name,
+						`ObsoletedBy` = @ObsoletedBy,
+						`ObsoletedOn` = @ObsoletedOn,
+						`Rgb` = @Rgb 
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+    </colors>
+    <images>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `images` WHERE `Id` = @Id
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `images`
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `images`
+					(
+            `Content`,
+						`CreatedBy`,
+						`MimeType`,
+            `Key`,
+						`ModifiedBy`,
+						`ObsoletedBy`,
+						`ObsoletedOn`
+					) 
+					VALUES 
+					(
+            @Content,
+						@CreatedBy,
+						@MimeType,
+            @Key,
+						@ModifiedBy,
+						@ObsoletedBy,
+						@ObsoletedOn
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `images`
+					(
+            `Content`,
+						`CreatedBy`,
+						`MimeType`,
+            `Key`,
+						`ModifiedBy`,
+						`ObsoletedBy`,
+						`ObsoletedOn`
+					) 
+					VALUES 
+					(
+            @Content,
+						@CreatedBy,
+						@MimeType,
+            @Key,
+						@ModifiedBy,
+						@ObsoletedBy,
+						@ObsoletedOn
+					)
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `images` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `images` 
+					SET 
+            `Content` = @Content,
+						`MimeType` = @MimeType,
+            `Key` = @Key,
+            `CreatedBy` = @CreatedBy,
+						`ModifiedBy` = @ModifiedBy,
+						`ObsoletedBy` = @ObsoletedBy,
+						`ObsoletedOn` = @ObsoletedOn 
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+    </images>
+    <roles>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `roles` WHERE `Id` = @Id
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `roles`
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `roles`
+					(
+					    `ColorId`,
+						`CreatedBy`,
+						`ModifiedBy`,
+						`Name`,
+						`ObsoletedBy`,
+						`ObsoletedOn`
+					) 
+					VALUES 
+					(
+					    @ColorId,
+						@CreatedBy,
+						@ModifiedBy,
+						@Name,
+						@ObsoletedBy,
+						@ObsoletedOn
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `roles`
+					(
+					    `ColorId`,
+						`CreatedBy`,
+						`ModifiedBy`,
+						`Name`,
+						`ObsoletedBy`,
+						`ObsoletedOn`
+					) 
+					VALUES 
+					(
+					    @ColorId,
+						@CreatedBy,
+						@ModifiedBy,
+						@Name,
+						@ObsoletedBy,
+						@ObsoletedOn
+					)
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `roles` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `roles` 
+					SET 
+					    `ColorId` = @ColorId,
+						`ModifiedBy` = @ModifiedBy,
+						`Name` = @Name,
+						`ObsoletedBy` = @ObsoletedBy,
+						`ObsoletedOn` = @ObsoletedOn 
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+      <UserRoles>
+        <![CDATA[
+          SELECT r.* FROM roles r
+          JOIN userroles ur ON ur.RoleId = r.Id
+          JOIN users u ON u.Id = ur.UserId
+          WHERE
+	            ur.UserId = @UserId AND
+              r.ObsoletedOn is null AND
+              ur.ObsoletedOn is null AND
+              u.ObsoletedOn is null
+        ]]>
+      </UserRoles>
+    </roles>
+    <sessions>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `sessions` WHERE `Id` = @Id
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `sessions`
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `sessions`
+					(
+					    `Browser`,
+						`CreatedBy`,
+						`Expires`,
+						`IPAddress`,
+						`ModifiedBy`,
+						`ObsoletedBy`,
+						`ObsoletedOn`,
+						`UserId`
+					) 
+					VALUES 
+					(
+					    @Browser,
+						@CreatedBy,
+						@Expires,
+						@IPAddress,
+						@ModifiedBy,
+						@ObsoletedBy,
+						@ObsoletedOn,
+						@UserId
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `sessions`
+					(
+					    `Browser`,
+						`CreatedBy`,
+						`Expires`,
+						`IPAddress`,
+						`ModifiedBy`,
+						`ObsoletedBy`,
+						`ObsoletedOn`,
+						`UserId`
+					) 
+					VALUES 
+					(
+					    @Browser,
+						@CreatedBy,
+						@Expires,
+						@IPAddress,
+						@ModifiedBy,
+						@ObsoletedBy,
+						@ObsoletedOn,
+						@UserId
+					)
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `sessions` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `sessions` 
+					SET 
+					    `Browser` = @Browser,
+						`Expires` = @Expires,
+						`IPAddress` = @IPAddress,
+						`ModifiedBy` = @ModifiedBy,
+						`ObsoletedBy` = @ObsoletedBy,
+						`ObsoletedOn` = @ObsoletedOn,
+						`UserId` = @UserId 
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+    </sessions>
+    <userroles>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `userroles` WHERE `Id` = @Id
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `userroles`
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `userroles`
+					(
+					    `CreatedBy`,
+						`ModifiedBy`,
+						`ObsoletedBy`,
+						`ObsoletedOn`,
+						`RoleId`,
+						`UserId`
+					) 
+					VALUES 
+					(
+					    @CreatedBy,
+						@ModifiedBy,
+						@ObsoletedBy,
+						@ObsoletedOn,
+						@RoleId,
+						@UserId
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `userroles`
+					(
+					    `CreatedBy`,
+						`ModifiedBy`,
+						`ObsoletedBy`,
+						`ObsoletedOn`,
+						`RoleId`,
+						`UserId`
+					) 
+					VALUES 
+					(
+					    @CreatedBy,
+						@ModifiedBy,
+						@ObsoletedBy,
+						@ObsoletedOn,
+						@RoleId,
+						@UserId
+					)
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `userroles` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `userroles` 
+					SET 
+					    `ModifiedBy` = @ModifiedBy,
+						`ObsoletedBy` = @ObsoletedBy,
+						`ObsoletedOn` = @ObsoletedOn,
+						`RoleId` = @RoleId,
+						`UserId` = @UserId 
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+    </userroles>
+    <users>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `users` WHERE `Id` = @Id AND ObsoletedOn IS NULL
+				]]>
+      </Get>
+      <GetByEmail>
+        <![CDATA[
+					SELECT * FROM `users` WHERE `Email` = @Email
+				]]>
+      </GetByEmail>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `users`
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `users`
+					(
+						`Email`,
+						`Name`,
+						`Surname`,
+						`Birthday`,
+						`Gender`,
+						`CPF`,
+						`CreatedBy`
+					) 
+					VALUES 
+					(
+						@Email,
+						@Name,
+						@Surname,
+						@Birthday,
+						@Gender,
+						@CPF,
+						@CreatedBy
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `users`
+					(
+						`Email`,
+						`Name`,
+						`Surname`,
+						`Birthday`,
+						`Gender`,
+						`CPF`,
+						`CreatedBy`
+					) 
+					VALUES 
+					(
+						@Email,
+						@Name,
+						@Surname,
+						@Birthday,
+						@Gender,
+						@CPF,
+						@CreatedBy
+					);
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `users` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `users` 
+					SET 
+					  `Email` = @Email,
+						`Name` = @Name,
+						`Surname` = @Surname,
+						`Birthday` = @Birthday,
+						`Gender` = @Gender,
+						`CPF` = @CPF,
+						`University` = @University,
+						`JobId` = @JobId,
+						`AddressId` = @AddressId,
+						`Name` = @Name,
+						`ModifiedOn` = @ModifiedOn,
+						`ModifiedBy` = @ModifiedBy,
+						`ObsoletedOn` = @ObsoletedOn,
+						`ObsoletedBy` = @ObsoletedBy
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+      <GetUser>
+        <![CDATA[
+          SELECT u.*, null as Split, a.* FROM users u
+          JOIN authentication a ON u.Id = a.UserId
+          WHERE 
+	            u.ObsoletedOn IS NULL AND
+              a.ObsoletedOn IS NULL AND
+              u.Email = @Email
+        ]]>
+      </GetUser>
+    </users>
+    <jobs>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `jobs` WHERE `Id` = @Id AND ObsoletedOn IS NULL
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `jobs`
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `jobs`
+					(
+					    `Name`,
+              `Identifier`,
+              `CreatedBy`
+						
+					) 
+					VALUES 
+					(
+					    @Name,
+              @Identifier,
+              @CreatedBy
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `jobs`
+					(
+					    `Name`,
+              `Identifier`,
+              `CreatedBy`				
+					) 
+					VALUES 
+					(
+					   @Name,
+             @Identifier,
+             @CreatedBy
+					)
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `jobs` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `jobs` 
+					SET 
+					    `Name` = @Name	
+              `Identifier` = @Identifier	
+              `ModifiedBy` = @ModifiedBy	
+              `ObsoletedBy` = @ObsoletedBy	
+              `ObsoletedOn` = @ObsoletedOn	
+              
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+    </jobs>
+    <patients>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `patients` WHERE `Id` = @Id AND ObsoletedOn IS NULL
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `patients` ORDER BY name
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `patients`
+					(
+					  `Name`,
+						`Surname`,
+						`CreatedBy`,
+						`UserId`,
+						`Gender`,
+						`Weight`,
+            `Height`,
+            `Birthday`
+					) 
+					VALUES 
+					(
+					  @Name,
+						@Surname,
+						@CreatedBy,
+						@UserId,
+						@Gender,
+						@Weight,
+            @Height,
+            @Birthday
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `patients`
+					(
+					   `Name`,
+						`Surname`,
+						`CreatedBy`,
+						`UserId`,
+						`Gender`,
+						`Weight`,
+            `Height`,
+            `Birthday`
+					) 
+					VALUES 
+					(
+					   @Name,
+						@Surname,
+						@CreatedBy,
+						@UserId,
+						@Gender,
+						@Weight,
+            @Height,
+            @Birthday
+					);
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `patients` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `patients` 
+					SET 
+					  `Name` = @Name,
+						`Surname` = @Surname,
+						`ModifiedBy` = @ModifiedBy,
+						`UserId` = @UserId,
+						`ObsoletedBy` = @ObsoletedBy,
+						`ObsoletedOn` = @ObsoletedOn,
+						`Gender` = @Gender,
+						`Weight` = @Weight, 
+            `Height` = @Height, 
+            `Birthday` = @Birthday
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+      <GetPatientsByUserId>
+        <![CDATA[
+        SELECT * FROM patients WHERE UserId = @UserId AND ObsoletedOn IS NULL ORDER BY name;
+				]]>
+      </GetPatientsByUserId>
+      <GetPatientsCountByUserId>
+        <![CDATA[
+        SELECT COUNT(Id) AS Value FROM patients WHERE UserId = @UserId AND ObsoletedOn IS NULL;
+				]]>
+      </GetPatientsCountByUserId>
+    </patients>
+    <questionnaires>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `questionnaires` WHERE `Id` = @Id AND ObsoletedOn IS NULL
+				]]>
+      </Get>
+      <GetByGuid>
+        <![CDATA[
+					SELECT * FROM `questionnaires` WHERE `Guid` = @Guid AND ObsoletedOn IS NULL
+				]]>
+      </GetByGuid>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `questionnaires` ORDER BY name
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `questionnaires`
+					(
+					  `Name`,
+						`UserId`,
+						`PatientId`,
+						`Guid`,
+						`Type`,
+						`Completed`,
+            `CreatedBy`
+					) 
+					VALUES 
+					(
+					  @Name,
+						@UserId,
+						@PatientId,
+						@Guid,
+						@Type,
+            @Completed,
+            @CreatedBy
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `questionnaires`
+					(
+					  `Name`,
+						`UserId`,
+						`PatientId`,
+						`Guid`,
+						`Type`,
+						`Completed`,
+            `CreatedBy`
+					) 
+					VALUES 
+					(
+					  @Name,
+						@UserId,
+						@PatientId,
+						@Guid,
+						@Type,
+            @Completed,
+            @CreatedBy
+					);
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `questionnaires` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `questionnaires` 
+					SET 
+					  `Name` = @Name,
+						`ModifiedBy` = @ModifiedBy,
+						`UserId` = @UserId,
+						`ObsoletedBy` = @ObsoletedBy,
+						`ObsoletedOn` = @ObsoletedOn,
+						`PatientId` = @PatientId,
+						`Guid` = @Guid,
+						`Type` = @Type,
+						`Completed` = @Completed
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+      <GetQuestionnairesByUserId>
+        <![CDATA[
+        SELECT * FROM questionnaires WHERE UserId = @UserId AND ObsoletedOn IS NULL ORDER BY CreatedOn;
+				]]>
+      </GetQuestionnairesByUserId>
+      <GetResearchesByUserId>
+        <![CDATA[
+        SELECT * FROM questionnaires WHERE UserId = @UserId AND PatientId = 0 AND ObsoletedOn IS NULL ORDER BY CreatedOn;
+				]]>
+      </GetResearchesByUserId>
+      <GetResearchesCountByUserId>
+        <![CDATA[
+        SELECT COUNT(Id) AS Value FROM questionnaires WHERE UserId = @UserId AND Type = 'pesquisa' AND ObsoletedOn IS NULL;
+				]]>
+      </GetResearchesCountByUserId>
+      <GetPendingQuestionnaireByPatientId>
+        <![CDATA[
+        SELECT * FROM questionnaires WHERE PatientId = @PatientId AND Completed <= 0 AND ObsoletedOn IS NULL;
+				]]>
+      </GetPendingQuestionnaireByPatientId>
+    
+  </questionnaires>
+	</SQL>
+</configuration>

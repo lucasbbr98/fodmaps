@@ -1,0 +1,55 @@
+﻿@import '../../Assets/Theme.scss';
+
+.agrega-textbox-group {
+    .agrega-input {
+        max-width: 280px;
+        padding: 4px 8px;
+        border-radius: 12px;
+        display: block;
+        padding: 0.125em 0.125em 0.0625em;
+        font-size: 1em;
+        line-height: 1.9;
+        width: 100%;
+        border-top-width: 0;
+        border-top-color: transparent;
+        border-left-width: 0;
+        border-left-color: transparent;
+        border-right-width: 0;
+        border-right-color: transparent;
+        border-bottom: 1.5px solid $gray;
+        background: none;
+        box-shadow: none;
+        -webkit-transition: all 0.28s ease;
+        transition: all 0.28s ease;
+    }
+
+    .agrega-input:focus {
+        border-color: $main;
+        -webkit-box-shadow: 0 8px 6px -6px $main;
+        -moz-box-shadow: 0 8px 6px -6px $main;
+        box-shadow: 0 8px 6px -6px $main;
+        //box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
+        outline: none;
+    }
+
+    .agrega-input:focus ~ .floating-label,
+    .agrega-input:not(:focus):valid ~ .floating-label {
+        top: -11px;
+        font-size: 11px;
+    }
+
+    .floating-label {
+        position: absolute;
+        pointer-events: none;
+        left: 20px;
+        top: 8px;
+        transition: 0.2s ease all;
+        font-size: 12px;
+
+        &.valid {
+            top: -11px;
+            font-size: 11px;
+            color: $main;
+        }
+    }
+}

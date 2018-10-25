@@ -1,0 +1,138 @@
+﻿<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div class="container form register-form">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <p class="question"><a (click)="doLogin()">Login</a></p>
+        </div>
+        <div class="col-xs-12">
+            <h1 class="title">Cadastro</h1>
+        </div>
+    </div>
+    <div class="row margin-top">
+        <div class="col-xs-12 col-sm-6">
+            <ag-textbox placeholder="Nome"
+                        type="text"
+                        autofocus="true"
+                        [(ngModel)]="model.name"
+                        min="3"
+                        max="40"
+                        pattern="^[ A-Za-z\u00C0-\u00ff]+$"
+                        shorterror="Nome entre 3-40 caracteres"
+                        longerror="Nome entre 3-40 caracteres"
+                        patternerror="Nome só pode conter letras e espaços">
+            </ag-textbox>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <ag-textbox placeholder="Sobrenome"
+                        type="text"
+                        autofocus="false"
+                        [(ngModel)]="model.surname"
+                        min="2"
+                        max="70"
+                        pattern="^[ A-Za-z\u00C0-\u00ff]+$"
+                        shorterror="Sobrenome entre 2-70 caracteres"
+                        longerror="Sobrenome entre 2-70 caracteres"
+                        patternerror="Nome só pode conter letras e espaços">
+            </ag-textbox>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <ag-textbox placeholder="Email"
+                        type="text"
+                        autofocus="false"
+                        pattern="^[a-z][a-zA-Z0-9_.]*(\.[a-zA-Z][a-zA-Z0-9_.]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$"
+                        patternerror="Digite um email válido"
+                        [(ngModel)]="model.email">
+            </ag-textbox>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <ag-textbox placeholder="Senha"
+                        type="password"
+                        autofocus="false"
+                        min="6"
+                        shorterror="Mínimo 6 caracteres"
+                        max="50"
+                        longerror="Máximo 50 caracteres"
+                        strength="true"
+                        [(ngModel)]="model.password">
+            </ag-textbox>
+        </div>
+    </div>
+    <div class="row margin-top">
+        <div class="col-xs-12 col-sm-6">
+            <ag-textbox placeholder="CPF"
+                        type="text"
+                        autofocus="false"
+                        [(ngModel)]="model.cpf"
+                        [valid]="validCPF"
+                        aMask="999.999.999-99">
+            </ag-textbox>
+            <div class="col-xs-12">
+                <span class="text-danger">{{cpfError}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center margin-top">
+        <h4 class="text-center bold">Data de nascimento</h4>
+        <div class="col-xs-12 col-sm-4">
+            <label for="bday">Dia</label>
+            <select id="bday" class="round-select fodmaps-select" type="number" name="bday" [(ngModel)]="bday" required>
+                <option [ngValue]="null">Selecione uma opção</option>
+                <option *ngFor="let day of days"
+                        [ngValue]="day">
+                    {{day}}
+                </option>
+            </select>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <label for="bmonth">Mês</label>
+            <select class="round-select" name="bmonth" id="bmonth" [(ngModel)]="bmonth" required>
+                <option [ngValue]="null">Selecione uma opção</option>
+                <option [ngValue]="01">Janeiro</option>
+                <option [ngValue]="02">Fevereiro</option>
+                <option [ngValue]="03">Março</option>
+                <option [ngValue]="04">Abril</option>
+                <option [ngValue]="05">Maio</option>
+                <option [ngValue]="06">Junho</option>
+                <option [ngValue]="07">Julho</option>
+                <option [ngValue]="08">Agosto</option>
+                <option [ngValue]="09">Setembro</option>
+                <option [ngValue]="10">Outubro</option>
+                <option [ngValue]="11">Novembro</option>
+                <option [ngValue]="12">Dezembro</option>
+            </select>
+        </div>
+        <div class="col-xs-12 col-sm-3 fix-position">
+            <ag-textbox placeholder="Ano"
+                        type="number"
+                        autofocus="false"
+                        [valid]="validBYear"
+                        [(ngModel)]="byear"
+                        pattern="[0-9]*">
+            </ag-textbox>
+        </div>
+        <div class="col-xs-12">
+            <span class="text-danger">{{byearError}}</span>
+        </div>
+    </div>
+    <h4 class="text-center bold">Gênero</h4>
+    <div class="row margin-top">
+        <div class="col-xs-12 text-center">
+            <div class="input-group margin-center">
+                <input type="radio" name="gender" value="Masculino" id="gender-male" [(ngModel)]="model.gender" />
+                <label for="gender-male">Masculino</label>
+                <input type="radio" name="gender" value="Feminino" id="gender-female" [(ngModel)]="model.gender" />
+                <label for="gender-female">Feminino</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row margin-top">
+        <ag-button name="Enviar"
+                   type="submit"
+                   (click)="register()">
+        </ag-button>
+    </div>
+    <div class="form-group text-center">
+        <p>Ao entrar, você confirma que leu e concorda com os nossos <a routerLink="/home/terms" routerLinkActive="active">Termos e Condições</a>.</p>
+    </div>
+</div>

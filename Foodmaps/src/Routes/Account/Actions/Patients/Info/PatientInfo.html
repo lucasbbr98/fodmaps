@@ -1,0 +1,34 @@
+﻿<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div class="container">
+    <div class="row text-center">
+        <div class="col-xs-12" style="margin-top:35px;">
+            <h3 style="font-weight:bold;">O que você quer fazer com {{name}}&nbsp;?</h3>
+        </div>
+    </div>
+    <div class="row" style="margin-top:25px;">
+        <div class="col-xs-12 col-md-6 text-center" *ngIf="hasPending">
+            <h3>Compartilhe o link abaixo para que {{name}} possa responder ao questionário.</h3><br />
+            <p>{{link}}</p><br />
+            <ag-button name="Copiar"
+                       type="submit"
+                       (click)="copyToClipboard()">
+            </ag-button>
+        </div>
+        <div class="col-xs-12 col-md-6 text-center" *ngIf="!hasPending">
+            <h3>Enviar novo questionário</h3><br />
+            <ag-button name="Enviar"
+                       type="submit"
+                       (click)="send()">
+            </ag-button>
+        </div>
+        <div class="col-xs-12 col-md-6 text-center">
+            <h3>Ver questionários respondidos</h3><br />
+            <ag-button name="Ver"
+                       type="submit"
+                       (click)="view()">
+            </ag-button>
+        </div>
+    </div>
+</div>
+
+
