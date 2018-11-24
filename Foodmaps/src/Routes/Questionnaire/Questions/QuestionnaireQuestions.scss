@@ -33,8 +33,21 @@ $primary-color: #4285f4;
     left: 0;
 }
 
+.quest-wrapper .horizontal ul.steps-indicator li div a {
+    font-size: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    color: white !important;
+}
+a {
+    font-size: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    color: white !important;
+}
+
 .question-img {
-    max-width: 300px;
+    max-width: 230px;
 }
 
 .card {

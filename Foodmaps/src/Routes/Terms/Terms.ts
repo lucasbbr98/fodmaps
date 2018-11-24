@@ -1,7 +1,7 @@
 ﻿import { Component } from '@angular/core';
 
 @Component({
-    selector: 'agrega-terms',
+    selector: 'tos',
     templateUrl: './Terms.html',
     styleUrls: ['./Terms.scss']
 })

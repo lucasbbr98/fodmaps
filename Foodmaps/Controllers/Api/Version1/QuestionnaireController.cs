@@ -7,6 +7,10 @@ using System.Net;
 
 namespace Foodmaps.Web.Controllers.Api.Version1
 {
+    using Foodmaps.Models.ViewModels;
+    using Models;
+    using System.Collections.Generic;
+
     public class QuestionnaireController : BaseController
     {
         private IQuestionnaireUtility questService;
@@ -35,6 +39,86 @@ namespace Foodmaps.Web.Controllers.Api.Version1
                 });
             }
             return Ok();
+        }
+
+        [HttpGet("{id}"), Authorize]
+        public IActionResult GetCompletedByPatient(int id)
+        {
+            try
+            {
+                if (UserId == null || UserId <= 0 || id <= 0)
+                    return StatusCode(500);
+
+                var userId = (int)UserId;
+                var resp = questService.GetCompletedByPatient(id, userId, out IEnumerable<Questionnaire> questionnaires);
+                if (resp != HttpStatusCode.OK)
+                    return StatusCode((int)resp);
+
+
+                return Ok(new
+                {
+                    Questionnaires = questionnaires
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = ex.ToString()
+                });
+            }
+        }
+
+        [HttpGet("{guid}"), Authorize]
+        public IActionResult GetData(string guid)
+        {
+            try
+            {
+                if (UserId == null || UserId <= 0 || string.IsNullOrEmpty(guid))
+                    return StatusCode(500);
+
+                var userId = (int)UserId;
+
+                var resp = questService.GetData(guid, userId, out IEnumerable<QuestionnaireDataViewModel> data);
+                if (resp != HttpStatusCode.OK)
+                    return StatusCode((int)resp);
+
+                return Ok(new
+                {
+                    Data = data
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = ex.ToString()
+                });
+            }
+        }
+
+        [HttpGet("{guid}")]
+        public IActionResult GetByGuid(string guid)
+        {
+            try
+            {
+
+                var resp = questService.GetByGuid(guid, out Questionnaire questionnaire);
+                if (resp != HttpStatusCode.OK)
+                    return StatusCode((int)resp);
+
+                return Ok(new
+                {
+                    Questionnaire = questionnaire
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = ex.ToString()
+                });
+            }
         }
     }
 }

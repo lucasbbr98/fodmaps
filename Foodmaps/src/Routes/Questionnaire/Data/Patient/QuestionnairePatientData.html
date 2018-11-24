@@ -1,0 +1,68 @@
+﻿
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div class="container" style="margin-top:25px;">
+    <div class="row text-center">
+        <div class="col-xs-12">
+            <h3 class="h3">Questionário respondido por {{name}} em {{datetime | date: 'dd/MM/yyyy'}}</h3>
+        </div>
+        <div class="col-xs-12">
+            <p><a (click)="download()">Clique aqui</a> para exportar os dados em Excel</p>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center" style="display: block; max-width: 500px; max-height: 500px; margin-top:25px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 class="lead">Visão geral</h4>
+        </div>
+    </div>
+
+    <!-- General Graph -->
+    <canvas baseChart
+            [data]="doughnutChartData"
+            [labels]="doughnutChartLabels"
+            [chartType]="doughnutChartType"></canvas>
+</div>
+
+<div>
+    <div class="container text-center" style="display: block; max-width: 500px; max-height: 500px; margin-top:50px; padding-bottom:50px; margin-bottom:30px;" >
+        <div class="row">
+            <div class="col-xs-12">
+                <h4 class="lead">Top 5 por FODMAP</h4>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <ag-button name="Frutose"
+                           type="submit"
+                           (click)="showFodmap('Frutose')">
+                </ag-button>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <ag-button name="Lactose"
+                           type="submit"
+                           (click)="showFodmap('Lactose')">
+                </ag-button>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <ag-button name="Oligo"
+                           type="submit"
+                           (click)="showFodmap('Oligossacarídeo')">
+                </ag-button>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <ag-button name="Poliól"
+                           type="submit"
+                           (click)="showFodmap('Poliól')">
+                </ag-button>
+            </div>
+        </div>
+
+        <!-- FODMAP Graph -->
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"></canvas>
+    </div>
+</div>

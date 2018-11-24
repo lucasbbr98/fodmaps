@@ -5,7 +5,9 @@ import { NetworkService } from '../../../Services/NetworkService';
 import { LoaderService } from '../../../Services/LoaderService';
 import { StorageService } from '../../../Services/StorageService';
 import { ErrorService } from '../../../Services/Errors/ErrorService';
-import { User, Answer } from '../../../Services/Models/DatabaseModels';
+import { User, Answer, Questionnaire } from '../../../Services/Models/DatabaseModels';
+import { GetQuestionnaireModel } from '../../Account/Actions/Patients/Info/PatientInfo';
+import { CreatePatientModel } from '../../../Services/Models/TranslationModels';
 
 export interface QuestionnaireAnswersModel {
     answers: Answer[];
@@ -20,24 +22,31 @@ export interface QuestionnaireAnswersModel {
 export class QuestionnaireDashboardComponent implements OnInit {
 
     private guid: string = 'exemplo';
+    public questionnaire: Questionnaire = <Questionnaire>{};
+    public pendingAttempts: number = 0;
     public toasterconfig: ToasterConfig;
     public user: User;
     public model: QuestionnaireAnswersModel = <QuestionnaireAnswersModel>{};
+    public patient: CreatePatientModel = <CreatePatientModel>{};
+    public patientAge: number = 0;
+    public showConfirm: boolean = false;
+    public showDashboard: boolean = false;
+    public showPatientQuestion: boolean = false;
 
     public fruitsCompleted: number = 0;
-    public fruitsPercentageString: string = '0%'
+    public fruitsPercentageString: string = '0%';
     public maxFruits: number = 18;
 
     public sugarCompleted: number = 0;
-    public sugarPercentageString: string = '0%'
+    public sugarPercentageString: string = '0%';
     public maxSugar: number = 4;
 
     public grainsCompleted: number = 0;
-    public grainsPercentageString: string = '0%'
+    public grainsPercentageString: string = '0%';
     public maxGrains: number = 8;
 
     public pastaCompleted: number = 0;
-    public pastaPercentageString: string = '0%'
+    public pastaPercentageString: string = '0%';
     public maxPasta: number = 16;
 
     public milkCompleted: number = 0;
@@ -65,6 +74,11 @@ export class QuestionnaireDashboardComponent implements OnInit {
             this.guid = p['guid'] || 'exemplo';
         });
 
+        if (this.guid != 'exemplo') {
+            console.log('not an example...');
+            this.getQuestionnaire();
+        }
+
         this.checkCompleted();
         this.user = this.storage.user;
         this.model.guid = this.guid;
@@ -74,7 +88,7 @@ export class QuestionnaireDashboardComponent implements OnInit {
             if (!(evt instanceof NavigationEnd)) {
                 return;
             }
-            window.scrollTo(0, 0)
+            window.scrollTo(0, 0);
         });
 
         this.toasterconfig = new ToasterConfig({
@@ -84,6 +98,34 @@ export class QuestionnaireDashboardComponent implements OnInit {
             positionClass: 'centered',
             limit: 1
         });
+    }
+
+    getQuestionnaire() {
+        // Gets patients from user
+        if (navigator.onLine) {
+            console.log('trying to get questionnaire...');
+            this.net.get<GetQuestionnaireModel>(`Questionnaire/GetByGuid/` + this.guid).subscribe(t => {
+                if (t != null && t.questionnaire != null) {
+                    this.questionnaire = t.questionnaire;
+                }
+            }, error => {
+                this.loaderService.display(false);
+                if (!navigator.onLine) {
+                    this.toasterService.pop('error', 'Erro Conexão', 'A sua conexão com a internet caiu e não foi possível obter a resposta do servidor. Tente recarregar a página');
+                    this.loaderService.display(false);
+                    return;
+                }
+                var errorResponse = this.errorService.saveAnswers(error.message);
+                this.toasterService.pop('error', 'Erro', errorResponse.error);
+                this.loaderService.display(false);
+                this.showDashboard = false;
+                this.showPatientQuestion = false;
+            });
+        }
+        else {
+            this.toasterService.pop('info', 'Sem conexão', 'Sem conexão com a internet. Não foi possível resgatar o número de pacientes.');
+            this.loaderService.display(false);
+        }
     }
 
     goTo(url: string, category: string, step: number) {
@@ -97,6 +139,10 @@ export class QuestionnaireDashboardComponent implements OnInit {
     }
 
     checkCompleted() {
+        var hasConfirmed = this.storage.getHasConfirmed(this.guid);
+        if (hasConfirmed) {this.showDashboard = true;}
+        else { this.showConfirm = true; }
+
         this.fruitsCompleted = this.storage.getCompleted('frutas', this.guid);
         this.fruitsPercentageString = this.toPercentageString(this.fruitsCompleted, this.maxFruits);
 
@@ -137,33 +183,50 @@ export class QuestionnaireDashboardComponent implements OnInit {
         return '0%';
     }
 
-    //TODO: Send to API
     completeQuestionnaire() {
+
+        // Has all answers been completed?
         if (!this.isQuestionnaireValid()) { return; }
 
-        this.loaderService.display(true);
-        if (navigator.onLine) {
-            this.net.post<QuestionnaireAnswersModel>(`Questionnaire/SaveAnswers`, this.model).subscribe(t => {
-                this.loaderService.display(false);
-                this.toasterService.pop("success", "Sucesso", "Pesquisa adicionada com sucesso!");
-                return;
-            }, error => {
-                if (!navigator.onLine) {
-                    this.toasterService.pop('error', 'Erro Conexão', 'A sua conexão com a internet caiu e não foi possível obter a resposta do servidor. Tente novamente');
-                    this.loaderService.display(false);
-                    return;
-                }
-                var errorResponse = this.errorService.saveAnswers(error.message);
-                this.toasterService.pop('error', 'Erro', errorResponse.error);
-                this.loaderService.display(false);
-            });
+        // Researches
+        if (this.questionnaire && this.questionnaire.type == 'pesquisa') {
+            this.showDashboard = false;
+            this.showPatientQuestion = true;
+            console.log(this.showPatientQuestion);
         }
+
+        // Patients
         else {
-            this.toasterService.pop('info', 'Sem conexão', 'Verifique a sua conexão com a internet');
-            this.loaderService.display(false);
+            this.loaderService.display(true);
+            if (navigator.onLine) {
+                this.net.post<QuestionnaireAnswersModel>(`Questionnaire/SaveAnswers`, this.model).subscribe(t => {
+                    this.loaderService.display(false);
+                    this.toasterService.pop("success", "Sucesso", "Pesquisa adicionada com sucesso!");
+                    return;
+                }, error => {
+                    if (!navigator.onLine) {
+                        this.toasterService.pop('error', 'Erro Conexão', 'A sua conexão com a internet caiu e não foi possível obter a resposta do servidor. Tente novamente');
+                        this.loaderService.display(false);
+                        return;
+                    }
+                    var errorResponse = this.errorService.saveAnswers(error.message);
+                    this.toasterService.pop('error', 'Erro', errorResponse.error);
+                    this.loaderService.display(false);
+                });
+            }
+            else {
+                this.toasterService.pop('info', 'Sem conexão', 'Verifique a sua conexão com a internet');
+                this.loaderService.display(false);
+            }
         }
 
     }
+
+    sendResearch() {
+        console.log(this.patient);
+        console.log(this.patientAge);
+    }
+
     isQuestionnaireValid(): boolean {
         if (this.sugarCompleted != this.maxSugar) {
             this.toasterService.pop('error', 'Erro', 'Responda todas as perguntas da categoria Açúcar');
@@ -197,4 +260,9 @@ export class QuestionnaireDashboardComponent implements OnInit {
         return true;
     }
 
+    confirm() {
+        this.showConfirm = false;
+        this.showDashboard = true;
+        this.storage.setHasConfirmed(true, this.guid);
+    }
 }

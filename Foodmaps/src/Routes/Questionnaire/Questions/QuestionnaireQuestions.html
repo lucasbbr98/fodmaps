@@ -1,14 +1,5 @@
 ﻿<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
 <div class="container card card-shadow quest-wrapper">
-    <div class="row text-center">
-        <div class="col-xs-12">
-            <a (click)="goTo('/questionario/painel')" class="back">
-                <div></div>
-                <h4>Categorias</h4>
-                <span>Voltar</span>
-            </a>
-        </div>
-    </div>
     <div class="row text-center mediaCssFixer" style="margin-top:10px;">
         <aw-wizard #wizard>
             <ng-container *ngFor="let q of questions; let first = first; let last = last; let i = index;">

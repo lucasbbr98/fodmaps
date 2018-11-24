@@ -19,8 +19,11 @@ export interface Address extends IReferenceTracker {
 export interface Food {
     id: number;
     name: string;
-    imageId: number;
-    nutrientsId: number;
+    groupId: number;
+    frutose: number;
+    lactose: number;
+    oligossacarideo: number;
+    poliol: number;
 }
 export interface FoodNutrients extends IReferenceTracker {
     id: number;
@@ -95,6 +98,24 @@ export interface Answer {
     foodId: number;
     value: number;
     frequency: string;
+    multiplier: number;
     questionnaireId: number;
     answered: boolean;
+}
+
+export interface Food extends IReferenceTracker {
+    id: number;
+    name: string;
+    groupId: number;
+    frutose: number;
+    lactose: number;
+    oligossacarideo: number;
+    poliol: number;
+}
+
+export interface QuestionnaireDataViewModel {
+    questionnaire: Questionnaire;
+    answer: Answer;
+    patient: Patient;
+    food: Food;
 }

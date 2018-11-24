@@ -6,6 +6,7 @@ using Foodmaps.Models.RequestModels;
 using Foodmaps.Services.User;
 using Foodmaps.Models;
 using Foodmaps.Services.Questionnaire;
+using System.Collections.Generic;
 
 namespace Foodmaps.Web.Controllers.Api.Version1
 {
@@ -168,7 +169,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
         [HttpGet, Authorize]
         public IActionResult GetResearches()
         {
-            Questionnaire[] questionnaires = null;
+            IEnumerable<Questionnaire> questionnaires = null;
             try
             {
                 if (UserId == null || UserId <= 0)

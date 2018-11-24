@@ -7,6 +7,7 @@ namespace Foodmaps.MySQL.Services.Utilities.User
     using Models;
     using Models.RequestModels;
     using Database;
+    using System.Collections.Generic;
 
     public class UserUtility:IUserUtility
     {
@@ -90,7 +91,7 @@ namespace Foodmaps.MySQL.Services.Utilities.User
             return HttpStatusCode.OK;
         }
 
-        public HttpStatusCode GetResearches(int userId, out Questionnaire[] questionnaires)
+        public HttpStatusCode GetResearches(int userId, out IEnumerable<Questionnaire> questionnaires)
         {
             questionnaires = questService.GetResearchesByUserId(userId);
 

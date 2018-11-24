@@ -103,7 +103,8 @@
 						`Value`,
 						`CreatedBy`,
 						`Frequency`,
-						`FoodId`
+						`FoodId`,
+            `Multiplier`
 					) 
 					VALUES 
 					(
@@ -111,7 +112,8 @@
 						@Value,
 						@CreatedBy,
 						@Frequency,
-						@FoodId
+						@FoodId,
+            @Multiplier
 					);
 					SELECT LAST_INSERT_ID();
 				]]>
@@ -124,7 +126,8 @@
 						`Value`,
 						`CreatedBy`,
 						`Frequency`,
-						`FoodId`
+						`FoodId`,
+            `Multiplier`
 					) 
 					VALUES 
 					(
@@ -132,7 +135,8 @@
 						@Value,
 						@CreatedBy,
 						@Frequency,
-						@FoodId
+						@FoodId,
+            @Multiplier
 					);
 				]]>
       </Insert>
@@ -150,7 +154,8 @@
 						`ObsoletedBy` = @ObsoletedBy,
             `ModifiedBy` = @ModifiedBy,
 						`Frequency` = @Frequency,
-						`FoodId` = @FoodId
+						`FoodId` = @FoodId,
+            `Multiplier` = @Multiplier
 					WHERE 
 					    `Id` = @Id
 				]]>
@@ -943,9 +948,39 @@
       </GetByGuid>
       <GetAll>
         <![CDATA[
-					SELECT * FROM `questionnaires` ORDER BY name
+					SELECT * FROM questionnaires ORDER BY name
 				]]>
       </GetAll>
+      <GetCompletedQuestionnaires>
+        <![CDATA[
+					SELECT * FROM questionnaires WHERE UserId = @UserId AND PatientId = @PatientId AND Completed = 1 AND ObsoletedOn IS NULL ORDER BY ModifiedOn DESC
+				]]>
+      </GetCompletedQuestionnaires>
+      <GetData>
+        <![CDATA[
+         SELECT 
+         q.*, null as Split1, 
+         a.*, null as Split2, 
+         p.*, null as Split3, 
+         f.* 
+         
+         FROM 
+         questionnaires q 
+         
+         JOIN answers a ON q.Id = a.QuestionnaireId 
+         JOIN patients p ON p.Id = q.PatientId 
+         JOIN foods f ON f.Id = a.FoodId 
+         
+         WHERE 
+         q.Guid = @Guid AND 
+         q.UserId = @UserId AND 
+         q.Completed = 1 AND 
+	       q.ObsoletedOn is null AND
+         a.ObsoletedOn is null AND 
+         p.ObsoletedOn is null AND 
+         f.ObsoletedOn is null
+        ]]>
+      </GetData>
       <InsertGetId>
         <![CDATA[
 					INSERT INTO `questionnaires`

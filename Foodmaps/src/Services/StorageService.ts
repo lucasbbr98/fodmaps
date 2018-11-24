@@ -35,6 +35,21 @@ export class StorageService {
 
         return false;
     }
+
+    public getHasConfirmed(guid:string): boolean {
+        var storageUrl = 'confirmed/' + guid;
+        return <boolean>this.storage.get(storageUrl) || false;
+    }
+    public setHasConfirmed(value: boolean, guid: string) {
+        var storageUrl = 'confirmed/' + guid;
+        if (value == null) {
+            this.storage.remove(storageUrl);
+        }
+        else {
+            this.storage.set(storageUrl, value);
+        }
+    }
+
     public get email(): string {
         return <string>this.storage.get(STORAGE_EMAIL) || '';
     }

@@ -22,7 +22,7 @@ import { ResearchesComponent } from './../Account/Actions/Researches/Researches'
             { path: 'perfil', component: ProfileComponent, canActivate: [IsLoggedIn] },
             { path: 'pacientes', component: PatientsComponent, canActivate: [IsLoggedIn] },
             { path: 'paciente/:id', component: PatientInfoComponent, canActivate: [IsLoggedIn] },
-            { path: 'pesquisas', component: ResearchesComponent, canActivate: [IsLoggedIn] },
+            { path: 'pesquisas', component: ResearchesComponent, canActivate: [IsLoggedIn] }
 
         ]
     ),

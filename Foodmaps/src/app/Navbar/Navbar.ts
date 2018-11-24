@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, ViewChild, ElementRef, Renderer } from '@angular/core';
+﻿import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { StorageService } from './../../Services/StorageService';
 import { Router } from '@angular/router';
 import { ToasterConfig, ToasterService } from 'angular2-toaster';

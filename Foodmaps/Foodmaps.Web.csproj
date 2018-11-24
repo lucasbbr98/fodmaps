@@ -18,6 +18,7 @@
     <None Remove="src\Routes\404.module.ts" />
     <None Remove="src\Routes\404.module.ts~RF169d228.TMP" />
     <None Remove="src\Routes\404\404.ts" />
+    <None Remove="src\Routes\About\About.ts" />
     <None Remove="src\Routes\Account.module.ts" />
     <None Remove="src\Routes\Account\Actions\PatientInfo.ts" />
     <None Remove="src\Routes\Account\Actions\Patients.ts" />
@@ -32,6 +33,7 @@
     <None Remove="src\Routes\Home.module.ts" />
     <None Remove="src\Routes\Home\Home.ts" />
     <None Remove="src\Routes\Home\Home.ts~RF15f2c15.TMP" />
+    <None Remove="src\Routes\Instructions\Instructions.ts" />
     <None Remove="src\Routes\ModuleHelper.ts" />
     <None Remove="src\Directives\Button\Button.ts" />
     <None Remove="src\Directives\TextBox\TextBox.ts" />
@@ -40,7 +42,11 @@
     <None Remove="src\Routes\Modules\Events.ts~RF1bde0f5.TMP" />
     <None Remove="src\Routes\Modules\ModuleHelper.ts~RF1bca652.TMP" />
     <None Remove="src\Routes\Modules\Questionnaire.ts" />
+    <None Remove="src\Routes\Papers\Papers.ts" />
+    <None Remove="src\Routes\Questionnaire\Answers\Patients\QuestionnairePatientAnswers.ts" />
+    <None Remove="src\Routes\Questionnaire\Data\Patient\QuestionnairePatientData.ts" />
     <None Remove="src\Routes\Questionnaire\Questions\QuestionnaireQuestions.ts" />
+    <None Remove="src\Routes\Support\Support.ts" />
     <None Remove="src\Routes\Terms\Terms.ts" />
     <None Remove="src\Services\Drag\DragService.ts" />
     <None Remove="src\Services\Errors\ErrorService.ts" />
@@ -72,12 +78,14 @@
     <TypeScriptCompile Include="src\Directives\StrengthBar\StrengthBar.ts" />
     <TypeScriptCompile Include="src\Global\GlobalComponent.ts" />
     <TypeScriptCompile Include="src\Main.ts" />
+    <TypeScriptCompile Include="src\Routes\About\About.ts" />
     <TypeScriptCompile Include="src\Routes\Account\Actions\Patients\Info\PatientInfo.ts" />
     <TypeScriptCompile Include="src\Routes\Account\Actions\Patients\Patients.ts" />
     <TypeScriptCompile Include="src\Routes\Account\Actions\Researches\Researches.ts" />
     <TypeScriptCompile Include="src\Routes\Account\Profile\Profile.ts" />
     <TypeScriptCompile Include="src\Routes\Account\Register\Additional\RegisterAdditional.ts" />
     <TypeScriptCompile Include="src\Routes\Admin\Admin.ts" />
+    <TypeScriptCompile Include="src\Routes\Instructions\Instructions.ts" />
     <TypeScriptCompile Include="src\Routes\Modules\Admin.ts" />
     <TypeScriptCompile Include="src\Routes\Modules\Home.ts" />
     <TypeScriptCompile Include="src\Routes\Modules\Account.ts" />
@@ -91,8 +99,12 @@
     <TypeScriptCompile Include="src\Directives\TextBox\TextBox.ts" />
     <TypeScriptCompile Include="src\Directives\TextSpin\TextSpinner.ts" />
     <TypeScriptCompile Include="src\Routes\Modules\Questionnaire.ts" />
+    <TypeScriptCompile Include="src\Routes\Papers\Papers.ts" />
+    <TypeScriptCompile Include="src\Routes\Questionnaire\Answers\Patients\QuestionnairePatientAnswers.ts" />
     <TypeScriptCompile Include="src\Routes\Questionnaire\Dashboard\QuestionnaireDashboard.ts" />
+    <TypeScriptCompile Include="src\Routes\Questionnaire\Data\Patient\QuestionnairePatientData.ts" />
     <TypeScriptCompile Include="src\Routes\Questionnaire\Questions\QuestionnaireQuestions.ts" />
+    <TypeScriptCompile Include="src\Routes\Support\Support.ts" />
     <TypeScriptCompile Include="src\Routes\Terms\Terms.ts" />
     <TypeScriptCompile Include="src\Services\Drag\DragService.ts" />
     <TypeScriptCompile Include="src\Services\Errors\ErrorService.ts" />
@@ -113,6 +125,8 @@
 
   <ItemGroup>
     <Folder Include="src\Routes\Account\Actions\Researches\Info\" />
+    <Folder Include="src\Routes\Questionnaire\Answers\Researches\" />
+    <Folder Include="src\Routes\Questionnaire\Data\Research\" />
   </ItemGroup>
 </Project>
 

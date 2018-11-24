@@ -6,8 +6,11 @@ namespace Foodmaps.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int ImageId { get; set; }
-        public int NutrientsId { get; set; }
+        public int GroupId { get; set; }
+        public double Frutose { get; set; }
+        public double Lactose { get; set; }
+        public double Oligossacarideo { get; set; }
+        public double Poliol { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public DateTime ModifiedOn { get; set; }

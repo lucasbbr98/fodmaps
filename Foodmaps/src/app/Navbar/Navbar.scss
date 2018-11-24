@@ -5,6 +5,10 @@
     background-color: #fff;
     border-color: $gray;
 
+    ul{
+        margin-top:15px;
+    }
+
     li {
         a {
             font-size: 15px;
@@ -28,5 +32,6 @@
 
 .fodmaps-logo {
     padding-left: 15px;
-    padding-top: 5px;
+    padding-top: 0;
+    margin:0;
 }

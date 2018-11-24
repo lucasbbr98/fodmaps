@@ -131,7 +131,8 @@ export class PatientInfoComponent implements OnInit {
     }
     //TODO
     view() {
-        this.toasterService.pop('info', 'TODO', 'Não implementado ainda')
+        this.router.navigate(['questionario/paciente/completos/', this.id], { queryParams: { name: this.name } });
+        //this.router.navigate(['/questionario/respostas/', this.id]);
     }
 
     copyToClipboard() {

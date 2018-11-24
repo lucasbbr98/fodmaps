@@ -9,6 +9,7 @@ namespace Foodmaps.Models
         public int Value { get; set; }
         public string Frequency { get; set; }
         public int FoodId { get; set; }
+        public int Multiplier { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public DateTime ModifiedOn { get; set; }

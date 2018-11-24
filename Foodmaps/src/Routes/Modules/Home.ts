@@ -3,17 +3,24 @@ import { ModuleHelper } from './ModuleHelper';
 
 import { HomeComponent } from './../Home/Home';
 import { TermsComponent } from './../Terms/Terms';
-import { IsLoggedIn } from './../../Services/Accessors/IsLoggedIn';
+import { AboutComponent } from './../About/About';
+import { SupportComponent } from './../Support/Support';
+import { InstructionsComponent } from './../Instructions/Instructions';
+import { PapersComponent } from './../Papers/Papers';
 
 @NgModule({
     imports: ModuleHelper.getImports(
         [
-            { path: '', component: HomeComponent, canActivate: [IsLoggedIn] },
-            { path: 'terms', component: TermsComponent },
+            { path: '', component: AboutComponent },
+            { path: 'termos', component: TermsComponent },
+            { path: 'sobre', component: AboutComponent },
+            { path: 'apoio', component: SupportComponent },
+            { path: 'instrucoes', component: InstructionsComponent },
+            { path: 'publicacoes', component: PapersComponent },
         ]
     ),
     declarations: [
-        HomeComponent, TermsComponent
+        HomeComponent, TermsComponent, AboutComponent, SupportComponent, InstructionsComponent, PapersComponent
     ]
 })
 export class HomeModule { }

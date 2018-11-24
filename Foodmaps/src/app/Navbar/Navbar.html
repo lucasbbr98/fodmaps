@@ -1,7 +1,7 @@
 ﻿<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
 <div class="navbar navbar-inverse navbar-fixed-top fodmaps-navbar">
     <a routerLink="/" routerLinkActive="active" class="pull-left fodmaps-logo">
-        <img src="../../Assets/Images/General/Logo/logo.png" alt="logo" height="40" />
+        <img src="../../Assets/Images/General/Logo/logo@3x.png" alt="logo" height="80" />
     </a>
     <div class="container">
         <div class="navbar-header">
@@ -12,23 +12,30 @@
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right" *ngIf="!loggedIn">
-                <li class="pull-right">
-                    <a (click)="goTo('/conta/login')">Login</a>
-                </li>
-                <li class="pull-right">
-                    <a (click)="goTo('/conta/cadastro')">Cadastre-se</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right" *ngIf="loggedIn">
+            <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a (click)="goTo('/conta/perfil')">{{ user.name }}</a>
+                    <a (click)="goTo('/home/sobre')">Quem somos</a>
                 </li>
-                <li *ngIf="isInRole('Admin')">
-                    <a (click)="goTo('/admin/panel')">Admin</a>
+                <li>
+                    <a (click)="goTo('/home/instrucoes')">Instruções</a>
                 </li>
                 <li>
                     <a (click)="goTo('/questionario/painel')">Questionário</a>
+                </li>
+                <li>
+                    <a (click)="goTo('/home/publicacoes')">Publicações</a>
+                </li>
+                <li>
+                    <a (click)="goTo('/home/apoio')">Material de Apoio</a>
+                </li>
+                <li class="pull-right" *ngIf="!loggedIn">
+                    <a (click)="goTo('/conta/login')">Login</a>
+                </li>
+                <li class="pull-right" *ngIf="!loggedIn">
+                    <a (click)="goTo('/conta/cadastro')">Cadastre-se</a>
+                </li>
+                <li class="pull-right" *ngIf="loggedIn">
+                    <a (click)="goTo('/conta/perfil')">{{ user.name }}</a>
                 </li>
             </ul>
         </div>
