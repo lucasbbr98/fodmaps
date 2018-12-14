@@ -166,6 +166,17 @@ export class ErrorService{
         }
     }
 
+    public seeAnswers(errorCode: string): ErrorResponse {
+        var r = new ErrorResponse();
+        switch (errorCode) {
+            case '404':
+                r = r.Error(StatusCode.BadRequest, 'O usuário ainda não respondeu nenhuma pesquisa'); return r;
+
+            default:
+                r = r.Error(StatusCode.InternalServerError, 'Ocorreu um erro interno, tente novamente'); return r;
+        }
+    }
+
     public saveAnswers(errorCode: string): ErrorResponse {
         var r = new ErrorResponse();
         switch (errorCode) {

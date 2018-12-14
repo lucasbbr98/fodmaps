@@ -14,6 +14,7 @@ namespace Foodmaps.Models
         public DateTime Birthday { get; set; }
         public double Weight { get; set; }
         public double Height { get; set; }
+        public int Age { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public DateTime ModifiedOn { get; set; }
@@ -22,6 +23,19 @@ namespace Foodmaps.Models
         public string ObsoletedBy { get; set; }
 
         public Patient() { }
+        public Patient(Research model) {
+            this.CreatedBy = model.CreatedBy;
+            this.ModifiedBy = model.ModifiedBy;
+            this.ModifiedOn = model.ModifiedOn;
+            this.ObsoletedBy = model.ObsoletedBy;
+            this.ObsoletedOn = model.ObsoletedOn;
+            this.Gender = model.Gender;
+            this.Height = model.Height;
+            this.Name = model.Name;
+            this.Surname = model.Surname;
+            this.Weight = model.Weight;
+            this.Age = model.Age;
+        }
         public Patient(CreatePatientModel model, int userId, string createdBy)
         {
             this.CreatedBy = createdBy;

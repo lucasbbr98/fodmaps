@@ -17,6 +17,7 @@ namespace Foodmaps.MySQL.Services.Database
         IEnumerable<Questionnaire> GetResearchesByUserId(int userId);
         IEnumerable<Questionnaire> GetCompletedQuestionnaires(int patientId, int userId);
         IEnumerable<QuestionnaireDataViewModel> GetData(string guid, int userId);
+        IEnumerable<QuestionnaireDataViewModel> GetResearchData(string guid, int userId);
     }
 
     public class QuestionnaireService : Queriable<Questionnaire>, IQuestionnaireService
@@ -97,6 +98,25 @@ namespace Foodmaps.MySQL.Services.Database
                 var items = con.Query<Questionnaire, Answer, Patient, Food, QuestionnaireDataViewModel>(
                     QueryFromConfig("GetData"),
                     (q, a, p, f) => new QuestionnaireDataViewModel(q, a, p, f),
+                    new
+                    {
+                        Guid = guid,
+                        UserId = userId
+                    },
+                    splitOn: "Split1,Split2,Split3"
+                ).ToArray();
+
+                return items;
+            }
+        }
+
+        public IEnumerable<QuestionnaireDataViewModel> GetResearchData(string guid, int userId)
+        {
+            using (var con = Connection)
+            {
+                var items = con.Query<Questionnaire, Answer, Research, Food, QuestionnaireDataViewModel>(
+                    QueryFromConfig("GetResearchData"),
+                    (q, a, r, f) => new QuestionnaireDataViewModel(q, a, r, f),
                     new
                     {
                         Guid = guid,

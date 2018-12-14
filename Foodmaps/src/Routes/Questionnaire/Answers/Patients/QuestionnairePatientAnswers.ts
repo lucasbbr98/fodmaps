@@ -72,7 +72,7 @@ export class QuestionnairePatientAnswersComponent implements OnInit {
                     this.loaderService.display(false);
                     return;
                 }
-                var errorResponse = this.errorService.createPatient(error.message);
+                var errorResponse = this.errorService.seeAnswers(error.message);
                 this.toasterService.pop('error', 'Erro', errorResponse.error);
                 this.loaderService.display(false);
             });;
@@ -84,7 +84,7 @@ export class QuestionnairePatientAnswersComponent implements OnInit {
 
 
     }
-    //TODO Change URL
+
     seeData(questionnaire: Questionnaire) {
         if (questionnaire == null || questionnaire.id == null || questionnaire.id <= 0) {
             this.toasterService.pop("error", "Erro", "Houve um erro interno, por favor tente recarregar a página");

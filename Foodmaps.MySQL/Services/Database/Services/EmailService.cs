@@ -62,14 +62,14 @@ namespace Foodmaps.MySQL.Services.Database.Services
         public static string PasswordResetBody(string token)
         {
             StringBuilder body = new StringBuilder();
-            body.AppendFormat("<h1>Agrega Universidades</h1>");
+            body.AppendFormat("<h1>Projeto FODMAP</h1>");
             body.AppendFormat("<br />");
             body.AppendFormat("<h3>Recuperação de senha</h3>");
             body.AppendFormat("<br />");
             body.AppendFormat("<p>Essa é uma mensagem automática para recuperação de senha. Se você não solicitou, por favor ignore.</p>");
             body.AppendFormat("<br />");
             body.AppendFormat("<p>Clique no link abaixo para cadastrar uma nova senha</p>");
-            body.AppendFormat($"<a href=\"https://www.agregauni.com/account/reset/{token}\">https://www.agregauni.com/account/reset/{token}</a>");
+            body.AppendFormat($"<a href=\"http://localhost:42300/conta/reset/{token}\">http://localhost:42300/conta/reset/{token}</a>");
 
 
             return body.ToString();

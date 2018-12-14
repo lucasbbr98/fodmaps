@@ -104,7 +104,8 @@
 						`CreatedBy`,
 						`Frequency`,
 						`FoodId`,
-            `Multiplier`
+            `Multiplier`,
+            `ResearchId`
 					) 
 					VALUES 
 					(
@@ -113,7 +114,8 @@
 						@CreatedBy,
 						@Frequency,
 						@FoodId,
-            @Multiplier
+            @Multiplier,
+            @ResearchId
 					);
 					SELECT LAST_INSERT_ID();
 				]]>
@@ -127,7 +129,8 @@
 						`CreatedBy`,
 						`Frequency`,
 						`FoodId`,
-            `Multiplier`
+            `Multiplier`,
+            `ResearchId`
 					) 
 					VALUES 
 					(
@@ -136,7 +139,8 @@
 						@CreatedBy,
 						@Frequency,
 						@FoodId,
-            @Multiplier
+            @Multiplier,
+            @ResearchId
 					);
 				]]>
       </Insert>
@@ -155,7 +159,8 @@
             `ModifiedBy` = @ModifiedBy,
 						`Frequency` = @Frequency,
 						`FoodId` = @FoodId,
-            `Multiplier` = @Multiplier
+            `Multiplier` = @Multiplier,
+            `ResearchId` = @ResearchId
 					WHERE 
 					    `Id` = @Id
 				]]>
@@ -422,6 +427,95 @@
 				]]>
       </Update>
     </images>
+    <researches>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `researches` WHERE `Id` = @Id AND ObsoletedOn IS NULL
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `researches`
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `researches`
+					(
+					  `QuestionnaireId`,
+						`Name`,
+						`Surname`,
+						`Age`,
+						`Gender`,
+            `Weight`,
+            `Height`,
+            `CreatedBy`
+					) 
+					VALUES 
+					(
+					  @QuestionnaireId,
+						@Name,
+            @Surname,
+            @Age,
+            @Gender,
+            @Weight,
+            @Height,
+            @CreatedBy
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `researches`
+					(
+					  `QuestionnaireId`,
+						`Name`,
+						`Surname`,
+						`Age`,
+						`Gender`,
+            `Weight`,
+            `Height`,
+            `CreatedBy`
+            
+					) 
+					VALUES 
+					(
+					  @QuestionnaireId,
+						@Name,
+            @Surname,
+            @Age,
+            @Gender,
+            @Weight,
+            @Height,
+            @CreatedBy
+					);
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `researches` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `researches` 
+					SET 
+					  `QuestionnaireId` = @QuestionnaireId,
+						`Name` = @Name,
+						`ModifiedBy` = @ModifiedBy,
+						`Surname` = @Surname,
+						`ObsoletedBy` = @ObsoletedBy,
+						`ObsoletedOn` = @ObsoletedOn,
+						`Gender` = @Gender,
+						`Weight` = @Weight ,
+            `Height` = @Height,
+            `Age` = @Age
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+    </researches>
     <roles>
       <Get>
         <![CDATA[
@@ -974,13 +1068,36 @@
          WHERE 
          q.Guid = @Guid AND 
          q.UserId = @UserId AND 
-         q.Completed = 1 AND 
 	       q.ObsoletedOn is null AND
          a.ObsoletedOn is null AND 
          p.ObsoletedOn is null AND 
          f.ObsoletedOn is null
         ]]>
       </GetData>
+      <GetResearchData>
+        <![CDATA[
+         SELECT 
+         q.*, null as Split1, 
+         a.*, null as Split2, 
+         r.*, null as Split3, 
+         f.* 
+         
+         FROM 
+         questionnaires q 
+         
+         JOIN answers a ON q.Id = a.QuestionnaireId 
+         JOIN researches r ON r.Id = a.ResearchId 
+         JOIN foods f ON f.Id = a.FoodId 
+         
+         WHERE 
+         q.Guid = @Guid AND 
+         q.UserId = @UserId AND 
+		      q.ObsoletedOn is null AND
+         a.ObsoletedOn is null AND 
+         r.ObsoletedOn is null AND 
+         f.ObsoletedOn is null
+        ]]>
+      </GetResearchData>
       <InsertGetId>
         <![CDATA[
 					INSERT INTO `questionnaires`

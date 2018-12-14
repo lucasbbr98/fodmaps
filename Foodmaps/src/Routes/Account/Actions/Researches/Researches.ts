@@ -78,13 +78,15 @@ export class ResearchesComponent implements OnInit {
 
     }
 
-    // TODO
     seeResearch(q: Questionnaire) {
-        if (q == null || q.guid == null || q.guid == "") {
+        if (q == null || q.guid == null || q.guid == "" || q.completed == null) {
             this.toasterService.pop("error", "Erro", "Houve um erro interno, por favor tente recarregar a página");
             return;
         }
-        this.router.navigate(['/conta/pesquisa/guid', q.guid]);
+
+        var completed = 'false'; if (q.completed) { completed = 'true'; }
+
+        this.router.navigate(['/conta/pesquisa', q.guid], { queryParams: { name: q.name, completed: completed } });
     }
 
 }

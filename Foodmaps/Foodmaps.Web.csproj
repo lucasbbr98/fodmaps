@@ -22,6 +22,7 @@
     <None Remove="src\Routes\Account.module.ts" />
     <None Remove="src\Routes\Account\Actions\PatientInfo.ts" />
     <None Remove="src\Routes\Account\Actions\Patients.ts" />
+    <None Remove="src\Routes\Account\Actions\Researches\Info\ResearchInfo.ts" />
     <None Remove="src\Routes\Account\Actions\Researches\Researches.ts" />
     <None Remove="src\Routes\Account\Login\Login.ts" />
     <None Remove="src\Routes\Account\Profile\Profile.ts" />
@@ -45,6 +46,9 @@
     <None Remove="src\Routes\Papers\Papers.ts" />
     <None Remove="src\Routes\Questionnaire\Answers\Patients\QuestionnairePatientAnswers.ts" />
     <None Remove="src\Routes\Questionnaire\Data\Patient\QuestionnairePatientData.ts" />
+    <None Remove="src\Routes\Questionnaire\Data\Patient\Report\QuestionnairePatientReport.ts" />
+    <None Remove="src\Routes\Questionnaire\Data\Research\QuestionnaireResearchData.ts" />
+    <None Remove="src\Routes\Questionnaire\Data\Research\Report\QuestionnaireResearchReport.ts" />
     <None Remove="src\Routes\Questionnaire\Questions\QuestionnaireQuestions.ts" />
     <None Remove="src\Routes\Support\Support.ts" />
     <None Remove="src\Routes\Terms\Terms.ts" />
@@ -81,6 +85,7 @@
     <TypeScriptCompile Include="src\Routes\About\About.ts" />
     <TypeScriptCompile Include="src\Routes\Account\Actions\Patients\Info\PatientInfo.ts" />
     <TypeScriptCompile Include="src\Routes\Account\Actions\Patients\Patients.ts" />
+    <TypeScriptCompile Include="src\Routes\Account\Actions\Researches\Info\ResearchInfo.ts" />
     <TypeScriptCompile Include="src\Routes\Account\Actions\Researches\Researches.ts" />
     <TypeScriptCompile Include="src\Routes\Account\Profile\Profile.ts" />
     <TypeScriptCompile Include="src\Routes\Account\Register\Additional\RegisterAdditional.ts" />
@@ -103,6 +108,9 @@
     <TypeScriptCompile Include="src\Routes\Questionnaire\Answers\Patients\QuestionnairePatientAnswers.ts" />
     <TypeScriptCompile Include="src\Routes\Questionnaire\Dashboard\QuestionnaireDashboard.ts" />
     <TypeScriptCompile Include="src\Routes\Questionnaire\Data\Patient\QuestionnairePatientData.ts" />
+    <TypeScriptCompile Include="src\Routes\Questionnaire\Data\Patient\Report\QuestionnairePatientReport.ts" />
+    <TypeScriptCompile Include="src\Routes\Questionnaire\Data\Research\QuestionnaireResearchData.ts" />
+    <TypeScriptCompile Include="src\Routes\Questionnaire\Data\Research\Report\QuestionnaireResearchReport.ts" />
     <TypeScriptCompile Include="src\Routes\Questionnaire\Questions\QuestionnaireQuestions.ts" />
     <TypeScriptCompile Include="src\Routes\Support\Support.ts" />
     <TypeScriptCompile Include="src\Routes\Terms\Terms.ts" />
@@ -120,13 +128,6 @@
 
   <ItemGroup>
     <None Include="wwwroot\external\favicon.ico" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="src\Routes\Account\Actions\Researches\Info\" />
-    <Folder Include="src\Routes\Questionnaire\Answers\Researches\" />
-    <Folder Include="src\Routes\Questionnaire\Data\Research\" />
   </ItemGroup>
 </Project>
 

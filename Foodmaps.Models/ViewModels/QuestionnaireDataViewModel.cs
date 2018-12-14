@@ -26,5 +26,13 @@
             this.Food = f;
         }
 
+        public QuestionnaireDataViewModel(Questionnaire q, Answer a, Research r, Food f)
+        {
+            this.Questionnaire = q;
+            this.Answer = a;
+            this.Patient = new Patient(r);
+            this.Food = f;
+        }
+
     }
 }

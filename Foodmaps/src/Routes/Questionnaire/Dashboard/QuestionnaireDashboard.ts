@@ -14,6 +14,17 @@ export interface QuestionnaireAnswersModel {
     guid: string;
 }
 
+export interface ResearchAnswersModel {
+    answers: Answer[];
+    guid: string;
+    name: string;
+    surname: string;
+    gender: string;
+    age: number;
+    weight: number;
+    height: number;
+}
+
 @Component({
     selector: 'questionnaire-dashboard',
     templateUrl: './QuestionnaireDashboard.html',
@@ -27,11 +38,13 @@ export class QuestionnaireDashboardComponent implements OnInit {
     public toasterconfig: ToasterConfig;
     public user: User;
     public model: QuestionnaireAnswersModel = <QuestionnaireAnswersModel>{};
+    public researchModel: ResearchAnswersModel = <ResearchAnswersModel>{};
     public patient: CreatePatientModel = <CreatePatientModel>{};
     public patientAge: number = 0;
     public showConfirm: boolean = false;
     public showDashboard: boolean = false;
     public showPatientQuestion: boolean = false;
+    public isSending: boolean = false;
 
     public fruitsCompleted: number = 0;
     public fruitsPercentageString: string = '0%';
@@ -223,8 +236,41 @@ export class QuestionnaireDashboardComponent implements OnInit {
     }
 
     sendResearch() {
-        console.log(this.patient);
-        console.log(this.patientAge);
+        this.researchModel.answers = this.model.answers;
+        this.researchModel.guid = this.guid;
+
+        this.researchModel.name = this.patient.name
+        this.researchModel.surname = this.patient.surname
+        this.researchModel.gender = this.patient.gender
+        this.researchModel.age = this.patientAge
+        this.researchModel.weight = this.patient.weight
+        this.researchModel.height = this.patient.height
+        if (this.isSending) { return; } else { this.isSending = true; }
+
+        this.loaderService.display(true);
+
+        if (navigator.onLine) {
+            this.net.post<ResearchAnswersModel>(`Questionnaire/SaveResearchAnswers`, this.researchModel).subscribe(t => {
+                this.isSending = false;
+                this.loaderService.display(false);
+                this.toasterService.pop("success", "Sucesso", "Pesquisa adicionada com sucesso!");
+                return;
+            }, error => {
+                this.isSending = false;
+                if (!navigator.onLine) {
+                    this.toasterService.pop('error', 'Erro Conexão', 'A sua conexão com a internet caiu e não foi possível obter a resposta do servidor. Tente novamente');
+                    this.loaderService.display(false);
+                    return;
+                }
+                var errorResponse = this.errorService.saveAnswers(error.message);
+                this.toasterService.pop('error', 'Erro', errorResponse.error);
+                this.loaderService.display(false);
+            });
+        }
+        else {
+            this.toasterService.pop('info', 'Sem conexão', 'Verifique a sua conexão com a internet');
+            this.loaderService.display(false);
+        }
     }
 
     isQuestionnaireValid(): boolean {

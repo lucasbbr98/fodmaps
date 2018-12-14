@@ -41,6 +41,27 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             return Ok();
         }
 
+        [HttpPost, AllowAnonymous]
+        public IActionResult SaveResearchAnswers([FromBody] ResearchAnswersModel model)
+        {
+            try
+            {
+                var resp = questService.SaveResearchAnswers(model);
+                if (resp != HttpStatusCode.OK)
+                {
+                    return StatusCode((int)resp);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = ex.ToString()
+                });
+            }
+            return Ok();
+        }
+
         [HttpGet("{id}"), Authorize]
         public IActionResult GetCompletedByPatient(int id)
         {
@@ -80,6 +101,34 @@ namespace Foodmaps.Web.Controllers.Api.Version1
                 var userId = (int)UserId;
 
                 var resp = questService.GetData(guid, userId, out IEnumerable<QuestionnaireDataViewModel> data);
+                if (resp != HttpStatusCode.OK)
+                    return StatusCode((int)resp);
+
+                return Ok(new
+                {
+                    Data = data
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = ex.ToString()
+                });
+            }
+        }
+
+        [HttpGet("{guid}"), Authorize]
+        public IActionResult GetResearchData(string guid)
+        {
+            try
+            {
+                if (UserId == null || UserId <= 0 || string.IsNullOrEmpty(guid))
+                    return StatusCode(500);
+
+                var userId = (int)UserId;
+
+                var resp = questService.GetResearchData(guid, userId, out IEnumerable<QuestionnaireDataViewModel> data);
                 if (resp != HttpStatusCode.OK)
                     return StatusCode((int)resp);
 

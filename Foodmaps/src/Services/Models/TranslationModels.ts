@@ -44,3 +44,12 @@ export interface CreateQuestionnaireModel {
 export interface GetIntegerModel {
     value: number;
 }
+
+export interface GetStringModel {
+    data: string;
+}
+
+export interface ResetPasswordModel {
+    passwordToken: string;
+    password: string;
+}

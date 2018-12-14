@@ -294,7 +294,7 @@ namespace Foodmaps.MySQL.Services.Utilities.Authentication
             }
             try
             {
-                emailService.SendEmail(model.Data, "Recuperação de Senha | Agrega", EmailService.PasswordResetBody(guid.ToString()));
+                emailService.SendEmail(model.Data, "Recuperação de Senha | FODMAP Project", EmailService.PasswordResetBody(guid.ToString()));
                 return HttpStatusCode.OK;
             }
             catch
@@ -303,6 +303,35 @@ namespace Foodmaps.MySQL.Services.Utilities.Authentication
             }
         }
 
-        
+        public HttpStatusCode ResetPassword(ResetPasswordModel model)
+        {
+            var validator = new ResetPasswordModelValidator();
+            var errorMsgs = validator.Validate(model);
+            if (errorMsgs.Any())
+            {
+                return HttpStatusCode.BadRequest;
+            }
+
+            var auth = authenticationService.GetByPasswordToken(model.PasswordToken);
+            if (auth == null)
+            {
+                return HttpStatusCode.NotAcceptable;
+            }
+
+            var salt = passwordService.RandomString();
+            var hashedPassword = passwordService.Hash(model.Password, salt);
+            auth.Salt = salt;
+            auth.Password = hashedPassword;
+            auth.PasswordToken = null;
+            auth.ModifiedBy = "ResetPassword";
+
+            if (!authenticationService.Update(auth))
+                return HttpStatusCode.InternalServerError;
+
+
+            return HttpStatusCode.OK;
+        }
+
+
     }
 }

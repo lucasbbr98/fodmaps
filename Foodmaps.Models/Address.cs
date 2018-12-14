@@ -1,6 +1,4 @@
-﻿using Foodmaps.Models;
-using Foodmaps.Models.RequestModels;
-using System;
+﻿using System;
 
 namespace Foodmaps.Models
 {

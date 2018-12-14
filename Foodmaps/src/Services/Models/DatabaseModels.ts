@@ -74,6 +74,7 @@ export interface Patient extends IReferenceTracker {
     weight: number;
     height: number;
     birthday: Date;
+    age: number;
 
 }
 

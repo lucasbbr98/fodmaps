@@ -1,65 +1,44 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { ToasterService, ToasterConfig } from 'angular2-toaster';
-import { NetworkService } from '../../../../Services/NetworkService';
-import { LoaderService } from '../../../../Services/LoaderService';
-import { ErrorService } from '../../../../Services/Errors/ErrorService';
-import { User, QuestionnaireDataViewModel } from '../../../../Services/Models/DatabaseModels';
+import { NetworkService } from '../../../../../Services/NetworkService';
+import { LoaderService } from '../../../../../Services/LoaderService';
+import { ErrorService } from '../../../../../Services/Errors/ErrorService';
+import { User, QuestionnaireDataViewModel } from '../../../../../Services/Models/DatabaseModels';
+import { StorageService } from '../../../../../Services/StorageService';
 
 
 export interface GetQuestionnaireData {
     data: QuestionnaireDataViewModel[];
 }
 
-export interface CSVModel {
-    alimento: string;
-    frequencia: string;
-    quantidade: number;
-    oligossacarideo: number;
-    poliol: number;
-    lactose: number;
-    frutose: number;
-    nome: string;
-    sobrenome: string;
-    peso: number;
-    altura: number;
-    idade: Date;
-}
-
-
 @Component({
-    selector: 'questionnaire-patient-data',
-    templateUrl: './QuestionnairePatientData.html',
-    styleUrls: ['./QuestionnairePatientData.scss']
+    selector: 'questionnaire-research-report',
+    templateUrl: './QuestionnaireResearchReport.html',
+    styleUrls: ['./QuestionnaireResearchReport.scss']
 })
-export class QuestionnairePatientDataComponent implements OnInit {
-
-    // General Chart (Total)
-    public doughnutChartLabels: string[] = ['Frutose', 'Lactose', 'Oligossacarídeo', 'Poliól'];
-    public doughnutChartData: number[] = [0, 0, 0, 0];
-    public doughnutChartType: string = 'doughnut';
-
-    // Group Chart (Top 5)
-    public barChartType: string = 'bar';
-    public barChartLegend: boolean = true;
-
-    // Fodmap Chart (Top 5)
-    public barChartLabels: Array<any>;
-
-    public barChartData: any[] = [
-        { data: [0, 0, 0, 0, 0], label: 'Frutose' }
-    ];
+export class QuestionnaireResearchReportComponent implements OnInit {
 
     private guid: string = '';
-    public datetime: Date;
-    public name: string = '';
     public toasterconfig: ToasterConfig;
     public user: User;
     public data: QuestionnaireDataViewModel[];
-    public answers: CSVModel[] = [];
+
+    public name: string = '';
+    public nutricionist: string = '';
+    public crn: string = '';
+    public age: number = 0;
+    public weight: number = 0;
+    public height: number = 0;
+    public datetime: Date;
+
+    public oligo: number = 0;
+    public poli: number = 0;
+    public frutose: number = 0;
+    public lactose: number = 0;
 
     // Fodmaps
-
+    public top: Array<number> = [0, 1, 2, 3, 4]
     public frutoseData: number[] = [0, 0, 0, 0, 0];
     public frutoseLabels: Array<any> = ['Alimento 1', 'Alimento 2', 'Alimento 3', 'Alimento 4', 'Alimento 5'];
 
@@ -78,24 +57,22 @@ export class QuestionnairePatientDataComponent implements OnInit {
         private loaderService: LoaderService,
         private router: Router,
         private route: ActivatedRoute,
-        private errorService: ErrorService
+        private errorService: ErrorService,
+        private storage: StorageService,
     ) { }
 
 
     ngOnInit(): void {
         this.route.params.subscribe(p => {
             this.guid = p['guid'] || '';
-            this.name = this.route.snapshot.queryParamMap.get('name') || "";
-            this.datetime = new Date(this.route.snapshot.queryParamMap.get('datetime')) || null;
         });
-
-        // Forces top navigation
         this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;
             }
             window.scrollTo(0, 0);
         });
+        this.user = this.storage.user;
         this.toasterconfig = new ToasterConfig({
             showCloseButton: true,
             tapToDismiss: true,
@@ -115,10 +92,11 @@ export class QuestionnairePatientDataComponent implements OnInit {
                 if (data && data.length > 0) {
                     this.data = data;
                     this.updateGeneralChart();
+                    this.populateReport();
                     this.populateFodmaps();
                 }
                 else {
-                    this.toasterService.pop("error", "Erro", "O paciente ainda não respondeu o questionário");
+                    this.toasterService.pop("error", "Erro", "Ops, ocorreu algum erro com esse questionário.");
                 }
             }, error => {
                 if (!navigator.onLine) {
@@ -138,6 +116,7 @@ export class QuestionnairePatientDataComponent implements OnInit {
 
     }
 
+
     updateGeneralChart() {
         if (!this.data || this.data.length <= 0)
             return;
@@ -153,35 +132,26 @@ export class QuestionnairePatientDataComponent implements OnInit {
                 lactoseCount = lactoseCount + (d.food.lactose * d.answer.value * d.answer.multiplier);
                 oligoCount = oligoCount + (d.food.oligossacarideo * d.answer.value * d.answer.multiplier);
                 poliolCount = poliolCount + (d.food.poliol * d.answer.value * d.answer.multiplier);
-
-                let csvData: CSVModel = {
-                    alimento: d.food.name, frequencia: d.answer.frequency, quantidade: d.answer.value,
-                    frutose: d.food.frutose, lactose: d.food.lactose, poliol: d.food.poliol, oligossacarideo: d.food.oligossacarideo,
-                    nome: d.patient.name, sobrenome: d.patient.surname, peso: d.patient.weight, altura: d.patient.height, idade: d.patient.birthday
-                };
-                this.answers.push(csvData);
             }
         }
 
         //Formatting
-        frutoseCount = Number(frutoseCount.toFixed(2));
-        lactoseCount = Number(lactoseCount.toFixed(2));
-        oligoCount = Number(oligoCount.toFixed(2));
-        poliolCount = Number(poliolCount.toFixed(2));
-
-        this.doughnutChartData = [frutoseCount, lactoseCount, oligoCount, poliolCount]
-
-        var total = frutoseCount + lactoseCount + oligoCount + poliolCount
-
-
-        this.doughnutChartLabels = [
-            'Frutose ' + (total / frutoseCount).toString() + '%',
-            'Lactose ' + (total / lactoseCount).toString() + '%',
-            'Oligossacarídeo ' + (total / oligoCount).toString() + '%',
-            'Poliól ' + (total / poliolCount).toString() + '%'
-        ]
+        this.frutose = Number(frutoseCount.toFixed(2));
+        this.lactose = Number(lactoseCount.toFixed(2));
+        this.oligo = Number(oligoCount.toFixed(2));
+        this.poli = Number(poliolCount.toFixed(2));
 
     }
+
+    populateReport() {
+        this.name = this.data[0].patient.name + " " + this.data[0].patient.surname;
+        this.age = this.calculateAge(this.data[0].patient.birthday);
+        this.height = this.data[0].patient.height;
+        this.weight = this.data[0].patient.weight;
+        this.datetime = this.data[0].questionnaire.modifiedOn;
+
+    }
+
 
     populateFodmaps() {
         if (!this.data || this.data.length <= 0)
@@ -257,98 +227,14 @@ export class QuestionnairePatientDataComponent implements OnInit {
             this.poliolData[i] = Number((poliolArray[i].food.poliol * poliolArray[i].answer.value * poliolArray[i].answer.multiplier).toFixed(2));
             this.poliolLabels[i] = poliolArray[i].food.name;
         }
-        this.barChartLabels = this.frutoseLabels;
-        setTimeout(() => {
-            this.barChartData = [{ data: this.frutoseData, label: 'Frutose' }];
-        }, 100);
     }
 
-    showFodmap(value) {
-        //'Frutose', 'Lactose', 'Oligossacarídeo', 'Poliól'
-        switch (value) {
-            case "Frutose": {
-                this.barChartLabels = this.frutoseLabels;
-                setTimeout(() => {
-                    this.barChartData = [{ data: this.frutoseData, label: value }];
-                }, 100);
-                break;
-            }
-            case "Lactose": {
-                this.barChartLabels = this.lactoseLabels;
-                setTimeout(() => {
-                    this.barChartData = [{ data: this.lactoseData, label: value }];
-                }, 100);
-                break;
-            }
-            case "Oligossacarídeo": {
-                this.barChartLabels = this.oligoLabels;
-                setTimeout(() => {
-                    this.barChartData = [{ data: this.oligoData, label: value }];
-                }, 100);
-                break;
-            }
-            case "Poliól": {
-                this.barChartLabels = this.poliolLabels;
-                setTimeout(() => {
-                    this.barChartData = [{ data: this.poliolData, label: value }];
-                }, 100);
-                break;
-            }
-            default: {
-                this.barChartLabels = this.frutoseLabels;
-                setTimeout(() => {
-                    this.barChartData = [{ data: this.frutoseData, label: value }];
-                }, 100);
-                break;
-            }
-        }
+    calculateAge(birthdate): number {
+        var timeDiff = Math.abs(Date.now() - Date.parse(birthdate));
+        return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
     }
 
-    seeReport() {
-        this.router.navigate(['questionario/paciente/relatorio/', this.guid]);
-    }
-
-    public barChartOptions: any = {
-        scaleShowVerticalLines: false,
-        responsive: true
-    };
-
-    download() {
-        var csvData = this.ConvertToCSV(this.answers);
-        var a = document.createElement("a");
-        a.setAttribute('style', 'display:none;');
-        document.body.appendChild(a);
-        var blob = new Blob([csvData], { type: 'text/csv' });
-        var url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = 'fodmapsdata.csv';
-        a.click();
-    }
-
-    ConvertToCSV(objArray) {
-        var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-        var str = 'sep=,\r\n';
-        var row = "";
-
-        var index;
-        for (index in objArray[0]) {
-            //Now convert each value to string and comma-separated
-            row += index + ',';
-        }
-        row = row.slice(0, -1);
-        //append Label row with line break
-        str += row + '\r\n';
-
-        for (var i = 0; i < array.length; i++) {
-            var line = '';
-            for (index in array[i]) {
-                if (line != '') line += ',';
-
-                line += array[i][index];
-            }
-            str += line + '\r\n';
-        }
-        str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-        return str;
+    print() {
+        window.print();
     }
 }

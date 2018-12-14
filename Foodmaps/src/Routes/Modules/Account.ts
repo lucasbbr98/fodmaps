@@ -10,6 +10,9 @@ import { ProfileComponent } from './../Account/Profile/Profile';
 import { PatientsComponent } from './../Account/Actions/Patients/Patients';
 import { PatientInfoComponent } from './../Account/Actions/Patients/Info/PatientInfo';
 import { ResearchesComponent } from './../Account/Actions/Researches/Researches';
+import { ResearchInfoComponent } from './../Account/Actions/Researches/Info/ResearchInfo';
+import { SendPasswordResetComponent } from './../Account/Reset/SendPasswordReset';
+import { ResetPasswordComponent } from './../Account/Reset/ResetPassword';
 
 @NgModule({
 
@@ -22,7 +25,10 @@ import { ResearchesComponent } from './../Account/Actions/Researches/Researches'
             { path: 'perfil', component: ProfileComponent, canActivate: [IsLoggedIn] },
             { path: 'pacientes', component: PatientsComponent, canActivate: [IsLoggedIn] },
             { path: 'paciente/:id', component: PatientInfoComponent, canActivate: [IsLoggedIn] },
-            { path: 'pesquisas', component: ResearchesComponent, canActivate: [IsLoggedIn] }
+            { path: 'pesquisas', component: ResearchesComponent, canActivate: [IsLoggedIn] },
+            { path: 'pesquisa/:guid', component: ResearchInfoComponent, canActivate: [IsLoggedIn] },
+            { path: 'resetar/senha', component: SendPasswordResetComponent },
+            { path: 'reset/:passwordToken', component: ResetPasswordComponent }
 
         ]
     ),
@@ -33,7 +39,10 @@ import { ResearchesComponent } from './../Account/Actions/Researches/Researches'
         ProfileComponent,
         PatientsComponent,
         PatientInfoComponent,
-        ResearchesComponent
+        ResearchesComponent,
+        ResearchInfoComponent,
+        SendPasswordResetComponent,
+        ResetPasswordComponent
     ]
 })
 export class AccountModule { }

@@ -116,4 +116,14 @@ export class LoginComponent implements OnInit {
         }
     }
 
+    forgot() {
+        if (navigator.onLine) {
+            this.router.navigateByUrl('conta/resetar/senha');
+        }
+        else {
+            this.toasterService.pop('info', 'Internet', 'Verifique a sua conexão com a internet');
+        }
+
+    }
+
 }

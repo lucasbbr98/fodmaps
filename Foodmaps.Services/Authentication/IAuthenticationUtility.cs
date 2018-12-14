@@ -13,5 +13,6 @@ namespace Foodmaps.Services.Authentication
         HttpStatusCode GetUser(int? userId, out User user);
         HttpStatusCode GetUserByEmail(string email, out User user);
         HttpStatusCode SendResetPassword(GetStringModel model);
+        HttpStatusCode ResetPassword(ResetPasswordModel model);
     }
 }

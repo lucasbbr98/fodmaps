@@ -190,6 +190,26 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             return Ok();
         }
 
+        [HttpPost, AllowAnonymous]
+        public IActionResult ResetPassword([FromBody]ResetPasswordModel model)
+        {
+            try
+            {
+                var resp = authenticationService.ResetPassword(model);
+                if (resp != HttpStatusCode.OK)
+                {
+                    return StatusCode((int)resp);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = ex.ToString()
+                });
+            }
+            return Ok();
+        }
 
     }
 }

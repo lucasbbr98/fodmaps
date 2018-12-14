@@ -23,16 +23,16 @@ export interface CSVModel {
     sobrenome: string;
     peso: number;
     altura: number;
-    idade: Date;
+    idade: number;
 }
 
 
 @Component({
-    selector: 'questionnaire-patient-data',
-    templateUrl: './QuestionnairePatientData.html',
-    styleUrls: ['./QuestionnairePatientData.scss']
+    selector: 'questionnaire-research-data',
+    templateUrl: './QuestionnaireResearchData.html',
+    styleUrls: ['./QuestionnaireResearchData.scss']
 })
-export class QuestionnairePatientDataComponent implements OnInit {
+export class QuestionnaireResearchDataComponent implements OnInit {
 
     // General Chart (Total)
     public doughnutChartLabels: string[] = ['Frutose', 'Lactose', 'Oligossacarídeo', 'Poliól'];
@@ -110,7 +110,7 @@ export class QuestionnairePatientDataComponent implements OnInit {
         }
         // Gets patient data
         if (navigator.onLine) {
-            this.net.get<GetQuestionnaireData>(`Questionnaire/GetData/` + this.guid).subscribe(t => {
+            this.net.get<GetQuestionnaireData>(`Questionnaire/GetResearchData/` + this.guid).subscribe(t => {
                 var data = t.data;
                 if (data && data.length > 0) {
                     this.data = data;
@@ -118,7 +118,7 @@ export class QuestionnairePatientDataComponent implements OnInit {
                     this.populateFodmaps();
                 }
                 else {
-                    this.toasterService.pop("error", "Erro", "O paciente ainda não respondeu o questionário");
+                    this.toasterService.pop("error", "Erro", "Nenhuma resposta foi gravada para essa pesquisa");
                 }
             }, error => {
                 if (!navigator.onLine) {
@@ -157,7 +157,7 @@ export class QuestionnairePatientDataComponent implements OnInit {
                 let csvData: CSVModel = {
                     alimento: d.food.name, frequencia: d.answer.frequency, quantidade: d.answer.value,
                     frutose: d.food.frutose, lactose: d.food.lactose, poliol: d.food.poliol, oligossacarideo: d.food.oligossacarideo,
-                    nome: d.patient.name, sobrenome: d.patient.surname, peso: d.patient.weight, altura: d.patient.height, idade: d.patient.birthday
+                    nome: d.patient.name, sobrenome: d.patient.surname, peso: d.patient.weight, altura: d.patient.height, idade: d.patient.age
                 };
                 this.answers.push(csvData);
             }
@@ -186,11 +186,7 @@ export class QuestionnairePatientDataComponent implements OnInit {
     populateFodmaps() {
         if (!this.data || this.data.length <= 0)
             return;
-
-        // Iterator to retrieve top 5 values
-        var top = [0, 1, 2, 3, 4]
-
-        var frutoseArray = this.data.sort((d1, d2) => {
+        let frutoseArray = this.data.concat().sort((d1, d2) => {
             var d1Value = d1.food.frutose * d1.answer.value * d1.answer.multiplier;
             var d2Value = d2.food.frutose * d2.answer.value * d2.answer.multiplier;
             if (d1Value > d2Value) {
@@ -202,12 +198,30 @@ export class QuestionnairePatientDataComponent implements OnInit {
 
             return 0;
         });
-        for (let i of top) {
-            this.frutoseData[i] = Number((frutoseArray[i].food.frutose * frutoseArray[i].answer.value * frutoseArray[i].answer.multiplier).toFixed(2));
-            this.frutoseLabels[i] = frutoseArray[i].food.name;
+        var counter = 0;
+        var adds = 0;
+        while (adds < 5) {
+            if (counter == 0) {
+                this.frutoseData[counter] = Number((frutoseArray[counter].food.frutose * frutoseArray[counter].answer.value * frutoseArray[counter].answer.multiplier).toFixed(2));
+                this.frutoseLabels[counter] = frutoseArray[counter].food.name;
+                adds++;
+                counter++;
+            }
+            else {
+                if (frutoseArray[counter - 1].food.name == frutoseArray[counter].food.name) {
+                    this.frutoseData[counter - 1] = this.frutoseData[counter - 1] + Number((frutoseArray[counter].food.frutose * frutoseArray[counter].answer.value * frutoseArray[counter].answer.multiplier).toFixed(2));
+                    frutoseArray.splice(counter, 1);
+                }
+                else {
+                    this.frutoseData[counter] = Number((frutoseArray[counter].food.frutose * frutoseArray[counter].answer.value * frutoseArray[counter].answer.multiplier).toFixed(2));
+                    this.frutoseLabels[counter] = frutoseArray[counter].food.name;
+                    counter++;
+                    adds++;
+                }
+            }
         }
 
-        var lactoseArray = this.data.sort((d1, d2) => {
+        let lactoseArray = this.data.concat().sort((d1, d2) => {
             var d1Value = d1.food.lactose * d1.answer.value * d1.answer.multiplier;
             var d2Value = d2.food.lactose * d2.answer.value * d2.answer.multiplier;
             if (d1Value > d2Value) {
@@ -219,12 +233,31 @@ export class QuestionnairePatientDataComponent implements OnInit {
 
             return 0;
         });
-        for (let i of top) {
-            this.lactoseData[i] = Number((lactoseArray[i].food.lactose * lactoseArray[i].answer.value * lactoseArray[i].answer.multiplier).toFixed(2));
-            this.lactoseLabels[i] = lactoseArray[i].food.name;
+        adds = 0;
+        counter = 0;
+        while (adds < 5) {
+            if (counter == 0) {
+                this.lactoseData[counter] = Number((lactoseArray[counter].food.lactose * lactoseArray[counter].answer.value * lactoseArray[counter].answer.multiplier).toFixed(2));
+                this.lactoseLabels[counter] = lactoseArray[counter].food.name;
+                adds++;
+                counter++;
+            }
+            else {
+                if (lactoseArray[counter - 1].food.name == lactoseArray[counter].food.name) {
+                    this.lactoseData[counter - 1] = this.lactoseData[counter - 1] + Number((lactoseArray[counter].food.lactose * lactoseArray[counter].answer.value * lactoseArray[counter].answer.multiplier).toFixed(2));
+                    lactoseArray.splice(counter, 1);
+                }
+                else {
+                    this.lactoseData[counter] = Number((lactoseArray[counter].food.lactose * lactoseArray[counter].answer.value * lactoseArray[counter].answer.multiplier).toFixed(2));
+                    this.lactoseLabels[counter] = lactoseArray[counter].food.name;
+                    counter++;
+                    adds++;
+                }
+            }
         }
 
-        var oligoArray = this.data.sort((d1, d2) => {
+
+        let oligoArray = this.data.concat().sort((d1, d2) => {
             var d1Value = d1.food.oligossacarideo * d1.answer.value * d1.answer.multiplier;
             var d2Value = d2.food.oligossacarideo * d2.answer.value * d2.answer.multiplier;
             if (d1Value > d2Value) {
@@ -236,12 +269,30 @@ export class QuestionnairePatientDataComponent implements OnInit {
 
             return 0;
         });
-        for (let i of top) {
-            this.oligoData[i] = Number((oligoArray[i].food.oligossacarideo * oligoArray[i].answer.value * oligoArray[i].answer.multiplier).toFixed(2));
-            this.oligoLabels[i] = oligoArray[i].food.name;
+        adds = 0;
+        counter = 0;
+        while (adds < 5) {
+            if (counter == 0) {
+                this.oligoData[counter] = Number((oligoArray[counter].food.oligossacarideo * oligoArray[counter].answer.value * oligoArray[counter].answer.multiplier).toFixed(2));
+                this.oligoLabels[counter] = oligoArray[counter].food.name;
+                adds++;
+                counter++;
+            }
+            else {
+                if (oligoArray[counter - 1].food.name == oligoArray[counter].food.name) {
+                    this.oligoData[counter - 1] = this.oligoData[counter - 1] + Number((oligoArray[counter].food.oligossacarideo * oligoArray[counter].answer.value * oligoArray[counter].answer.multiplier).toFixed(2));
+                    oligoArray.splice(counter, 1);
+                }
+                else {
+                    this.oligoData[counter] = Number((oligoArray[counter].food.oligossacarideo * oligoArray[counter].answer.value * oligoArray[counter].answer.multiplier).toFixed(2));
+                    this.oligoLabels[counter] = oligoArray[counter].food.name;
+                    counter++;
+                    adds++;
+                }
+            }
         }
 
-        var poliolArray = this.data.sort((d1, d2) => {
+        let poliolArray = this.data.concat().sort((d1, d2) => {
             var d1Value = d1.food.poliol * d1.answer.value * d1.answer.multiplier;
             var d2Value = d2.food.poliol * d2.answer.value * d2.answer.multiplier;
             if (d1Value > d2Value) {
@@ -253,10 +304,29 @@ export class QuestionnairePatientDataComponent implements OnInit {
 
             return 0;
         });
-        for (let i of top) {
-            this.poliolData[i] = Number((poliolArray[i].food.poliol * poliolArray[i].answer.value * poliolArray[i].answer.multiplier).toFixed(2));
-            this.poliolLabels[i] = poliolArray[i].food.name;
+        adds = 0;
+        counter = 0;
+        while (adds < 5) {
+            if (counter == 0) {
+                this.poliolData[counter] = Number((poliolArray[counter].food.poliol * poliolArray[counter].answer.value * poliolArray[counter].answer.multiplier).toFixed(2));
+                this.poliolLabels[counter] = poliolArray[counter].food.name;
+                adds++;
+                counter++;
+            }
+            else {
+                if (poliolArray[counter - 1].food.name == poliolArray[counter].food.name) {
+                    this.poliolData[counter - 1] = this.poliolData[counter - 1] + Number((poliolArray[counter].food.poliol * poliolArray[counter].answer.value * poliolArray[counter].answer.multiplier).toFixed(2));
+                    poliolArray.splice(counter, 1);
+                }
+                else {
+                    this.poliolData[counter] = Number((poliolArray[counter].food.poliol * poliolArray[counter].answer.value * poliolArray[counter].answer.multiplier).toFixed(2));
+                    this.poliolLabels[counter] = poliolArray[counter].food.name;
+                    counter++;
+                    adds++;
+                }
+            }
         }
+
         this.barChartLabels = this.frutoseLabels;
         setTimeout(() => {
             this.barChartData = [{ data: this.frutoseData, label: 'Frutose' }];

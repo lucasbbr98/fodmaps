@@ -15,13 +15,16 @@ namespace Foodmaps.MySQL.Services.Utilities.Questionnaire
     {
         private IAnswerService answerService;
         private IQuestionnaireService questionnaireService;
+        private IResearchService researchService;
         private IPatientService patientService;
         public const string UTILITY_NAME = "QuestionnaireUtility | ";
-        public QuestionnaireUtility(IAnswerService answerService, IQuestionnaireService questionnaireService, IPatientService patientService)
+        public QuestionnaireUtility(IAnswerService answerService, IQuestionnaireService questionnaireService, 
+            IPatientService patientService, IResearchService researchService)
         {
             this.questionnaireService = questionnaireService;
             this.answerService = answerService;
             this.patientService = patientService;
+            this.researchService = researchService;
         }
 
         public HttpStatusCode SaveQuestionnaireAnswers(QuestionnaireAnswersModel model)
@@ -48,6 +51,18 @@ namespace Foodmaps.MySQL.Services.Utilities.Questionnaire
             {
                 a.QuestionnaireId = q.Id;
                 a.CreatedBy = METHOD_IDENTIFIER;
+                if (a.Frequency == "mes")
+                {
+                    a.Multiplier = 30;
+                }
+                else if (a.Frequency == "semana")
+                {
+                    a.Multiplier = 7;
+                }
+                else
+                {
+                    a.Multiplier = 1;
+                }
                 answerService.Insert(a);
             }
 
@@ -55,6 +70,57 @@ namespace Foodmaps.MySQL.Services.Utilities.Questionnaire
             q.Completed = 1;
             if (!questionnaireService.Update(q))
                 return HttpStatusCode.InternalServerError;
+
+            return HttpStatusCode.OK;
+        }
+
+        public HttpStatusCode SaveResearchAnswers(ResearchAnswersModel model)
+        {
+            const string METHOD_IDENTIFIER = UTILITY_NAME + "SaveResearchAnswers";
+
+            // Validates Input Data
+            var validator = new ResearchAnswersModelValidator();
+            var errorMsgs = validator.Validate(model);
+            if (errorMsgs.Any())
+                return HttpStatusCode.BadRequest;
+
+            // Checks questionnaire exists
+            var q = questionnaireService.GetByGuid(model.Guid);
+            if (q == null)
+                return HttpStatusCode.NotFound;
+
+            // Checks if it has been already answered
+            if (q.Completed == 1)
+                return HttpStatusCode.Conflict;
+
+            // Saves Research Patient Info
+            Research research = new Research(q.Id, model.Name, model.Surname, model.Age, model.Gender, model.Weight, model.Height, METHOD_IDENTIFIER);
+            var researchId = researchService.InsertGetId(research);
+            if (researchId <= 0)
+                return HttpStatusCode.InternalServerError;
+
+            // Records all answers
+            foreach (var a in model.Answers)
+            {
+                a.QuestionnaireId = q.Id;
+                a.CreatedBy = METHOD_IDENTIFIER;
+                a.ResearchId = researchId;
+
+                if (a.Frequency == "mes")
+                {
+                    a.Multiplier = 30;
+                }
+                else if(a.Frequency == "semana")
+                {
+                    a.Multiplier = 7;
+                }
+                else
+                {
+                    a.Multiplier = 1;
+                }
+                answerService.Insert(a);
+            }
+
 
             return HttpStatusCode.OK;
         }
@@ -82,8 +148,18 @@ namespace Foodmaps.MySQL.Services.Utilities.Questionnaire
             if (!Guid.TryParse(guid, out Guid result) || userId <= 0)
                 return HttpStatusCode.BadRequest;
                 
-
             data = questionnaireService.GetData(guid, userId);
+
+            return HttpStatusCode.OK;
+        }
+
+        public HttpStatusCode GetResearchData(string guid, int userId, out IEnumerable<QuestionnaireDataViewModel> data)
+        {
+            data = null;
+            if (!Guid.TryParse(guid, out Guid result) || userId <= 0)
+                return HttpStatusCode.BadRequest;
+
+            data = questionnaireService.GetResearchData(guid, userId);
 
             return HttpStatusCode.OK;
         }
