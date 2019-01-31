@@ -375,7 +375,7 @@ export class QuestionnaireResearchDataComponent implements OnInit {
     }
 
     seeReport() {
-        this.router.navigate(['questionario/paciente/relatorio/', this.guid]);
+        this.router.navigate(['questionario/pesquisa/relatorio/', this.guid]);
     }
 
     public barChartOptions: any = {

@@ -16,10 +16,17 @@
         <div class="col-xs-6"><p><span class="h4">Profissional:</span> {{user.name}} {{user.surname}}</p></div>
         <div class="col-xs-6"><p><span class="h4">Data da pesquisa:</span> {{datetime | date: 'dd/MM/yyyy'}}</p></div>
     </div>
+</div>
+<div class="container">
+    <div class="row text-center" style="margin-top:50px;">
+        <div class="col-xs-12">
+            <h3 class="h3">População</h3>
+        </div>
+    </div>
     <div class="row text-center" style="margin-top:25px;">
-        <div class="col-xs-4"><p><span class="h4">Idade:</span> {{age}} anos</p></div>
-        <div class="col-xs-4"><p><span class="h4">Peso: </span> {{weight}} kg</p></div>
-        <div class="col-xs-4"><p><span class="h4">Altura:</span> {{height}} cm</p></div>
+        <div class="col-xs-12"><p><span class="h4">Total:</span> {{totalPeople}} pessoas</p></div>
+        <div class="col-xs-6 col-md-6"><p><span class="h4">Masculino:</span> {{malePeople}} homens</p></div>
+        <div class="col-xs-6 col-md-6"><p><span class="h4">Feminino: </span> {{femalePeople}} mulheres</p></div>
     </div>
 </div>
 <div class="container">
