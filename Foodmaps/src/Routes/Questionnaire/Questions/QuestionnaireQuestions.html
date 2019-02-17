@@ -4,7 +4,7 @@
         <aw-wizard #wizard>
             <ng-container *ngFor="let q of questions; let first = first; let last = last; let i = index;">
                 <ng-container *ngIf="i < currentIndex">
-                    <aw-wizard-step [stepTitle]="100" awOptionalStep>
+                    <aw-wizard-step [stepTitle]=" "  awOptionalStep>
                         <div class="centered-content">
                             <div class="col-xs-12">
                                 <h3>{{q.question}}</h3>
@@ -28,17 +28,23 @@
                                 </div>
                             </div>
                             <div class="col-xs-12" style="margin-top: 20px;">
-                                <div class="button dropdown">
+                                <!--<div class="button dropdown">
                                     <select [(ngModel)]='optionSelected' (ngModelChange)='onSelectChange()'>
-                                        <option value="dia">vezes por Dia</option>
-                                        <option value="semana">vezes por Semana</option>
-                                        <option value="mes">vezes por Mês</option>
+                                        <option value="dia">vezes por dia</option>
+                                        <option value="semana">vezes por semana</option>
+                                        <option value="mes">vezes por mês</option>
                                     </select>
+                                </div>-->
+                                <div class="wrap">
+                                    <div class="circle-logo-button" *ngFor="let item of frequencyValues" (click)="toggleClass(item)" [ngClass]="{'active-frequency': item.active}">
+                                        <div class="circle-logo-button-content circle-logo-button-wrapper">semana</div>
+                                        <a class="circle-logo-button-content">{{item.name}}</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn-control previous" (click)="previous()" [awGoToStep]="{stepIndex: currentStep - 1}" *ngIf="!first">Voltar</button>
-                                <button type="button" class="btn-control next" (click)="next()" [awGoToStep]="{stepIndex: currentStep + 1}" *ngIf="!last">Continuar</button>
+                                <button type="button" class="btn-control previous" (click)="previous()" *ngIf="!first && !last">Voltar</button>
+                                <button type="button" class="btn-control next" (click)="next()"  *ngIf="!last" >Continuar</button>
                                 <button type="button" class="btn-control next" (click)="save()" *ngIf="last">Finalizar</button>
                             </div>
                         </div>
@@ -69,17 +75,25 @@
                                 </div>
                             </div>
                             <div class="col-xs-12" style="margin-top: 20px;">
-                                <div class="button dropdown">
+                                <!--<div class="button dropdown">
                                     <select [(ngModel)]='optionSelected' (ngModelChange)='onSelectChange()'>
-                                        <option value="dia">vezes por Dia</option>
-                                        <option value="semana">vezes por Semana</option>
-                                        <option value="mes">vezes por Mês</option>
+                                        <option value="dia">vezes por dia</option>
+                                        <option value="semana">vezes por semana</option>
+                                        <option value="mes">vezes por mês</option>
                                     </select>
+                                </div>-->
+                                <div>
+                                    <div class="wrap">
+                                        <div class="circle-logo-button" *ngFor="let item of frequencyValues" (click)="toggleClass(item)" [ngClass]="{'active-frequency': item.active}">
+                                            <div class="circle-logo-button-content circle-logo-button-wrapper">semana</div>
+                                            <a class="circle-logo-button-content">{{item.name}}</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn-control previous" (click)="previous()" [awGoToStep]="{stepIndex: i - 1}" *ngIf="!first">Voltar</button>
-                                <button type="button" class="btn-control next" (click)="next()" [awGoToStep]="{stepIndex: i + 1}" *ngIf="!last">Continuar</button>
+                                <button type="button" class="btn-control previous" (click)="previous()" *ngIf="!first && !last">Voltar</button>
+                                <button type="button" class="btn-control next" (click)="next()" *ngIf="!last">Continuar</button>
                                 <button type="button" class="btn-control next" (click)="save()" *ngIf="last">Finalizar</button>
                             </div>
                         </div>

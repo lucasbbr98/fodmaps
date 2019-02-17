@@ -39,12 +39,6 @@ $primary-color: #4285f4;
     width: 0 !important;
     color: white !important;
 }
-a {
-    font-size: 0 !important;
-    height: 0 !important;
-    width: 0 !important;
-    color: white !important;
-}
 
 .question-img {
     max-width: 230px;
@@ -139,7 +133,7 @@ a {
 
 // BTN BACK e FORWARD
 .btn-control {
-    margin-top: 50px;
+    margin-top: 25px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -479,4 +473,129 @@ option {
     .mediaCssFixer {
         width: 130%;
     }
+}
+
+
+aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a{
+    display:none;
+    color:transparent;
+    height:0;
+    width:0;
+}
+
+/* Button */
+
+/* === usage: default settings before @import */
+$spacing: 15px;
+// @import 'path/to/circle-logo-button';
+
+
+/* === _circle-logo-button.scss ============ */
+$delay: .33s !default;
+$expand-color: #e32636 !default;
+$opacity: .9 !default;
+$spacing: 20px !default;
+$font-size: 1rem !default;
+$border-width: 2px !default;
+
+.circle-logo-button,
+%circle-logo-button {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    font-size: 0;
+    text-align: center;
+    color: #000;
+    border: #808080 $border-width solid;
+    border-radius: 50%;
+    transition: border $delay ease $delay*.2;
+
+    &:after {
+        content: '';
+        display: block;
+        padding-top: 100%;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: -1;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $expand-color;
+        opacity: $opacity;
+        transition: top $delay ease;
+    }
+
+    &:hover {
+        border-color: rgb(66, 133, 244);
+        cursor: pointer;
+
+        &:before {
+            top: 0;
+        }
+    }
+}
+
+.circle-logo-button-content,
+%circle-logo-button-content {
+    color:#000;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    font-size: 0;
+    font-size: $font-size;
+    text-decoration: none;
+    // vertical centering
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        width: 0;
+        vertical-align: middle;
+        font-size: 0;
+    }
+}
+
+.circle-logo-button-wrapper,
+%circle-logo-button-wrapper {
+    display: block;
+    visibility: hidden !important;
+    position: static !important;
+    padding: 0 $spacing;
+    float: left;
+}
+
+.wrap {
+    position: relative;
+    width: 100%;
+}
+
+///////////////////////////////////////
+
+.container1 {
+    @extend %circle-logo-button;
+    margin: 20px;
+}
+
+.wrapper {
+    @extend %circle-logo-button-wrapper;
+    padding: 0 15px;
+}
+
+.text1 {
+    @extend %circle-logo-button-content;
+    font-size: 40px;
+}
+
+.active-frequency {
+    border-color: rgb(66, 133, 244);
 }

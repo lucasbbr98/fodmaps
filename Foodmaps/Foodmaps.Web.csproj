@@ -34,6 +34,9 @@
     <None Remove="src\Routes\Home.module.ts" />
     <None Remove="src\Routes\Home\Home.ts" />
     <None Remove="src\Routes\Home\Home.ts~RF15f2c15.TMP" />
+    <None Remove="src\Routes\Info\Info1.ts" />
+    <None Remove="src\Routes\Info\Info2.ts" />
+    <None Remove="src\Routes\Info\Info3.ts" />
     <None Remove="src\Routes\Instructions\Instructions.ts" />
     <None Remove="src\Routes\ModuleHelper.ts" />
     <None Remove="src\Directives\Button\Button.ts" />
@@ -90,6 +93,9 @@
     <TypeScriptCompile Include="src\Routes\Account\Profile\Profile.ts" />
     <TypeScriptCompile Include="src\Routes\Account\Register\Additional\RegisterAdditional.ts" />
     <TypeScriptCompile Include="src\Routes\Admin\Admin.ts" />
+    <TypeScriptCompile Include="src\Routes\Info\Info2.ts" />
+    <TypeScriptCompile Include="src\Routes\Info\Info3.ts" />
+    <TypeScriptCompile Include="src\Routes\Info\Info1.ts" />
     <TypeScriptCompile Include="src\Routes\Instructions\Instructions.ts" />
     <TypeScriptCompile Include="src\Routes\Modules\Admin.ts" />
     <TypeScriptCompile Include="src\Routes\Modules\Home.ts" />

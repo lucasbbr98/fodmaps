@@ -3,7 +3,7 @@
   <SQL>
     <System>
       <ConnectionString>
-        server=localhost;user id=root;password=Pmlt2998!;database=foodmaps;SslMode=None;Allow User Variables=True;
+        server=localhost;user id=root;password=Pmlt2998!;database=foodmaps;Allow User Variables=True;
       </ConnectionString>
     </System>
     <addresses>

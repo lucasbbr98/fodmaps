@@ -12,6 +12,11 @@ export interface GetQuestionnaireData {
 }
 
 export interface CSVModel {
+    nome: string;
+    sobrenome: string;
+    peso: number;
+    altura: number;
+    idade: number;
     alimento: string;
     frequencia: string;
     quantidade: number;
@@ -19,11 +24,6 @@ export interface CSVModel {
     poliol: number;
     lactose: number;
     frutose: number;
-    nome: string;
-    sobrenome: string;
-    peso: number;
-    altura: number;
-    idade: number;
 }
 
 
@@ -155,9 +155,9 @@ export class QuestionnaireResearchDataComponent implements OnInit {
                 poliolCount = poliolCount + (d.food.poliol * d.answer.value * d.answer.multiplier);
 
                 let csvData: CSVModel = {
+                    nome: d.patient.name, sobrenome: d.patient.surname, peso: d.patient.weight, altura: d.patient.height, idade: d.patient.age,
                     alimento: d.food.name, frequencia: d.answer.frequency, quantidade: d.answer.value,
-                    frutose: d.food.frutose, lactose: d.food.lactose, poliol: d.food.poliol, oligossacarideo: d.food.oligossacarideo,
-                    nome: d.patient.name, sobrenome: d.patient.surname, peso: d.patient.weight, altura: d.patient.height, idade: d.patient.age
+                    frutose: d.food.frutose, lactose: d.food.lactose, poliol: d.food.poliol, oligossacarideo: d.food.oligossacarideo
                 };
                 this.answers.push(csvData);
             }
@@ -375,7 +375,7 @@ export class QuestionnaireResearchDataComponent implements OnInit {
     }
 
     seeReport() {
-        this.router.navigate(['questionario/paciente/relatorio/', this.guid]);
+        this.router.navigate(['questionario/pesquisa/relatorio/', this.guid]);
     }
 
     public barChartOptions: any = {

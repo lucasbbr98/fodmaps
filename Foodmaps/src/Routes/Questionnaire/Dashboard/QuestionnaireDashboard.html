@@ -9,7 +9,7 @@
         </header>
 
         <p>
-            Olá, a partir de agora você irá responder um questionário de frequência alimentar curto!
+            Olá, a partir de agora você irá preencher o Questionário de Frequência Alimentar Curto para Avaliação do Consumo de FODMAP.
             Antes de iniciar, leia com atenção as instruções a seguir:
         </p>
         <p>O preenchimento do QFA curto é simples. Basta marcar a opção que melhor reflete a quantidade e a frequência que você comeu ou bebeu determinado alimento nos últimos 3 meses.</p>
@@ -32,7 +32,7 @@
     <div class="container" *ngIf="guid !== 'exemplo'">
         <div class="row text-center">
             <div class="col-xs-12">
-                <p class="lead">Complete todas as categorias de perguntas e clique em enviar para registrar a sua pesquisa.</p>
+                <p class="lead" style="font-weight:bold;">Versão online do QFA Curto para Avaliação do Consumo de FODMAP e do Manual Fotográfico de Porções Alimentares para Quantificação do Consumo de FODMAP</p>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
         <ul class="surveys grid">
             <li class="survey-item" (click)="goTo('/questionario/perguntas/', 'acucar', sugarCompleted)">
                 <span class="survey-name">
-                    Produtos Açucarados
+                    Produtos açucarados
                 </span>
                 <div class="pull-left">
                     <span class="survey-progress">
@@ -66,7 +66,7 @@
             </li>
             <li class="survey-item" (click)="goTo('/questionario/perguntas/', 'cereais-e-massas', pastaCompleted)">
                 <span class="survey-name">
-                    Cereais, Massas e Tubérculos
+                    Cereais, massas e tubérculos
                 </span>
                 <div class="pull-left">
                     <span class="survey-progress">
@@ -86,7 +86,7 @@
                         Pão, Macarrão, Biscoito...
                     </span>
                 </div>
-                <div class="pull-right">
+                <div class="pull-right" style="margin-top: -20px;">
                     <img class="img-item" src="../../../Assets/Images/Questionnaire/Dashboard/cereais-massas.png" />
                 </div>
             </li>
@@ -118,7 +118,7 @@
             </li>
             <li class="survey-item" (click)="goTo('/questionario/perguntas/', 'legumes-e-verduras', vegetablesCompleted)">
                 <span class="survey-name">
-                    Legumes e Verduras
+                    Legumes e verduras
                 </span>
                 <div class="pull-left">
                     <span class="survey-progress">
@@ -170,7 +170,7 @@
             </li>
             <li class="survey-item" (click)="goTo('/questionario/perguntas/', 'graos', grainsCompleted)">
                 <span class="survey-name">
-                    Leguminosas e Oleaginosas
+                    Leguminosas e oleaginosas
                 </span>
                 <div class="pull-left">
                     <span class="survey-progress">

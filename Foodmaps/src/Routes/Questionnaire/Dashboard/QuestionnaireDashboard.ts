@@ -45,14 +45,15 @@ export class QuestionnaireDashboardComponent implements OnInit {
     public showDashboard: boolean = false;
     public showPatientQuestion: boolean = false;
     public isSending: boolean = false;
+    public didComplete: boolean = false;
 
     public fruitsCompleted: number = 0;
     public fruitsPercentageString: string = '0%';
-    public maxFruits: number = 18;
+    public maxFruits: number = 16;
 
     public sugarCompleted: number = 0;
     public sugarPercentageString: string = '0%';
-    public maxSugar: number = 4;
+    public maxSugar: number = 3;
 
     public grainsCompleted: number = 0;
     public grainsPercentageString: string = '0%';
@@ -60,15 +61,15 @@ export class QuestionnaireDashboardComponent implements OnInit {
 
     public pastaCompleted: number = 0;
     public pastaPercentageString: string = '0%';
-    public maxPasta: number = 16;
+    public maxPasta: number = 11;
 
     public milkCompleted: number = 0;
     public milkPercentageString: string = '0%';
-    public maxMilk: number = 10;
+    public maxMilk: number = 8;
 
     public vegetablesCompleted: number = 0;
     public vegetablesPercentageString: string = '0%';
-    public maxVegetables: number = 9;
+    public maxVegetables: number = 8;
 
 
     constructor(
@@ -246,7 +247,7 @@ export class QuestionnaireDashboardComponent implements OnInit {
         this.researchModel.weight = this.patient.weight
         this.researchModel.height = this.patient.height
         if (this.isSending) { return; } else { this.isSending = true; }
-
+        if (this.didComplete) { this.toasterService.pop('info', 'Informação', 'Pesquisa já enviada _:D') }
         this.loaderService.display(true);
 
         if (navigator.onLine) {
@@ -254,6 +255,7 @@ export class QuestionnaireDashboardComponent implements OnInit {
                 this.isSending = false;
                 this.loaderService.display(false);
                 this.toasterService.pop("success", "Sucesso", "Pesquisa adicionada com sucesso!");
+                this.didComplete = true;
                 return;
             }, error => {
                 this.isSending = false;

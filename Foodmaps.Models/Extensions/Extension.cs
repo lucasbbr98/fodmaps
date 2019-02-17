@@ -363,14 +363,11 @@ namespace Foodmaps.Models.Extensions
 
         public static bool IsValidQuestionnaireAnswersArray(Answer[] answers)
         {
-            if (answers.Length != 65)
-                return false;
-
             // Checks if all FoodIds are Unique
             if (answers.GroupBy(x => x.FoodId).Any(g => g.Count() > 1))
                 return false;
 
-            // Makes sure all FoodIDs are between 1 and 47 including both
+            // Makes sure all FoodIDs are between 1 and 65 including both
             if (answers.Any(t => t.FoodId < 1 || t.FoodId > 65))
                 return false;
 

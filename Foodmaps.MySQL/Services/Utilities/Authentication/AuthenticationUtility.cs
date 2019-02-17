@@ -90,7 +90,7 @@ namespace Foodmaps.MySQL.Services.Utilities.Authentication
 
                 return HttpStatusCode.OK;
             }
-            catch
+            catch(Exception e)
             {
                 //Log the error here
                 return HttpStatusCode.InternalServerError;
