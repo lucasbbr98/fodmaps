@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
     plugins.push(
         new AotPlugin({
             tsConfigPath: './tsconfig.json',
-            entryModule: 'src/app/app.module#AppModule'
+            entryModule: './src/app/App#AppModule'
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
@@ -62,7 +62,9 @@ if (process.env.NODE_ENV === 'production') {
             comments: false
         }),
     );
-} else {
+}
+
+else {
     console.log('STARTING DEV BUILD');
 
     rules.push({
@@ -73,41 +75,41 @@ if (process.env.NODE_ENV === 'production') {
     });
     plugins.push(
         new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)@angular/, path.resolve(__dirname, './notfound')),
-        //new OptimizeCssAssetsPlugin({
-        //    assetNameRegExp: /\.optimize\.css$/g,
-        //    cssProcessor: require('cssnano'),
-        //    cssProcessorOptions: { discardComments: { removeAll: true } },
-        //    canPrint: true
-        //}),            
-        //new UglifyJsPlugin({
-        //    uglifyOptions: {
-        //        ecma: 8,
-        //        warnings: false,
-        //        compress: true,
-        //        mangle: true,
-        //        compress: {
-        //            sequences: true,
-        //            dead_code: true,
-        //            conditionals: true,
-        //            booleans: true,
-        //            unused: true,
-        //            if_return: true,
-        //            join_vars: true,
-        //            drop_console: true
-        //        },
+        new OptimizeCssAssetsPlugin({
+            assetNameRegExp: /\.optimize\.css$/g,
+            cssProcessor: require('cssnano'),
+            cssProcessorOptions: { discardComments: { removeAll: true } },
+            canPrint: true
+        }),            
+        new UglifyJsPlugin({
+            uglifyOptions: {
+                ecma: 8,
+                warnings: false,
+                compress: true,
+                mangle: true,
+                compress: {
+                    sequences: true,
+                    dead_code: true,
+                    conditionals: true,
+                    booleans: true,
+                    unused: true,
+                    if_return: true,
+                    join_vars: true,
+                    drop_console: true
+                },
 
-        //        output: {
-        //            comments: false,
-        //            beautify: false,
-        //        },
-        //        toplevel: false,
-        //        nameCache: null,
-        //        ie8: false,
-        //        keep_classnames: undefined,
-        //        keep_fnames: false,
-        //        safari10: false,
-        //    }
-        //})
+                output: {
+                    comments: false,
+                    beautify: false,
+                },
+                toplevel: false,
+                nameCache: null,
+                ie8: false,
+                keep_classnames: undefined,
+                keep_fnames: false,
+                safari10: false,
+            }
+        })
        
     );
 }

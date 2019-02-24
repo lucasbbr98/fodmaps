@@ -17,13 +17,10 @@
   <ItemGroup>
     <PackageReference Include="AWSSDK.Core" Version="3.3.31.6" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.31.14" />
-<<<<<<< HEAD
     <PackageReference Include="Dapper" Version="1.50.7" />
     <PackageReference Include="MySql.Data" Version="8.0.15" />
-=======
     <PackageReference Include="Dapper" Version="1.50.5" />
     <PackageReference Include="MySql.Data" Version="8.0.14" />
->>>>>>> 3f3b865000a5a2868070294d71f9ada43dd949ad
   </ItemGroup>
 
   <ItemGroup>
