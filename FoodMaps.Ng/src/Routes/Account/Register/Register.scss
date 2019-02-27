@@ -1,0 +1,40 @@
+﻿@import '../../../Assets/Theme.scss';
+@import '../../../Assets/Shared/Form/FormCard.scss';
+.register-form {
+    @import '../../../Assets/Shared/Form/Inputs/Input.scss';
+    @import '../../../Assets/Shared/Form/Inputs/Select.scss';
+
+    .title {
+        color: $black;
+    }
+
+    .question {
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.4;
+    }
+
+    .fix-position {
+        margin-top: 28px;
+    }
+
+    .bold{
+        font-weight:bold;
+    }
+}
+.margin-top{
+    margin-top:30px;
+}
+.margin-center{
+    margin:0 auto;
+}
+
+
+// Tablets
+@media (max-width: 1024px) {
+
+}
+// Phones
+@media (max-width: 435px) {
+}

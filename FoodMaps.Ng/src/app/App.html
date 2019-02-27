@@ -1,0 +1,16 @@
+﻿<ag-global></ag-global>
+<fodmaps-navbar></fodmaps-navbar>
+<div class="mobile-fix" role="main">
+    <router-outlet>
+        <div *ngIf="showLoader" class="loading">
+            <div class="container loading-container">
+                <div class="loader">
+                    <div class="circle">&nbsp;</div>
+                    <div class="circle">&nbsp;</div>
+                    <div class="circle">&nbsp;</div>
+                    <div class="circle">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </router-outlet>
+</div>

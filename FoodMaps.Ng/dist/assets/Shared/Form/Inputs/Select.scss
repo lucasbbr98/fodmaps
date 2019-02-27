@@ -1,0 +1,54 @@
+﻿@import '../../../../Assets/Theme.scss';
+select {
+    width: 100%;
+    padding: 1em;
+    height: 3.4em;
+    line-height: 2;
+    border: 1px solid #e5e5e5;
+    border-radius: $borderRadius;
+    font-size: 1em;
+    box-shadow: none;
+    background-color: #f9f9f9;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+    display: inline-block;
+    text-align: center;
+    float: left;
+
+    :focus, :active {
+        background-color: $main;
+        color: #fff;
+        border-color: $main;
+    }
+
+    :first-of-type, :last-of-type {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+
+    :focus, :active {
+        outline: 0;
+    }
+
+    option {
+        /*background-color: $green;*/
+        color: #808080;
+    }
+}
+
+select option {
+    width: 100%;
+    padding: 1em;
+    line-height: 1.4;
+    background-color: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: $borderRadius;
+    -webkit-transition: 0.35s ease-in-out;
+    -moz-transition: 0.35s ease-in-out;
+    -o-transition: 0.35s ease-in-out;
+    transition: 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out;
+}

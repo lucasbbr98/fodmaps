@@ -1,0 +1,37 @@
+﻿<div class="form-group">
+    <div class="form-group agrega-textbox-group">
+        <input class="form-control agrega-input"
+               [type]="type"
+               [(ngModel)]="text"
+               [name]="placeholder"
+               [autofocus]="autofocus ? 'autofocus': ''"
+               [ngModelOptions]="{standalone: true}"
+               [id]="placeholder"
+               autocorrect="off" 
+               autocapitalize="off" 
+               spellcheck="false"
+               required
+               *ngIf="type !== 'number'" />
+        <input class="form-control agrega-input"
+               [type]="type"
+               [(ngModel)]="text"
+               [name]="placeholder"
+               [autofocus]="autofocus ? 'autofocus': ''"
+               autocorrect="off" 
+               autocapitalize="off" 
+               spellcheck="false"
+               [ngModelOptions]="{standalone: true}"
+               [id]="placeholder"
+               required
+               [min]="min"
+               [max]="max"
+               *ngIf="type === 'number'" />
+        <label class="control-label floating-label"
+               [ngClass]="isValid"
+               [for]="placeholder">
+            {{ placeholder }}
+        </label>
+        <ag-strength-bar  *ngIf="type === 'password' && strength ==='true'" [passwordToCheck]="text"></ag-strength-bar>
+    </div>
+    <span class="text-danger" *ngIf="isValid == 'invalid'">{{ errorToDisplay }}</span>
+</div>

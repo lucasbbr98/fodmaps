@@ -1,0 +1,577 @@
+﻿/***
+  Example article layout
+  ----------------------
+  workshop: https://open-sessions.thinkful.com/css-styling-typography-and-pancakes-335/
+
+***/
+/* great default, for your sanity.
+   https://css-tricks.com/box-sizing/  */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    /* showing the default */
+    line-height: 1.8;
+}
+
+.first {
+    margin: 0 auto;
+    padding-top: 15px;
+}
+
+.article {
+    max-width: 1000px;
+    margin: 0 auto;
+    /* for mobile */
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 90px;
+    /* (shorthand) padding: 60px 30px 90px; */
+}
+
+
+/* yoink! dropbox colors http://brandcolors.net/ */
+/* sizes: http://www.modularscale.com/?16&px&1.8,1.34164&web&table */
+/* HEADER */
+.category {
+    font-family: 'Montserrat', sans-serif;
+    color: #7b8994;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.342em;
+    line-height: 1;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    /* default */
+    font-size: 2.415em;
+    line-height: 1.2;
+    /*
+  letter-spacing: -1px;
+  color: @blue;
+  padding-bottom: 6px;
+  border-bottom: 2px solid @gray;
+  */
+}
+
+.pub-date {
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    color: #7b8994;
+    text-transform: uppercase;
+    font-size: 74.5%;
+    font-size: 0.745em;
+    /* 74.5% of parent */
+}
+/* END HEADER */
+/* ARTICLE CONTENT */
+p {
+    /* we did most of the work in the body tag! */
+    margin-bottom: 1em;
+}
+
+h2 {
+    font-size: 1.8rem;
+    line-height: 1;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.342rem;
+    line-height: 1;
+    margin-top: 1.8em;
+    margin-bottom: 0.5em;
+}
+/* inline vs inline-block; */
+code {
+    display: inline;
+    /* display: inline-block; */
+    vertical-align: baseline;
+    padding-top: 0px;
+    /* padding-bottom: 300px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: whitesmoke;
+    /* background-color: fade(teal, 30%); */
+}
+/* What <display> are images ? */
+/* another great default, for your sanity. */
+img {
+    /* display: block; */
+    max-width: 100%;
+}
+
+sup {
+    font-family: 'Open Sans', sans-serif;
+}
+
+figure {
+    margin: 2em 0 1em;
+    /* what is a float ? */
+    /*
+  float: right;
+  width: 70%;
+  padding: 0;
+  margin-right: -25%;
+  margin-left: 1em;
+  */
+}
+
+figcaption {
+    font-family: 'Open Sans', sans-serif;
+    color: #7b8994;
+    line-height: 1.8em;
+    text-align: center;
+    padding: 0.5em 1em;
+}
+
+// TEAM
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:200);
+
+body {
+    color: #858585;
+    font-family: 'Raleway',sans-serif;
+    font-size: 16px;
+    font-weight: 200;
+}
+
+h4,
+.h4 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.mycontainer {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.team {
+    min-height:600px;
+    height:650px;
+    max-width: 380px;
+    border: 1px solid rgba(133,133,133,.15);
+    background-color: #fff;
+    -moz-box-shadow: 0 0 8px rgba(0,0,0,.09);
+    -webkit-box-shadow: 0 0 8px rgba(0,0,0,.09);
+    box-shadow: 0 0 8px rgba(0,0,0,.09);
+    float: left;
+}
+
+.teamimg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    margin-top: -80px;
+    width: 170px;
+    height: 170px;
+    background: #1bbc9d;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.09);
+}
+
+.teamsocial {
+    height: 48px;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+}
+
+.line {
+    display: inline-block;
+    width: 100px;
+    height: 3px;
+    margin: 15px;
+    background-color: #4285f4;
+}
+
+.img-team{
+    width:100%;
+    height:100%;
+}
+
+// ACCORDION
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
+
+// Accordion Height
+$a-height: 250px;
+
+// Position text along bottom
+$text-offset: $a-height - 90;
+
+.accordion {
+    width: 100%;
+    max-width: 1200px;
+    height: $a-height;
+    overflow: hidden;
+    margin: 50px auto;
+
+    ul {
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: table-cell;
+            vertical-align: bottom;
+            position: relative;
+            width: 16.666%; // 6 into 100
+            height: $a-height;
+            background-repeat: no-repeat;
+            background-position: center center;
+            transition: all 500ms ease;
+
+            div {
+                display: block;
+                overflow: hidden;
+                width: 100%;
+
+                a {
+                    display: block;
+                    height: $a-height;
+                    width: 100%;
+                    position: relative;
+                    z-index: 3;
+                    vertical-align: bottom;
+                    padding: 15px 20px;
+                    box-sizing: border-box;
+                    color: #fff;
+                    text-decoration: none;
+                    font-family: Open Sans, sans-serif;
+                    transition: all 200ms ease;
+
+                    * {
+                        opacity: 0;
+                        margin: 0;
+                        width: 100%;
+                        text-overflow: ellipsis;
+                        position: relative;
+                        z-index: 5;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        -webkit-transform: translateX(-20px);
+                        transform: translateX(-20px);
+                        -webkit-transition: all 400ms ease;
+                        transition: all 400ms ease;
+                    }
+
+                    h2 {
+                        font-family: Montserrat,sans-serif;
+                        text-overflow: clip;
+                        font-size: 24px;
+                        text-transform: uppercase;
+                        margin-bottom: 2px;
+                        top: $text-offset;
+                    }
+
+                    p {
+                        top: $text-offset;
+                        font-size: 13.5px;
+                    }
+                }
+            }
+        }
+        // Background images
+        li:nth-child(1) {
+            background-image: url('https://s3-sa-east-1.amazonaws.com/fodmaps/homeSII.png');
+        }
+
+        li:nth-child(2) {
+            background-image: url('https://s3-sa-east-1.amazonaws.com/fodmaps/homeConhecendo.png');
+        }
+
+        li:nth-child(3) {
+            background-image: url('https://s3-sa-east-1.amazonaws.com/fodmaps/homeAvaliacao.png');
+        }
+
+        &:hover li,
+        &:focus-within li {
+            width: 8%;
+        }
+
+        li:focus {
+            outline: none;
+        }
+
+        &:hover li:hover,
+        // allow users to tab through active slides
+        li:focus,
+        &:focus-within li:focus {
+            width: 60%;
+
+            a {
+                background: rgba(0,0,0,.4);
+
+                * {
+                    opacity: 1;
+                    -webkit-transform: translateX(0);
+                    transform: translateX(0);
+                }
+            }
+        }
+
+        &:hover li {
+            width: 8% !important;
+
+            a * {
+                opacity: 0 !important;
+            }
+        }
+
+        &:hover li:hover {
+            width: 60% !important;
+
+            a {
+                background: rgba(0,0,0,.4);
+
+                * {
+                    opacity: 1 !important;
+                    -webkit-transform: translateX(0);
+                    transform: translateX(0);
+                }
+            }
+        }
+    }
+}
+
+// Stack items
+@media screen and (max-width: 600px) {
+
+    // IE gets fussy if this isn't here
+    body {
+        margin: 0;
+    }
+
+    .accordion {
+        height: auto;
+
+        ul, ul:hover {
+
+            li, li:hover {
+                position: relative;
+                display: table-row;
+                table-layout: fixed;
+                width: 100%;
+                -webkit-transition: none;
+                transition: none;
+            }
+        }
+
+        li {
+            width: 60% !important;
+
+            a {
+                background: rgba(0,0,0,.4);
+
+                * {
+                    opacity: 1 !important;
+                    -webkit-transform: translateX(0);
+                    transform: translateX(0);
+                }
+            }
+        }
+
+        #info1, #info2, #info3 {
+            font-size: 15px !important;
+        }
+    }
+}
+
+// FOOTER
+
+.footer-bs {
+    background-color: #3c3d41;
+    padding: 40px;
+    color: rgba(255,255,255,1.00);
+    margin-bottom: 20px;
+    border-bottom-right-radius: 6px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 6px;
+}
+
+.footer-bs .footer-brand, .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns {
+    padding: 10px 25px;
+}
+
+.footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns {
+    border-color: transparent;
+}
+
+.footer-bs .footer-brand h2 {
+    margin: 0px 0px 10px;
+}
+
+.footer-bs .footer-brand p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.70);
+}
+
+.footer-bs .footer-nav ul.pages {
+    list-style: none;
+    padding: 0px;
+}
+
+.footer-bs .footer-nav ul.pages li {
+    padding: 5px 0px;
+}
+
+.footer-bs .footer-nav ul.pages a {
+    color: rgba(255,255,255,1.00);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.footer-bs .footer-nav ul.pages a:hover {
+    color: rgba(255,255,255,0.80);
+    text-decoration: none;
+}
+
+.footer-bs .footer-nav h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.footer-bs .footer-nav ul.list {
+    list-style: none;
+    padding: 0px;
+}
+
+.footer-bs .footer-nav ul.list li {
+    padding: 5px 0px;
+}
+
+.footer-bs .footer-nav ul.list a {
+    color: rgba(255,255,255,0.80);
+}
+
+.footer-bs .footer-nav ul.list a:hover {
+    color: rgba(255,255,255,0.60);
+    text-decoration: none;
+}
+
+.footer-bs .footer-social ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.footer-bs .footer-social h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.footer-bs .footer-social li {
+    padding: 5px 4px;
+}
+
+.footer-bs .footer-social a {
+    color: rgba(255,255,255,1.00);
+}
+
+.footer-bs .footer-social a:hover {
+    color: rgba(255,255,255,0.80);
+    text-decoration: none;
+}
+
+.footer-bs .footer-ns h4 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.footer-bs .footer-ns p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.70);
+}
+
+@media (min-width: 768px) {
+    .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns {
+        border-left: solid 1px rgba(255,255,255,0.10);
+    }
+}
+
+.social-svg-wrapper {
+    margin: 0 auto;
+    width: 200px;
+    cursor: pointer;
+}
+
+.social-shape {
+    fill: transparent;
+    stroke-width: 9px;
+    stroke: #E5E5E5;
+}
+
+.social-text {
+    color: #E5E5E5;
+    font-family: 'Open Sans';
+    font-size: 40px;
+    font-weight: 700;
+    position: relative;
+    top: -58px;
+    transition: 0.3s;
+}
+
+.social-svg-wrapper:hover .social-text {
+    color: #3B5998;
+    transition: 320ms;
+    transition-delay: 400ms;
+}
+
+@keyframes draw-social {
+    0% {
+        stroke-dashoffset: -130;
+        stroke-dasharray: 40 180;
+    }
+
+    100% {
+        stroke-dashoffset: 10;
+        stroke-dasharray: 20 40;
+        stroke: #3B5998;
+    }
+}
+
+@keyframes drawout-social {
+    0% {
+        stroke-dashoffset: 10;
+        stroke-dasharray: 20 40;
+        stroke: #3B5998;
+    }
+
+    100% {
+        stroke-dashoffset: -130;
+        stroke-dasharray: 40 180;
+    }
+}
+
+.social-svg-wrapper .social-shape {
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+    -webkit-animation: 0.6s drawout-social cubic-bezier(0.86, 0, 0.07, 1) forwards;
+    animation: 0.6s drawout-social cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+
+.social-svg-wrapper:hover .social-shape {
+    -webkit-animation: 0.6s draw-social cubic-bezier(0.86, 0, 0.07, 1) forwards;
+    animation: 0.6s draw-social cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}

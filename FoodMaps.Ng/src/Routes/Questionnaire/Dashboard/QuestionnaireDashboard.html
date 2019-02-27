@@ -1,0 +1,300 @@
+﻿<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div *ngIf="showConfirm">
+    <article class="article">
+        <header class="header text-center">
+            <h1 class="headline">
+                Questionário
+            </h1>
+            <span class="line"></span>
+        </header>
+
+        <p>
+            Olá, a partir de agora você irá preencher o Questionário de Frequência Alimentar Curto para Avaliação do Consumo de FODMAP.
+            Antes de iniciar, leia com atenção as instruções a seguir:
+        </p>
+        <p>O preenchimento do QFA curto é simples. Basta marcar a opção que melhor reflete a quantidade e a frequência que você comeu ou bebeu determinado alimento nos últimos 3 meses.</p>
+        <p>Para ajudar a sua memória e tornar o processo mais simples, mostraremos a fotografia da porção padrão do alimento questionado.</p>
+        <p>Se você consumiu o alimento 2 ou menos vezes nos últimos 3 meses, basta marcar “zero”. Se consumiu acima dessa quantidade, marque quantas vezes isso aconteceu. </p>
+        <p>Você terá a opção de dizer se foi de 0 a 10 vezes por dia, por semana ou por mês, ficando a vontade para marcar a opção que mais se aproxima da quantidade real.</p>
+        <p>É importante não deixar de preencher a frequência de consumo para nenhum dos alimentos. Caso contrário você não conseguirá seguir para a próxima tela.</p>
+        <p>Para começar <a (click)="confirm()">clique aqui</a>!</p>
+
+    </article>
+</div>
+<div *ngIf="showDashboard">
+    <div class="container" *ngIf="guid === 'exemplo'">
+        <div class="row text-center">
+            <div class="col-xs-12">
+                <p class="lead">Exemplo de questionário enviado para um paciente ou para uma pesquisa.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container" *ngIf="guid !== 'exemplo'">
+        <div class="row text-center">
+            <div class="col-xs-12">
+                <p class="lead" style="font-weight:bold;">Versão online do QFA Curto para Avaliação do Consumo de FODMAP e do Manual Fotográfico de Porções Alimentares para Quantificação do Consumo de FODMAP</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <ul class="surveys grid">
+            <li class="survey-item" (click)="goTo('/questionario/perguntas/', 'acucar', sugarCompleted)">
+                <span class="survey-name">
+                    Produtos açucarados
+                </span>
+                <div class="pull-left">
+                    <span class="survey-progress">
+                        <span class="survey-progress-bg">
+                            <span class="survey-progress-fg" [ngStyle]="{width: sugarPercentageString}"></span>
+                        </span>
+                        <span class="survey-progress-labels">
+                            <span class="survey-progress-label">
+                                {{sugarPercentageString}}
+                            </span>
+                            <span class="survey-completes">
+                                {{sugarCompleted}} / {{maxSugar}}
+                            </span>
+                        </span>
+                    </span>
+                    <span class="survey-end-date ended">
+                        Refrigerante, Mel, Geléia...
+                    </span>
+                </div>
+                <div class="pull-right">
+                    <img class="img-item" src="../../../Assets/Images/Questionnaire/Dashboard/sugar.png" />
+                </div>
+            </li>
+            <li class="survey-item" (click)="goTo('/questionario/perguntas/', 'cereais-e-massas', pastaCompleted)">
+                <span class="survey-name">
+                    Cereais, massas e tubérculos
+                </span>
+                <div class="pull-left">
+                    <span class="survey-progress">
+                        <span class="survey-progress-bg">
+                            <span class="survey-progress-fg" [ngStyle]="{width: pastaPercentageString}"></span>
+                        </span>
+                        <span class="survey-progress-labels">
+                            <span class="survey-progress-label">
+                                {{pastaPercentageString}}
+                            </span>
+                            <span class="survey-completes">
+                                {{pastaCompleted}} / {{maxPasta}}
+                            </span>
+                        </span>
+                    </span>
+                    <span class="survey-end-date ended">
+                        Pão, Macarrão, Biscoito...
+                    </span>
+                </div>
+                <div class="pull-right" style="margin-top: -20px;">
+                    <img class="img-item" src="../../../Assets/Images/Questionnaire/Dashboard/cereais-massas.png" />
+                </div>
+            </li>
+            <li class="survey-item" (click)="goTo('/questionario/perguntas/', 'frutas', fruitsCompleted)">
+                <span class="survey-name">
+                    Frutas
+                </span>
+                <div class="pull-left">
+                    <span class="survey-progress">
+                        <span class="survey-progress-bg">
+                            <span class="survey-progress-fg" [ngStyle]="{width: fruitsPercentageString}"></span>
+                        </span>
+                        <span class="survey-progress-labels">
+                            <span class="survey-progress-label">
+                                {{fruitsPercentageString}}
+                            </span>
+                            <span class="survey-completes">
+                                {{fruitsCompleted}} / {{maxFruits}}
+                            </span>
+                        </span>
+                    </span>
+                    <span class="survey-end-date ended">
+                        Banana, Uva, Pêra...
+                    </span>
+                </div>
+                <div class="pull-right">
+                    <img class="img-item" src="../../../Assets/Images/Questionnaire/Dashboard/frutas.png" />
+                </div>
+            </li>
+            <li class="survey-item" (click)="goTo('/questionario/perguntas/', 'legumes-e-verduras', vegetablesCompleted)">
+                <span class="survey-name">
+                    Legumes e verduras
+                </span>
+                <div class="pull-left">
+                    <span class="survey-progress">
+                        <span class="survey-progress-bg">
+                            <span class="survey-progress-fg" [ngStyle]="{width: vegetablesPercentageString}"></span>
+                        </span>
+                        <span class="survey-progress-labels">
+                            <span class="survey-progress-label">
+                                {{vegetablesPercentageString}}
+                            </span>
+                            <span class="survey-completes">
+                                {{vegetablesCompleted}} / {{maxVegetables}}
+                            </span>
+                        </span>
+                    </span>
+                    <span class="survey-end-date ended">
+                        Alho, Cebola, Couve Flor...
+                    </span>
+                </div>
+                <div class="pull-right">
+                    <img class="img-item" src="../../../Assets/Images/Questionnaire/Dashboard/legumes-verduras.png" />
+                </div>
+            </li>
+            <li class="survey-item" (click)="goTo('/questionario/perguntas/', 'leite-e-derivados', milkCompleted)">
+                <span class="survey-name">
+                    Leite e derivados
+                </span>
+                <div class="pull-left">
+                    <span class="survey-progress">
+                        <span class="survey-progress-bg">
+                            <span class="survey-progress-fg" [ngStyle]="{width: milkPercentageString}"></span>
+                        </span>
+                        <span class="survey-progress-labels">
+                            <span class="survey-progress-label">
+                                {{milkPercentageString}}
+                            </span>
+                            <span class="survey-completes">
+                                {{milkCompleted}} / {{maxMilk}}
+                            </span>
+                        </span>
+                    </span>
+                    <span class="survey-end-date ended">
+                        Chocolate, Iogurte, Sorvete...
+                    </span>
+                </div>
+                <div class="pull-right">
+                    <img class="img-item" src="../../../Assets/Images/Questionnaire/Dashboard/milk.jpeg" />
+                </div>
+            </li>
+            <li class="survey-item" (click)="goTo('/questionario/perguntas/', 'graos', grainsCompleted)">
+                <span class="survey-name">
+                    Leguminosas e oleaginosas
+                </span>
+                <div class="pull-left">
+                    <span class="survey-progress">
+                        <span class="survey-progress-bg">
+                            <span class="survey-progress-fg" [ngStyle]="{width: grainsPercentageString}"></span>
+                        </span>
+                        <span class="survey-progress-labels">
+                            <span class="survey-progress-label">
+                                {{grainsPercentageString}}
+                            </span>
+                            <span class="survey-completes">
+                                {{grainsCompleted}} / {{maxGrains}}
+                            </span>
+                        </span>
+                    </span>
+                    <span class="survey-end-date ended">
+                        Pistache, Feijão, Ervilha
+                    </span>
+                </div>
+                <div class="pull-right">
+                    <img class="img-item" src="../../../Assets/Images/Questionnaire/Dashboard/leguminosas.png" />
+                </div>
+            </li>
+            <li class="survey-item text-center" style="box-shadow: none;">
+                <a class='btn-send' (click)="completeQuestionnaire()">Enviar</a>
+                <img style="margin-top: 30px;width: 50px; height: 50px;" src="../../../Assets/Images/Questionnaire/Dashboard/lupa.jpg" />
+            </li>
+        </ul>
+    </div>
+</div>
+<div *ngIf="showPatientQuestion">
+    <div class="container form register-form" style="z-index: 20;">
+        <div class="row">
+            <div class="col-xs-2 col-xs-offset-10">
+                <a class="close-btn" (click)="showPatientQuestion = false; showDashboard = true;">x</a>
+            </div>
+            <div class="col-xs-12">
+                <h1 class="title">Estamos quase prontos...</h1>
+            </div>
+            <div class="col-xs-12">
+                <h3>Dados Pessoais</h3>
+            </div>
+        </div>
+        <div class="row margin-top">
+            <div class="col-xs-12 col-sm-6">
+                <ag-textbox placeholder="Nome"
+                            type="text"
+                            autofocus="true"
+                            [(ngModel)]="patient.name"
+                            min="3"
+                            max="40"
+                            pattern="^[ A-Za-z\u00C0-\u00ff]+$"
+                            shorterror="Nome entre 3-40 caracteres"
+                            longerror="Nome entre 3-40 caracteres"
+                            patternerror="Nome só pode conter letras e espaços">
+                </ag-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <ag-textbox placeholder="Sobrenome"
+                            type="text"
+                            autofocus="false"
+                            [(ngModel)]="patient.surname"
+                            min="2"
+                            max="70"
+                            pattern="^[ A-Za-z\u00C0-\u00ff]+$"
+                            shorterror="Sobrenome entre 2-70 caracteres"
+                            longerror="Sobrenome entre 2-70 caracteres"
+                            patternerror="Nome só pode conter letras e espaços">
+                </ag-textbox>
+            </div>
+        </div>
+        <div class="row text-center margin-top">
+            <div class="col-xs-12">
+                <ag-textbox placeholder="Idade"
+                            type="number"
+                            autofocus="true"
+                            [(ngModel)]="patientAge"
+                            min="1"
+                            max="130"
+                            shorterror="Mínimo 1 ano"
+                            longerror="Máximo 130 anos">
+                </ag-textbox>
+            </div>
+        </div>
+        <h4 class="text-center bold">Gênero</h4>
+        <div class="row margin-top">
+            <div class="col-xs-12 text-center">
+                <div class="input-group margin-center">
+                    <input type="radio" name="gender" value="Masculino" id="gender-male" [(ngModel)]="patient.gender" />
+                    <label for="gender-male">Masculino</label>
+                    <input type="radio" name="gender" value="Feminino" id="gender-female" [(ngModel)]="patient.gender" />
+                    <label for="gender-female">Feminino</label>
+                </div>
+            </div>
+        </div>
+        <div class="row margin-top">
+            <div class="col-xs-12 col-sm-6">
+                <ag-textbox placeholder="Altura (cm)"
+                            type="number"
+                            autofocus="true"
+                            [(ngModel)]="patient.height"
+                            min="1"
+                            max="250"
+                            shorterror="Mínimo 1 centímetro"
+                            longerror="Máximo 250 centímetros">
+                </ag-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <ag-textbox placeholder="Peso (kg)"
+                            type="number"
+                            autofocus="true"
+                            [(ngModel)]="patient.weight"
+                            min="1"
+                            max="300"
+                            shorterror="Mínimo 1 kilograma"
+                            longerror="Máximo 300 kilogramas">
+                </ag-textbox>
+            </div>
+        </div>
+        <div class="row margin-top">
+            <ag-button name="Enviar"
+                       type="submit"
+                       (click)="sendResearch()">
+            </ag-button>
+        </div>
+    </div>
+</div>

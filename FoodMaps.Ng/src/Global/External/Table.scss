@@ -1,0 +1,147 @@
+﻿:host {
+    font-size: 1rem
+}
+
+:host /deep/ * {
+    box-sizing: border-box
+}
+
+:host /deep/ button, :host /deep/ input, :host /deep/ optgroup, :host /deep/ select, :host /deep/ textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0
+}
+
+:host /deep/ table {
+    line-height: 1.5em;
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: table;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all
+}
+
+:host /deep/ table tr th {
+    font-weight: 700
+}
+
+:host /deep/ table tr section {
+    font-size: .75em;
+    font-weight: 700
+}
+
+:host /deep/ table tr td, :host /deep/ table tr th {
+    font-size: .875em;
+    margin: 0;
+    padding: .5em 1em
+}
+
+:host /deep/ a {
+    color: #1e6bb8;
+    text-decoration: none
+}
+
+:host /deep/ a:hover {
+    text-decoration: underline
+}
+/*# sourceMappingURL=ng2-smart-table.component.css.map */
+
+
+:host .ng2-smart-filter /deep/ input, :host .ng2-smart-filter /deep/ select {
+    width: 100%;
+    line-height: normal;
+    padding: .375em .75em;
+    font-weight: 400
+}
+
+:host .ng2-smart-filter /deep/ input[type=search] {
+    box-sizing: inherit
+}
+
+:host .ng2-smart-filter /deep/ .completer-dropdown-holder {
+    font-weight: 400
+}
+
+:host .ng2-smart-filter /deep/ a {
+    font-weight: 400
+}
+/*# sourceMappingURL=filter.component.css.map */
+
+a.sort.asc, a.sort.desc {
+    font-weight: 700
+}
+
+a.sort.asc::after, a.sort.desc::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-bottom: 4px solid rgba(0,0,0,.3);
+    border-top: 4px solid transparent;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    margin-bottom: 2px
+}
+
+a.sort.desc::after {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    margin-bottom: -2px
+}
+/*# sourceMappingURL=title.component.css.map */
+:host .ng2-smart-row.selected {
+    background: rgba(0,0,0,.05)
+}
+
+:host .ng2-smart-row .ng2-smart-actions.ng2-smart-action-multiple-select {
+    text-align: center
+}
+/*# sourceMappingURL=tbody.component.css.map */
+.ng2-smart-pagination {
+    display: inline-flex;
+    font-size: .875em;
+    padding: 0
+}
+
+.ng2-smart-pagination .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0
+}
+
+.ng2-smart-pagination .ng2-smart-page-item {
+    display: inline
+}
+
+.ng2-smart-pagination .page-link-next, .ng2-smart-pagination .page-link-prev {
+    font-size: 10px
+}
+
+:host {
+    display: flex;
+    justify-content: space-between
+}
+
+:host select {
+    margin: 1rem 0 1rem 1rem
+}
+
+:host label {
+    margin: 1rem 0 1rem 1rem;
+    line-height: 2.5rem
+}
+/*# sourceMappingURL=pager.component.css.map */
+:host input, :host textarea {
+    width: 100%;
+    line-height: normal;
+    padding: .375em .75em
+}
+/*# sourceMappingURL=editor.component.css.map */

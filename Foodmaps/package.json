@@ -1,13 +1,14 @@
 {
   "version": "1.0.0",
-  "name": "agrega.web",
-  "description": "Agrega Web project",
+  "name": "fodmaps.web",
+  "description": "FODMAP PROJECT",
   "private": true,
   "scripts": {
     "webpack-dev": "set NODE_ENV=development && webpack",
     "webpack-production": "set NODE_ENV=production && webpack",
     "build-dev": "npm run webpack-dev",
     "build-production": "npm run webpack-production",
+    "bundle-report": "webpack-bundle-analyzer dist/stats.json",
     "watch-webpack-dev": "rimraf wwwroot && set NODE_ENV=development && webpack --watch --color",
     "version": "webpack --version"
   },
@@ -68,7 +69,6 @@
     "core-js": "2.4.1",
     "jquery": "^3.2.1",
     "modernizr": "^3.6.0",
-    "moment": "^2.18.1",
     "ng2-charts": "^1.6.0",
     "ng2-smart-table": "^1.2.2",
     "ng4-file-upload": "^5.0.5",
@@ -79,7 +79,7 @@
     "tslib": "1.7.1",
     "zone.js": "0.8.12"
   },
-  "-vs-binding": {
+  "no-vs-binding": {
     "ProjectOpened": [
       "watch-webpack-dev"
     ]

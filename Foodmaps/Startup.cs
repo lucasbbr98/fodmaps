@@ -61,7 +61,7 @@ namespace Foodmaps
             services.Configure<GzipCompressionProviderOptions>(options => options.Level = System.IO.Compression.CompressionLevel.Optimal);
             services.AddResponseCompression(options =>
             {
-                options.EnableForHttps = true;
+                options.Providers.Add<GzipCompressionProvider>();
             });
             var setup = new FoodmapsSetup()
                 .Configure(c =>

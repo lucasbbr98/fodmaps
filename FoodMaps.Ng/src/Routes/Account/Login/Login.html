@@ -1,0 +1,54 @@
+﻿<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div class="container">
+    <div class="form login-form">
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
+                <div class="text-center">
+                    <h1>Login</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row margin-top">
+            <div class="col-xs-12 col-sm-offset-2">
+                <ag-textbox                      
+                            placeholder="Email" 
+                            type="text" 
+                            index="1" 
+                            autofocus="true"
+                            [valid]="validEmail"
+                            [(ngModel)]="email">
+                </ag-textbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-offset-2">
+                <ag-textbox 
+                            placeholder="Senha" 
+                            type="password" 
+                            index="2" 
+                            autofocus="true"
+                            [valid]="validPassword"
+                            [(ngModel)]="password"
+                            (keyup.enter)="login()">
+                </ag-textbox>
+            </div>
+        </div>
+        <div class="row margin-top">
+            <div class="col-xs-12">
+                <ag-button name="Entrar"
+                           type="submit"
+                           (click)="login()">
+                </ag-button>
+            </div>
+            <div class="col-xs-12">
+                <h4 class="text-center"><a (click)="register()">Criar uma conta</a></h4>
+            </div>
+            <div class="col-xs-12 margin-top">
+                <h4 class="text-center"><a (click)="forgot()">Esqueci minha senha</a></h4>
+            </div>
+            <div class="form-group text-center">
+                <p>Ao entrar, você confirma que leu e concorda com os nossos <a routerLink="/home/termos" routerLinkActive="active">Termos e Condições</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>

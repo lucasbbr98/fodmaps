@@ -1,0 +1,19 @@
+﻿<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+<div class="container">
+    <div class="row text-center" style="margin-top: 25px;">
+        <div class="col-xs-12">
+            <h3>Questionários respondidos por {{name}}</h3>
+        </div>
+    </div>
+</div>
+<div class="search-container" data-behaviour="search-on-list" style="margin-top: 25px;">
+    <span class="counter"></span>
+    <div class="list-wrap">
+        <ul class="list" *ngIf="questionnaires">
+            <li class="list-item" data-search-on-list="list-item" *ngFor="let q of questionnaires" (click)="seeData(q)">
+                <a class="list-item-link">{{q.modifiedOn | date: 'dd/MM/yyyy'}}</a>
+            </li>
+        </ul>
+        <h3 style="color: #808080; margin-top: 20px;" *ngIf="!questionnaires">Nenhum questionário completo encontrado</h3>
+    </div>
+</div>

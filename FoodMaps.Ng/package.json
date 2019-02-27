@@ -1,0 +1,62 @@
+{
+  "name": "foodmaps.web",
+  "version": "1.0.0",
+  "description": "FoodMaps Web Application",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "ng-build-stats": "ng build --prod --stats-json",
+    "start": "npm run clean && ng serve",
+    "clean": "rimraf ../Foodmaps/wwwroot",
+    "build": "npm run clean && ng build --prod",
+    "watch": "npm run clean && ng build --watch",
+    "build-nonprd": "npm run clean && ng build",
+    "bundle-report": "webpack-bundle-analyzer stats.json"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "7.2.6",
+    "@angular/common": "7.2.6",
+    "@angular/compiler": "7.2.6",
+    "@angular/core": "7.2.6",
+    "@angular/forms": "7.2.6",
+    "@angular/http": "7.2.6",
+    "@angular/platform-browser": "7.2.6",
+    "@angular/platform-browser-dynamic": "7.2.6",
+    "@angular/router": "7.2.6",
+    "core-js": "^2.5.7",
+    "mutationobserver-shim": "^0.3.2",
+    "rimraf": "^2.6.3",
+    "rxjs": "^6.3.3",
+    "rxjs-compat": "^6.3.3",
+    "ts-helpers": "^1.1.2",
+    "survey-angular": "^1.0.47",
+    "surveyjs-editor": "^1.0.47",
+    "zone.js": "^0.8.26",
+    "@swimlane/ngx-datatable": "^14.0.0",
+    "angular-2-local-storage": "^3.0.2",
+    "angular-archwizard": "^3.0.0",
+    "angular2-toaster": "^7.0.0",
+    "angular4-fusioncharts": "^1.0.0",
+    "blueimp-canvas-to-blob": "^3.14.0",
+    "bootstrap": "^3.3.7",
+    "chart.js": "^2.7.2",
+    "jquery": "^3.2.1",
+    "ng2-charts": "^1.6.0",
+    "ng4-file-upload": "^5.0.5"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "0.13.3",
+    "@angular/cli": "7.3.3",
+    "@angular/compiler-cli": "7.2.6",
+    "@angular/language-service": "7.2.6",
+    "@types/node": "11.9.5",
+    "ts-node": "^8.0.2",
+    "typescript": "3.2.2",
+    "webpack-bundle-analyzer": "^3.0.4"
+  },
+  "engines": {
+    "node": ">= 8.9.4",
+    "npm": ">= 5.6.0"
+  }
+}

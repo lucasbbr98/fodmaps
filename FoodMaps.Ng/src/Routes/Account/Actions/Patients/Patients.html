@@ -1,0 +1,19 @@
+﻿<div class="container">
+    <div class="row text-center">
+        <div class="col-xs-12">
+            <h3>Indivíduos cadastrados</h3>
+        </div>
+    </div>
+</div>
+<div class="search-container" data-behaviour="search-on-list">
+    <input [(ngModel)]="searchText" type="text" class="input-query" placeholder="Digite o nome..." />
+    <span class="counter"></span>
+    <div class="list-wrap">
+        <ul class="list" *ngIf="patients">
+            <li class="list-item" data-search-on-list="list-item" *ngFor="let patient of patients | searchPatients : searchText"  (click)="seePatient(patient)">
+                <a class="list-item-link">{{patient.name}} {{patient.surname}}</a>
+            </li>
+        </ul>
+        <h3 style="color: #808080; margin-top: 20px;" *ngIf="!patients">Nenhum paciente encontrado</h3>
+    </div>
+</div>

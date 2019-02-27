@@ -1,0 +1,11 @@
+﻿@import '../../../../Assets/Theme.scss';
+@import '../../../../Assets/Shared/Form/FormCard.scss';
+
+.register-additional-form {
+    @import '../../../../Assets/Shared/Form/Inputs/Input.scss';
+    @import '../../../../Assets/Shared/Form/Inputs/Select.scss';
+}
+
+.margin-top {
+    margin-top: 30px;
+}

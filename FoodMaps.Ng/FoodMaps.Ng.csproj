@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="dist\**" />
+    <Compile Remove="node_modules\**" />
+    <EmbeddedResource Remove="dist\**" />
+    <EmbeddedResource Remove="node_modules\**" />
+    <None Remove="dist\**" />
+    <None Remove="node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="stats.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="stats.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

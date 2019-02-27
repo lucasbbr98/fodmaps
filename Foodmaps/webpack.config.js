@@ -1,7 +1,7 @@
 ﻿const path = require('path');
 const webpack = require('webpack');
 const typescript = require('typescript');
-const { AotPlugin } = require('@ngtools/webpack').AotPlugin;
+const AotPlugin = require('@ngtools/webpack').AotPlugin;
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin")
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -33,10 +33,9 @@ if (process.env.NODE_ENV === 'production') {
         test: /\.ts$/, loaders: ['@ngtools/webpack']
     });
     plugins.push(
-        new AotPlugin({
-            tsConfigPath: './tsconfig.json',
-            entryModule: './src/app/App#AppModule'
-        }),
+        //new AotPlugin({
+        //    tsConfigPath: 'tsconfig.json',
+        //    entryModule: path.resolve(__dirname, './src/app/App#AppModule')}),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             debug: false
@@ -66,7 +65,6 @@ if (process.env.NODE_ENV === 'production') {
 
 else {
     console.log('STARTING DEV BUILD');
-
     rules.push({
         test: /\.ts$/,
         loaders: [
@@ -75,41 +73,41 @@ else {
     });
     plugins.push(
         new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)@angular/, path.resolve(__dirname, './notfound')),
-        new OptimizeCssAssetsPlugin({
-            assetNameRegExp: /\.optimize\.css$/g,
-            cssProcessor: require('cssnano'),
-            cssProcessorOptions: { discardComments: { removeAll: true } },
-            canPrint: true
-        }),            
-        new UglifyJsPlugin({
-            uglifyOptions: {
-                ecma: 8,
-                warnings: false,
-                compress: true,
-                mangle: true,
-                compress: {
-                    sequences: true,
-                    dead_code: true,
-                    conditionals: true,
-                    booleans: true,
-                    unused: true,
-                    if_return: true,
-                    join_vars: true,
-                    drop_console: true
-                },
+        //new OptimizeCssAssetsPlugin({
+        //    assetNameRegExp: /\.optimize\.css$/g,
+        //    cssProcessor: require('cssnano'),
+        //    cssProcessorOptions: { discardComments: { removeAll: true } },
+        //    canPrint: true
+        //}),            
+        //new UglifyJsPlugin({
+        //    uglifyOptions: {
+        //        ecma: 8,
+        //        warnings: false,
+        //        compress: true,
+        //        mangle: true,
+        //        compress: {
+        //            sequences: true,
+        //            dead_code: true,
+        //            conditionals: true,
+        //            booleans: true,
+        //            unused: true,
+        //            if_return: true,
+        //            join_vars: true,
+        //            drop_console: true
+        //        },
 
-                output: {
-                    comments: false,
-                    beautify: false,
-                },
-                toplevel: false,
-                nameCache: null,
-                ie8: false,
-                keep_classnames: undefined,
-                keep_fnames: false,
-                safari10: false,
-            }
-        })
+        //        output: {
+        //            comments: false,
+        //            beautify: false,
+        //        },
+        //        toplevel: false,
+        //        nameCache: null,
+        //        ie8: false,
+        //        keep_classnames: undefined,
+        //        keep_fnames: false,
+        //        safari10: false,
+        //    }
+        //})
        
     );
 }

@@ -1,0 +1,60 @@
+﻿@import "../../Theme.scss";
+.orange {
+    background-color: $orange;
+}
+
+.black-green {
+    background-color: $black
+}
+.gray {
+    background-color: #929292;
+}
+
+.navy-blue{
+    background-color: $navy-blue;
+}
+.red{
+    background-color: $red;
+}
+.gold {
+    background-color: #919200;
+}
+
+.row-centered {
+    text-align: center;
+}
+
+.col-centered {
+    display: inline-block;
+    float: none;
+    /* reset the text-align */
+    text-align: left;
+    /* inline-block space fix */
+    margin-right: -4px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+
+.panel {
+
+    .square {
+        max-height: 300px;
+        min-height: 300px;
+        max-width: 300px;
+        min-width: 300px;
+        display: inline-flex; // <-- This is responsible for vertical alignment
+        .content {
+            margin: auto auto; // <-- This is responsible for vertical alignment
+            .panel-icon {
+                color: #fff;
+                font-size: 30px;
+            }
+
+            .panel-description {
+                color: #fff;
+                font-size: 18px;
+            }
+        }
+    }
+}

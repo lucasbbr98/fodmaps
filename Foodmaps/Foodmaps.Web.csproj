@@ -41,7 +41,6 @@
     <None Remove="src\Routes\ModuleHelper.ts" />
     <None Remove="src\Directives\Button\Button.ts" />
     <None Remove="src\Directives\TextBox\TextBox.ts" />
-    <None Remove="src\Directives\TextSpin\TextSpinner.ts" />
     <None Remove="src\Routes\Modules\Admin.ts" />
     <None Remove="src\Routes\Modules\Events.ts~RF1bde0f5.TMP" />
     <None Remove="src\Routes\Modules\ModuleHelper.ts~RF1bca652.TMP" />
@@ -108,7 +107,6 @@
     <TypeScriptCompile Include="src\Routes\Modules\ModuleHelper.ts" />
     <TypeScriptCompile Include="src\Directives\Button\Button.ts" />
     <TypeScriptCompile Include="src\Directives\TextBox\TextBox.ts" />
-    <TypeScriptCompile Include="src\Directives\TextSpin\TextSpinner.ts" />
     <TypeScriptCompile Include="src\Routes\Modules\Questionnaire.ts" />
     <TypeScriptCompile Include="src\Routes\Papers\Papers.ts" />
     <TypeScriptCompile Include="src\Routes\Questionnaire\Answers\Patients\QuestionnairePatientAnswers.ts" />
