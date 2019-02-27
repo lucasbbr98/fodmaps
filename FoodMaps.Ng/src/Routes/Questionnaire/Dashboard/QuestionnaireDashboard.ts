@@ -57,11 +57,11 @@ export class QuestionnaireDashboardComponent implements OnInit {
 
     public grainsCompleted: number = 0;
     public grainsPercentageString: string = '0%';
-    public maxGrains: number = 8;
+    public maxGrains: number = 7;
 
     public pastaCompleted: number = 0;
     public pastaPercentageString: string = '0%';
-    public maxPasta: number = 11;
+    public maxPasta: number = 12;
 
     public milkCompleted: number = 0;
     public milkPercentageString: string = '0%';
@@ -247,7 +247,7 @@ export class QuestionnaireDashboardComponent implements OnInit {
         this.researchModel.weight = this.patient.weight
         this.researchModel.height = this.patient.height
         if (this.isSending) { return; } else { this.isSending = true; }
-        if (this.didComplete) { this.toasterService.pop('info', 'Informação', 'Pesquisa já enviada _:D') }
+        if (this.didComplete == true) { this.toasterService.pop('info', 'Informação', 'Pesquisa já enviada _:D'); return; }
         this.loaderService.display(true);
 
         if (navigator.onLine) {

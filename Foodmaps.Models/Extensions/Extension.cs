@@ -368,7 +368,7 @@ namespace Foodmaps.Models.Extensions
                 return false;
 
             // Makes sure all FoodIDs are between 1 and 65 including both
-            if (answers.Any(t => t.FoodId < 1 || t.FoodId > 65))
+            if (answers.Any(t => t.FoodId < 1 || t.FoodId > 66))
                 return false;
 
             // Makes sure the values are between 0 and 10 including both
