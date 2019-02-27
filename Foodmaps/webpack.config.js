@@ -34,6 +34,7 @@ if (process.env.NODE_ENV === 'production') {
     });
     plugins.push(
         //new AotPlugin({
+<<<<<<< HEAD
         //    tsConfigPath: 'tsconfig.json',
         //    entryModule: path.resolve(__dirname, './src/app/App#AppModule')}),
         new webpack.LoaderOptionsPlugin({
@@ -60,6 +61,35 @@ if (process.env.NODE_ENV === 'production') {
             },
             comments: false
         }),
+=======
+        //    tsConfigPath: './tsconfig.json',
+        //    entryModule: './src/app/App#AppModule'
+        //}),
+        //new webpack.LoaderOptionsPlugin({
+        //    minimize: true,
+        //    debug: false
+        //}),
+        //new webpack.optimize.UglifyJsPlugin({
+        //    sourceMap: true,
+        //    beautify: false,
+        //    mangle: {
+        //        screw_ie8: true
+        //    },
+        //    compress: {
+        //        unused: true,
+        //        dead_code: true,
+        //        drop_debugger: true,
+        //        conditionals: true,
+        //        evaluate: true,
+        //        drop_console: true,
+        //        sequences: true,
+        //        booleans: true,
+        //        screw_ie8: true,
+        //        warnings: false
+        //    },
+        //    comments: false
+        //}),
+>>>>>>> 03316a89f478e659c8c47d1a23097233277841f5
     );
 }
 
