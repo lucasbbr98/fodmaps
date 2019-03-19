@@ -6,7 +6,6 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { Router,Routes, RouterModule, ActivatedRoute } from '@angular/router';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { DirectivesModule } from './../Directives/Directives';
-import { enableProdMode } from '@angular/core';
 
 // containers
 import {GlobalComponent} from '../Global/GlobalComponent'
@@ -39,16 +38,24 @@ export class AppComponent {
 
     constructor(
         private loaderService: LoaderService,
-        private storage: StorageService,
-        private net: NetworkService,
-        private router: Router,
-        private route: ActivatedRoute) {
+        private storage: StorageService) {
     }
 
     ngOnInit() {
         this.loaderService.status.subscribe((val: boolean) => {
             this.showLoader = val;
         });
+    }
+
+    onActivate(event) {
+        let scrollToTop = window.setInterval(() => {
+            let pos = window.pageYOffset;
+            if (pos > 0) {
+                window.scrollTo(0, pos - 20); // how far to scroll on each step
+            } else {
+                window.clearInterval(scrollToTop);
+            }
+        }, 16);
     }
 }
 

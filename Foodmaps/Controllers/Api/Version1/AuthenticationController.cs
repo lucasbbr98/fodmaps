@@ -19,15 +19,19 @@ namespace Foodmaps.Web.Controllers.Api.Version1
         private IAuthenticationUtility authenticationService;
         private IConfigurationRoot configuration;
         private IImageService imageService;
+        private IFatalErrorService fatalErrorService;
+        const string CONTROLLER_NAME = "AuthController";
 
         public AuthenticationController(
             IAuthenticationUtility authenticationService, 
             IImageService imageService,
-            IConfigurationRoot configuration)
+            IConfigurationRoot configuration,
+            IFatalErrorService fatalErrorService)
         {
             this.authenticationService = authenticationService;
             this.configuration = configuration;
             this.imageService = imageService;
+            this.fatalErrorService = fatalErrorService;
         }
 
         [HttpGet("{email}/{password}"), AllowAnonymous]
@@ -67,6 +71,8 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                //fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | Login"));
+
                 //Log EX somewhere.
                 return StatusCode(500, new
                 {
@@ -88,6 +94,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | Register"));
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()
@@ -115,6 +122,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | RegisterAdditional"));
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()
@@ -161,6 +169,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | GetUser"));
                 //Log EX somewhere.
                 return StatusCode(500, new
                 {
@@ -182,6 +191,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | SendResetPassword"));
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()
@@ -203,6 +213,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | ResetPassword"));
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()

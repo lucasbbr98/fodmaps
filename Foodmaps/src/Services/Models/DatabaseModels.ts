@@ -24,6 +24,7 @@ export interface Food {
     lactose: number;
     oligossacarideo: number;
     poliol: number;
+    standardPortion: number;
 }
 export interface FoodNutrients extends IReferenceTracker {
     id: number;

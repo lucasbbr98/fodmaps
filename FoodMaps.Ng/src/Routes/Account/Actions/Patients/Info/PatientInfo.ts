@@ -106,7 +106,7 @@ export class PatientInfoComponent implements OnInit {
             this.net.get<GetQuestionnaireModel>(`User/GetPendingQuestionnaire/` + this.id).subscribe(t => {
                 if (t != null && t.questionnaire != null) {
                     this.pendingQuestionnaire = t.questionnaire;
-                    this.link = "http://localhost:42300/questionario/painel/" + t.questionnaire.guid;
+                    this.link = window.location.origin + "/questionario/painel/" + t.questionnaire.guid;
                     this.hasPending = true;
                     this.toasterService.pop('success', 'Sucesso', 'Questionário pendente encontrado, compartilhe o link a seguir com ' + this.name);
                 }

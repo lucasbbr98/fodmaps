@@ -5,17 +5,20 @@ using Microsoft.AspNetCore.Authorization;
 using Foodmaps.Models.RequestModels;
 using Foodmaps.Services.User;
 using Foodmaps.Models;
-using Foodmaps.Services.Questionnaire;
 using System.Collections.Generic;
+using Foodmaps.MySQL.Services.Database;
 
 namespace Foodmaps.Web.Controllers.Api.Version1
 {
     public class UserController : BaseController
     {
         private IUserUtility userService;
-        public UserController(IUserUtility userService)
+        private IFatalErrorService fatalErrorService;
+        const string CONTROLLER_NAME = "UserController";
+        public UserController(IUserUtility userService, IFatalErrorService fatalErrorService)
         {
             this.userService = userService;
+            this.fatalErrorService = fatalErrorService;
         }
 
         #region Patients
@@ -37,6 +40,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | CreatePatient"));
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()
@@ -64,6 +68,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | GetPatientsCount"));
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()
@@ -94,6 +99,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | GetPatients"));
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()
@@ -128,6 +134,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | CreateQuestionnaire"));
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()
@@ -154,6 +161,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | GetResearchesCount"));
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()
@@ -184,6 +192,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | GetResearches"));
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()
@@ -210,6 +219,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             }
             catch (Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | GetPendingQuestionnaire"));
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()

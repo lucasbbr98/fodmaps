@@ -27,10 +27,11 @@ body *::before {
 }
 
 .section__headline {
+    text-align:center;
     font-family: "Varela Round", sans-serif;
     font-size: 42px;
     font-weight: 200;
-    color: #4285f4;
+    color: #000;
     padding-left: 15px;
     padding-top: 30px;
 }
@@ -171,4 +172,25 @@ body *::before {
 
 .c-note a {
     color: #4285f4;
+}
+
+.headline {
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+    font-size: 2.415em;
+    line-height: 1.2;
+}
+
+.article {
+    max-width: 610px;
+    margin: 0 auto;
+    padding: 60px 30px 90px;
+}
+
+.line {
+    display: inline-block;
+    width: 100px;
+    height: 3px;
+    margin: 15px;
+    background-color: #4285f4;
 }

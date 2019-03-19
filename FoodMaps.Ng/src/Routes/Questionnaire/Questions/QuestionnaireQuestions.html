@@ -4,17 +4,17 @@
         <aw-wizard #wizard [defaultStepIndex]="currentIndex">
             <ng-container *ngFor="let q of questions; let first = first; let last = last; let i = index;">
                 <ng-container *ngIf="i < currentIndex">
-                    <aw-wizard-step [stepTitle]="100"  awOptionalStep>
+                    <aw-wizard-step class="step-wrapper" awOptionalStep>
+                        <ng-template awWizardStepTitle>
+                        </ng-template>
                         <div class="centered-content">
-                            <div class="col-xs-12">
-                                <h3>{{q.question}}</h3>
-                            </div>
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-6">
                                 <img class="question-img" [src]="q.image" />
                             </div>
-                            <div class="col-xs-12" style="margin-top: 20px;">
+                            <div class="col-xs-12 col-sm-6" style="margin-top: 20px;">
+                                <h3 style="font-size:20px;">Com qual frequência você consumiu <span style="color:#0094ff;">{{q.question}}</span> nos últimos três meses?</h3>
                                 <div class="btn-container">
-                                    <div class="radio-tile-group">
+                                    <div class="radio-tile-group" style="max-width: 400px;">
                                         <div class="input-container" *ngFor="let value of questionValues;">
                                             <input [ngClass]="{'checked':selectedRadio === value}" class="radio-button" type="radio" name="radiogroup"
                                                    [(ngModel)]="selectedRadio"
@@ -26,61 +26,67 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-12" style="margin-top: 20px;">
-                                <div class="wrap">
-                                    <div class="circle-logo-button" *ngFor="let item of frequencyValues" (click)="toggleClass(item)" [ngClass]="{'active-frequency': item.active}">
-                                        <div class="circle-logo-button-content circle-logo-button-wrapper">semana</div>
-                                        <a class="circle-logo-button-content">{{item.name}}</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btn-group">
-                                <button style="margin-right:25px;" type="button" class="btn-control previous" (click)="previous()" *ngIf="!first" awPreviousStep>Voltar</button>
-                                <button type="button" class="btn-control next" (click)="next()"  *ngIf="!last" awNextStep >Continuar</button>
-                                <button type="button" class="btn-control next" (click)="save()" *ngIf="last">Finalizar</button>
-                            </div>
-                        </div>
-                    </aw-wizard-step>
-                </ng-container>
-                <ng-container *ngIf="i >= currentIndex">
-                    <aw-wizard-step [stepTitle]="100" >
-                        <div class="centered-content">
-                            <div class="col-xs-12">
-                                <h3>{{q.question}}</h3>
-                            </div>
-                            <div class="col-xs-12">
-                                <img class="question-img" [src]="q.image" />
-                            </div>
-                            <div class="col-xs-12" style="margin-top: 20px;">
-                                <div class="btn-container">
-                                    <div class="radio-tile-group">
-                                        <div class="input-container" *ngFor="let value of questionValues;">
-                                            <input [ngClass]="{'checked':selectedRadio === value}" class="radio-button" type="radio" name="radiogroup"
-                                                   [(ngModel)]="selectedRadio"
-                                                   [value]="value"
-                                                   (change)="onRadioChange(value, q)">
-                                            <div class="radio-tile">
-                                                <label for="quest-{{value}}" class="radio-tile-label">{{value}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12" style="margin-top: 20px;">
                                 <div>
                                     <div class="wrap">
                                         <div class="circle-logo-button" *ngFor="let item of frequencyValues" (click)="toggleClass(item)" [ngClass]="{'active-frequency': item.active}">
-                                            <div class="circle-logo-button-content circle-logo-button-wrapper">semana</div>
+                                            <div class="circle-logo-button-content circle-logo-button-wrapper">SEMANA</div>
                                             <a class="circle-logo-button-content">{{item.name}}</a>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="btn-group">
+                                    <button style="margin-right:25px;" type="button" class="btn-control previous" (click)="previous()" *ngIf="!first" awPreviousStep>Voltar</button>
+                                    <button type="button" class="btn-control next" (click)="next()" *ngIf="!last && canExit()" awNextStep>Continuar</button>
+                                    <button type="button" class="btn-control next" (click)="next()" *ngIf="!last && !canExit()">Continuar</button>
+                                    <button type="button" class="btn-control next" (click)="save()" *ngIf="last">Finalizar</button>
+                                </div>
                             </div>
-                            <div class="btn-group">
-                                <button style="margin-right:25px;" type="button" class="btn-control previous" (click)="previous()" *ngIf="!first" awPreviousStep>Voltar</button>
-                                <button type="button" class="btn-control next" (click)="next()" *ngIf="!last" awNextStep>Continuar</button>
-                                <button type="button" class="btn-control next" (click)="save()" *ngIf="last">Finalizar</button>
+                        </div>
+                    </aw-wizard-step>
+                </ng-container>
+
+                <ng-container *ngIf="i >= currentIndex">
+                    <aw-wizard-step class="step-wrapper">
+                        <ng-template awWizardStepTitle>
+                        </ng-template>
+                        <div class="centered-content">
+                            <div class="col-xs-12 col-sm-6">
+                                <img class="question-img" [src]="q.image" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6" style="margin-top: 20px;">
+                                <h3 style="font-size:20px;">Com qual frequência você comeu <span style="color:#0094ff;">{{q.question}}</span> nos últimos três meses?</h3>
+                                <div class="btn-container">
+                                    <div class="radio-tile-group" style="max-width: 400px;">
+                                        <div class="input-container" *ngFor="let value of questionValues;">
+                                            <input [ngClass]="{'checked':selectedRadio === value}" class="radio-button" type="radio" name="radiogroup"
+                                                   [(ngModel)]="selectedRadio"
+                                                   [value]="value"
+                                                   (change)="onRadioChange(value, q)">
+                                            <div class="radio-tile">
+                                                <label for="quest-{{value}}" class="radio-tile-label">{{value}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="wrap">
+                                        <div class="circle-logo-button" *ngFor="let item of frequencyValues" (click)="toggleClass(item)" [ngClass]="{'active-frequency': item.active}">
+                                            <div class="circle-logo-button-content circle-logo-button-wrapper">SEMANA</div>
+                                            <a class="circle-logo-button-content">{{item.name}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="btn-group">
+                                    <button style="margin-right:25px;" type="button" class="btn-control previous" (click)="previous()" *ngIf="!first" awPreviousStep>Voltar</button>
+                                    <button type="button" class="btn-control next" (click)="next()" *ngIf="!last && canExit()" awNextStep>Continuar</button>
+                                    <button type="button" class="btn-control next" (click)="next()" *ngIf="!last && !canExit()">Continuar</button>
+                                    <button type="button" class="btn-control next" (click)="save()" *ngIf="last">Finalizar</button>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" style="margin-top: 20px;">
+
                             </div>
                         </div>
                     </aw-wizard-step>

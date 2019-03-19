@@ -73,4 +73,10 @@ export class NavbarComponent implements OnInit {
             this.navbarToggler.nativeElement.click();
         }
     }
+
+    logout() {
+        this.storage.token = null;
+        this.storage.user = null;
+        this.goTo('/home/sobre');
+    }
 }

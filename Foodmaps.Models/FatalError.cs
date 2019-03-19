@@ -2,16 +2,10 @@
 
 namespace Foodmaps.Models
 {
-    public class Food : IEntity
+    public class FatalError : IEntity
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int GroupId { get; set; }
-        public double Frutose { get; set; }
-        public double Lactose { get; set; }
-        public double StandardPortion { get; set; }
-        public double Oligossacarideo { get; set; }
-        public double Poliol { get; set; }
+        public string Exception { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public DateTime ModifiedOn { get; set; }
@@ -19,11 +13,15 @@ namespace Foodmaps.Models
         public DateTime? ObsoletedOn { get; set; }
         public string ObsoletedBy { get; set; }
 
-        public Food() { }
-
+        public FatalError() { }
+        public FatalError(string exception, string createdBy)
+        {
+            this.Exception = exception;
+            this.CreatedBy = createdBy;
+        }
         public override string ToString()
         {
-            return "foods";
+            return "fatalerrors";
         }
     }
 }

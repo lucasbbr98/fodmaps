@@ -4,7 +4,12 @@
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="wwwroot\assets\External\favicon.ico" />
+    <Content Remove="wwwroot\assets\External\Images\favicon.ico" />
+    <Content Remove="wwwroot\assets\favicon.ico" />
+    <Content Remove="wwwroot\assets\Images\favicon.ico" />
     <Content Remove="wwwroot\external\favicon.ico" />
+    <Content Remove="wwwroot\favicon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -131,7 +136,12 @@
 
 
   <ItemGroup>
+    <None Include="wwwroot\assets\External\favicon.ico" />
+    <None Include="wwwroot\assets\External\Images\favicon.ico" />
+    <None Include="wwwroot\assets\favicon.ico" />
+    <None Include="wwwroot\assets\Images\favicon.ico" />
     <None Include="wwwroot\external\favicon.ico" />
+    <None Include="wwwroot\favicon.ico" />
   </ItemGroup>
 </Project>
 

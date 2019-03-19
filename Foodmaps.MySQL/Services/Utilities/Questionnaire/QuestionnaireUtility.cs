@@ -17,14 +17,16 @@ namespace Foodmaps.MySQL.Services.Utilities.Questionnaire
         private IQuestionnaireService questionnaireService;
         private IResearchService researchService;
         private IPatientService patientService;
+        private IFatalErrorService fatalErrorService;
         public const string UTILITY_NAME = "QuestionnaireUtility | ";
         public QuestionnaireUtility(IAnswerService answerService, IQuestionnaireService questionnaireService, 
-            IPatientService patientService, IResearchService researchService)
+            IPatientService patientService, IResearchService researchService, IFatalErrorService fatalErrorService)
         {
             this.questionnaireService = questionnaireService;
             this.answerService = answerService;
             this.patientService = patientService;
             this.researchService = researchService;
+            this.fatalErrorService = fatalErrorService;
         }
 
         public HttpStatusCode SaveQuestionnaireAnswers(QuestionnaireAnswersModel model)

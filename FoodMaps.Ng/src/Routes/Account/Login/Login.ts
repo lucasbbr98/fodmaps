@@ -14,6 +14,7 @@ import {LoginModel} from '../../../Services/Models/TranslationModels';
     styleUrls: ['./Login.scss']
 })
 export class LoginComponent implements OnInit {
+    public msg: string = '';
     public email: string = '';
     public password: string = '';
     public errorMsg: string = '';
@@ -61,6 +62,7 @@ export class LoginComponent implements OnInit {
 
         this.route.queryParams.subscribe(p => this.returnUrl = p['return'] || '/');
         this.route.queryParams.subscribe(p => this.errorMsg = p['message'] || '');
+        this.route.queryParams.subscribe(p => this.msg = p['msg'] || '');
 
     }
 

@@ -5,8 +5,8 @@
     background-color: #fff;
     border-color: $gray;
 
-    ul{
-        margin-top:15px;
+    ul {
+        margin-top: 33px;
     }
 
     li {
@@ -16,22 +16,54 @@
         }
 
         a:hover {
-            color: $main;
+            color: $green;
+            cursor:pointer;
         }
     }
 }
+
 .navbar {
     .fodmaps-navbar-button:hover {
         background-color: $black;
     }
 
     .fodmaps-icon-bar {
-        background-color: $main;
+        background-color: $green;
     }
 }
 
 .fodmaps-logo {
     padding-left: 15px;
     padding-top: 0;
-    margin:0;
+    margin: 0;
+}
+
+.logo-img {
+    height: 80px;
+}
+
+.cool-link {
+    display: inline-block;
+    color: $green;
+    text-decoration: none;
+}
+
+.cool-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: $green;
+    transition: width .3s;
+}
+
+.cool-link:hover::after {
+    width: 100%;
+    //transition: width .3s;
+}
+
+@media (max-device-width:768px) {
+    .logo-img {
+        height: 60px;
+    }
 }

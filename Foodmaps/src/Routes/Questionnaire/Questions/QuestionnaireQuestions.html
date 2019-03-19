@@ -1,10 +1,10 @@
 ﻿<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
-<div class="container card card-shadow quest-wrapper">
+<div class="container card card-shadow quest-wrapper" style="margin-left:0;">
     <div class="row text-center mediaCssFixer" style="margin-top:10px;">
         <aw-wizard #wizard>
             <ng-container *ngFor="let q of questions; let first = first; let last = last; let i = index;">
                 <ng-container *ngIf="i < currentIndex">
-                    <aw-wizard-step [stepTitle]=" "  awOptionalStep>
+                    <aw-wizard-step [stepTitle]="&#8203;"  awOptionalStep>
                         <div class="centered-content">
                             <div class="col-xs-12">
                                 <h3>{{q.question}}</h3>
@@ -51,7 +51,7 @@
                     </aw-wizard-step>
                 </ng-container>
                 <ng-container *ngIf="i >= currentIndex">
-                    <aw-wizard-step [stepTitle]="100">
+                    <aw-wizard-step [stepTitle]="&#8203;">
                         <div class="centered-content">
                             <div class="col-xs-12">
                                 <h3>{{q.question}}</h3>

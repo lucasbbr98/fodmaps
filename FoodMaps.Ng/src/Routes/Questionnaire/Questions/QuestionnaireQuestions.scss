@@ -3,6 +3,12 @@
     box-sizing: border-box;
 }
 
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    margin: 0;
+}
+
 h3 {
     margin-top: 0;
     margin-bottom: 10px;
@@ -41,7 +47,8 @@ $primary-color: #4285f4;
 }
 
 .question-img {
-    max-width: 230px;
+    width:80%;
+    height:80%;
 }
 
 .card {
@@ -476,11 +483,11 @@ option {
 }
 
 
-aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a{
-    display:none;
-    color:transparent;
-    height:0;
-    width:0;
+aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a {
+    display: none;
+    color: transparent;
+    height: 0;
+    width: 0;
 }
 
 /* Button */
@@ -495,7 +502,7 @@ $delay: .33s !default;
 $expand-color: #e32636 !default;
 $opacity: .9 !default;
 $spacing: 20px !default;
-$font-size: 1rem !default;
+$font-size: 1.5rem !default;
 $border-width: 2px !default;
 
 .circle-logo-button,
@@ -542,7 +549,7 @@ $border-width: 2px !default;
 
 .circle-logo-button-content,
 %circle-logo-button-content {
-    color:#000;
+    color: #808080;
     display: block;
     position: absolute;
     left: 0;
@@ -598,4 +605,11 @@ $border-width: 2px !default;
 
 .active-frequency {
     border-color: rgb(66, 133, 244);
+}
+
+.step-wrapper aw-wizard-navigation-bar.horizontal ul.steps-indicator li div a {
+    color: transparent !important;
+    display: none !important;
+    line-height: 0 !important;
+    cursor: none !important;
 }

@@ -14,12 +14,14 @@ namespace Foodmaps.MySQL.Services.Utilities.User
         private IUserService userService;
         private IPatientService patientService;
         private IQuestionnaireService questService;
+        private IFatalErrorService fatalErrorService;
         public const string UTILITY_NAME = "UserUtility | ";
         public UserUtility(IUserService userService, IPatientService patientService, IQuestionnaireService questService)
         {
             this.userService = userService;
             this.patientService = patientService;
             this.questService = questService;
+            this.fatalErrorService = fatalErrorService;
         }
 
         public HttpStatusCode CreatePatient(CreatePatientModel model, int userId)

@@ -1,7 +1,7 @@
 ﻿<ag-global></ag-global>
 <fodmaps-navbar></fodmaps-navbar>
 <div class="mobile-fix" role="main">
-    <router-outlet>
+    <router-outlet (activate)="onActivate($event)">
         <div *ngIf="showLoader" class="loading">
             <div class="container loading-container">
                 <div class="loader">

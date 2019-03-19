@@ -10,10 +10,12 @@
         </div>
         <div class="row margin-top">
             <div class="col-xs-12 col-sm-offset-2">
-                <ag-textbox                      
-                            placeholder="Email" 
-                            type="text" 
-                            index="1" 
+                <p style="color:#74bd7c; font-size:18px;">{{msg}}</p>
+            </div>
+            <div style="margin-top:13px;" class="col-xs-12 col-sm-offset-2">
+                <ag-textbox placeholder="Email"
+                            type="text"
+                            index="1"
                             autofocus="true"
                             [valid]="validEmail"
                             [(ngModel)]="email">

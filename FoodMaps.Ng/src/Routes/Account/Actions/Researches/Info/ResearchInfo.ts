@@ -61,7 +61,7 @@ export class ResearchInfoComponent implements OnInit {
             this.net.get<GetQuestionnaireModel>(`Questionnaire/GetByGuid/` + this.guid).subscribe(t => {
                 if (t != null && t.questionnaire != null) {
                     this.questionnaire = t.questionnaire;
-                    this.link = "http://localhost:42300/questionario/painel/" + t.questionnaire.guid;
+                    this.link = window.location.origin + "/questionario/painel/" + t.questionnaire.guid;
                 }
             }, error => {
                 this.loaderService.display(false);

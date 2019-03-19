@@ -83,7 +83,7 @@ $datas-height: calc(100% - #{$visual-height} + 2px);
         height: $visual-height;
         overflow: hidden;
         position: relative;
-        background: url('https://s3-sa-east-1.amazonaws.com/fodmaps/perfilprofissional.jpg')no-repeat center center/cover;
+        background: url('https://s3-sa-east-1.amazonaws.com/fodmap/perfilprofissional.jpg')no-repeat center center/cover;
         border-top-left-radius: $radius;
         border-top-right-radius: $radius;
 
@@ -106,7 +106,7 @@ $datas-height: calc(100% - #{$visual-height} + 2px);
         &:after {
             z-index: 2;
             mix-blend-mode: lighten;
-            background: url('https://s3-sa-east-1.amazonaws.com/fodmaps/perfilprofissional.jpg')no-repeat center center/cover;
+            background: url('https://s3-sa-east-1.amazonaws.com/fodmap/perfilprofissional.jpg')no-repeat center center/cover;
             opacity: 1;
         }
     }

@@ -24,7 +24,7 @@ body {
 }
 
 .article {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     /* for mobile */
     padding-left: 30px;
@@ -290,15 +290,15 @@ $text-offset: $a-height - 90;
         }
         // Background images
         li:nth-child(1) {
-            background-image: url('https://s3-sa-east-1.amazonaws.com/fodmaps/homeSII.png');
+            background-image: url('https://s3-sa-east-1.amazonaws.com/fodmap/homeSII.png');
         }
 
         li:nth-child(2) {
-            background-image: url('https://s3-sa-east-1.amazonaws.com/fodmaps/homeConhecendo.png');
+            background-image: url('https://s3-sa-east-1.amazonaws.com/fodmap/homeConhecendo.png');
         }
 
         li:nth-child(3) {
-            background-image: url('https://s3-sa-east-1.amazonaws.com/fodmaps/homeAvaliacao.png');
+            background-image: url('https://s3-sa-east-1.amazonaws.com/fodmap/homeAvaliacao.png');
         }
 
         &:hover li,

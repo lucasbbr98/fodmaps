@@ -23,18 +23,20 @@ namespace Foodmaps.MySQL.Services.Utilities.Authentication
         private IEmailService emailService;
         private IJobService jobService;
         private IAddressService addressService;
+        private IFatalErrorService fatalErrorService;
         public const string UTILITY_NAME = "Authentication Utility | ";
 
         public AuthenticationUtility(
-            IUserService userService, 
-            IConfigurationRoot configuration, 
+            IUserService userService,
+            IConfigurationRoot configuration,
             IPasswordUtility passwordService,
             IAuthenticationService authenticationService,
             IRoleService roleService,
             IUserRoleService userRoleService,
             IEmailService emailService,
             IJobService jobService,
-            IAddressService addressService)
+            IAddressService addressService,
+            IFatalErrorService fatalErrorService)
         {
             this.userService = userService;
             this.configuration = configuration;
@@ -45,144 +47,126 @@ namespace Foodmaps.MySQL.Services.Utilities.Authentication
             this.emailService = emailService;
             this.jobService = jobService;
             this.addressService = addressService;
+            this.fatalErrorService = fatalErrorService;
         }
 
         public HttpStatusCode Authenticate(string email, string password, out User user)
         {
             user = null;
-            try
+            if (string.IsNullOrEmpty(email) ||
+                string.IsNullOrEmpty(password))
             {
-                if (string.IsNullOrEmpty(email) ||
-                    string.IsNullOrEmpty(password))
-                {
-                    return HttpStatusCode.BadRequest;
-                }
-
-                var userAuth = userService.GetUser(email);
-                if (userAuth == null || userAuth.Value.Key == null)
-                {
-                    return HttpStatusCode.NotFound;
-                }
-
-                user = userAuth.Value.Key;
-                var auth = userAuth.Value.Value;
-
-                var hashedPassword = passwordService.Hash(password, auth.Salt);
-
-                if (auth.Password != hashedPassword)
-                {
-                    auth.Failures += 1;
-                    auth.LastFailure = DateTime.Now;
-                    auth.ModifiedBy = "AuthenticationService";
-                    authenticationService.Update(auth);
-                    return HttpStatusCode.NotAcceptable;
-                }
-
-                var roles = roleService.UserRoles(user.Id).ToArray();
-
-                //Check for any bad roles here (Like suspended)
-                if (roles.Any(t => t.Name == "Suspended"))
-                {
-                    return HttpStatusCode.Forbidden;
-                }
-
-                user.Roles = roles;
-
-                return HttpStatusCode.OK;
+                return HttpStatusCode.BadRequest;
             }
-            catch(Exception e)
+
+            var userAuth = userService.GetUser(email);
+            if (userAuth == null || userAuth.Value.Key == null)
             {
-                //Log the error here
-                return HttpStatusCode.InternalServerError;
+                return HttpStatusCode.NotFound;
             }
+
+            user = userAuth.Value.Key;
+            var auth = userAuth.Value.Value;
+
+            var hashedPassword = passwordService.Hash(password, auth.Salt);
+
+            if (auth.Password != hashedPassword)
+            {
+                auth.Failures += 1;
+                auth.LastFailure = DateTime.Now;
+                auth.ModifiedBy = "AuthenticationService";
+                authenticationService.Update(auth);
+                return HttpStatusCode.NotAcceptable;
+            }
+
+            var roles = roleService.UserRoles(user.Id).ToArray();
+
+            //Check for any bad roles here (Like suspended)
+            if (roles.Any(t => t.Name == "Suspended"))
+            {
+                return HttpStatusCode.Forbidden;
+            }
+
+            user.Roles = roles;
+
+            return HttpStatusCode.OK;
+
         }
 
         public HttpStatusCode GetUser(int? userId, out User user)
         {
             user = null;
-            try
+            if (userId == null)
             {
-                if (userId == null)
-                {
-                    return HttpStatusCode.BadRequest;
-                }
-
-                var testId = (int)userId;
-
-                if (testId <= 0 )
-                {
-                    return HttpStatusCode.BadRequest;
-                }
-
-                user = userService.Get(testId);
-                if (user == null)
-                {
-                    return HttpStatusCode.NotFound;
-                }
-                // I NEED TO CHANGE THIS TO SQL!
-                if (user.ObsoletedBy != null || user.ObsoletedOn != null)
-                {
-                    return HttpStatusCode.Forbidden;
-                }
-
-
-                var roles = roleService.UserRoles(user.Id).ToArray();
-
-                //Check for any bad roles here (Like suspended)
-                if (roles.Any(t => t.Name == "Suspended"))
-                {
-                    return HttpStatusCode.Forbidden;
-                }
-
-                user.Roles = roles;
-
-                return HttpStatusCode.OK;
+                return HttpStatusCode.BadRequest;
             }
-            catch
+
+            var testId = (int)userId;
+
+            if (testId <= 0)
             {
-                //Log the error here
-                return HttpStatusCode.InternalServerError;
+                return HttpStatusCode.BadRequest;
             }
+
+            user = userService.Get(testId);
+            if (user == null)
+            {
+                return HttpStatusCode.NotFound;
+            }
+            // I NEED TO CHANGE THIS TO SQL!
+            if (user.ObsoletedBy != null || user.ObsoletedOn != null)
+            {
+                return HttpStatusCode.Forbidden;
+            }
+
+
+            var roles = roleService.UserRoles(user.Id).ToArray();
+
+            //Check for any bad roles here (Like suspended)
+            if (roles.Any(t => t.Name == "Suspended"))
+            {
+                return HttpStatusCode.Forbidden;
+            }
+
+            user.Roles = roles;
+
+            return HttpStatusCode.OK;
+
+
         }
         public HttpStatusCode GetUserByEmail(string email, out User user)
         {
             user = null;
-            try
+
+            if (email == null)
             {
-                if (email == null)
-                {
-                    return HttpStatusCode.BadRequest;
-                }
-
-                user = userService.GetByEmail(email);
-                if (user == null)
-                {
-                    return HttpStatusCode.NotFound;
-                }
-                // I NEED TO CHANGE THIS TO SQL!
-                if (user.ObsoletedBy != null || user.ObsoletedOn != null)
-                {
-                    return HttpStatusCode.Forbidden;
-                }
-
-
-                var roles = roleService.UserRoles(user.Id).ToArray();
-
-                //Check for any bad roles here (Like suspended)
-                if (roles.Any(t => t.Name == "Suspended"))
-                {
-                    return HttpStatusCode.Forbidden;
-                }
-
-                user.Roles = roles;
-
-                return HttpStatusCode.OK;
+                return HttpStatusCode.BadRequest;
             }
-            catch
+
+            user = userService.GetByEmail(email);
+            if (user == null)
             {
-                //Log the error here
-                return HttpStatusCode.InternalServerError;
+                return HttpStatusCode.NotFound;
             }
+            // I NEED TO CHANGE THIS TO SQL!
+            if (user.ObsoletedBy != null || user.ObsoletedOn != null)
+            {
+                return HttpStatusCode.Forbidden;
+            }
+
+
+            var roles = roleService.UserRoles(user.Id).ToArray();
+
+            //Check for any bad roles here (Like suspended)
+            if (roles.Any(t => t.Name == "Suspended"))
+            {
+                return HttpStatusCode.Forbidden;
+            }
+
+            user.Roles = roles;
+
+            return HttpStatusCode.OK;
+
         }
 
         public HttpStatusCode Register(RegistrationModel model)
@@ -223,7 +207,7 @@ namespace Foodmaps.MySQL.Services.Utilities.Authentication
             }
 
             // Sets Role
-            var role = new UserRole(user,RoleType.Doctor);
+            var role = new UserRole(user, RoleType.Doctor);
             if (!userRoleService.Insert(role))
             {
                 return HttpStatusCode.InternalServerError;
@@ -297,8 +281,9 @@ namespace Foodmaps.MySQL.Services.Utilities.Authentication
                 emailService.SendEmail(model.Data, "Recuperação de Senha | FODMAP Project", EmailService.PasswordResetBody(guid.ToString()));
                 return HttpStatusCode.OK;
             }
-            catch
+            catch(Exception ex)
             {
+                fatalErrorService.Insert(new FatalError(ex.ToString(), $"{UTILITY_NAME} SendResetPassword - Email"));
                 return HttpStatusCode.InternalServerError;
             }
         }

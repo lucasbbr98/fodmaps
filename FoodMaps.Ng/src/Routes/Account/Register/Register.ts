@@ -196,7 +196,11 @@ export class RegisterComponent implements OnInit {
             tempModel.password = btoa(this.model.password);
             this.net.post<RegistrationModel>(`Authentication/Register`, tempModel).subscribe(t => {               
                 this.loaderService.display(false);
-                this.router.navigateByUrl("conta/update");
+                this.router.navigate(['conta/login'], {
+                    queryParams: {
+                        msg: 'Conta criada com sucesso' 
+                    }
+                });
                 return;
             }, error => {
                 if (!navigator.onLine) {

@@ -3,7 +3,7 @@
   <SQL>
     <System>
       <ConnectionString>
-        server=localhost;user id=root;password=Pmlt2998!;database=foodmaps;Allow User Variables=True;
+        server=foodmaps.cyyfxwwrtutt.sa-east-1.rds.amazonaws.com;user id=root;password=Pmlt2998!;database=foodmaps;Allow User Variables=True;
       </ConnectionString>
     </System>
     <addresses>
@@ -1191,5 +1191,60 @@
       </GetPendingQuestionnaireByPatientId>
     
   </questionnaires>
+    <fatalerrors>
+      <Get>
+        <![CDATA[
+					SELECT * FROM `fatalerrors` WHERE `Id` = @Id
+				]]>
+      </Get>
+      <GetAll>
+        <![CDATA[
+					SELECT * FROM `fatalerrors`
+				]]>
+      </GetAll>
+      <InsertGetId>
+        <![CDATA[
+					INSERT INTO `fatalerrors`
+					(
+					  `Exception`,
+						`CreatedBy`
+					) 
+					VALUES 
+					(
+					  @Exception,
+						@CreatedBy
+					);
+					SELECT LAST_INSERT_ID();
+				]]>
+      </InsertGetId>
+      <Insert>
+        <![CDATA[
+					INSERT INTO `fatalerrors`
+					(
+					  `Exception`,
+						`CreatedBy`,
+					) 
+					VALUES 
+					(
+					  @Exception,
+						@CreatedBy
+					);
+				]]>
+      </Insert>
+      <Delete>
+        <![CDATA[
+					DELETE FROM `fatalerrors` WHERE `Id` = @Id
+				]]>
+      </Delete>
+      <Update>
+        <![CDATA[
+					UPDATE `fatalerrors` 
+					SET 
+					  `Exception` = @Exception
+					WHERE 
+					    `Id` = @Id
+				]]>
+      </Update>
+    </fatalerrors>
 	</SQL>
 </configuration>
