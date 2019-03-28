@@ -1222,7 +1222,7 @@
 					INSERT INTO `fatalerrors`
 					(
 					  `Exception`,
-						`CreatedBy`,
+						`CreatedBy`
 					) 
 					VALUES 
 					(

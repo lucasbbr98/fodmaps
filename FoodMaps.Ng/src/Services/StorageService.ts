@@ -1,7 +1,6 @@
 ﻿import { LocalStorageService } from 'angular-2-local-storage';
 import { Injectable } from '@angular/core';
 import { User, Answer } from './Models/DatabaseModels';
-import { forEach } from '@angular/router/src/utils/collection';
 
 const STORAGE_EMAIL: string = 'email';
 const STORAGE_PASSWORD: string = 'password';
@@ -14,10 +13,7 @@ const CATEGORIES = ['frutas', 'acucar', 'legumes-e-verduras', 'leite-e-derivados
 @Injectable()
 export class StorageService {
 
-    constructor(
-        private storage: LocalStorageService
-    ) {
-    }
+    constructor(private storage: LocalStorageService) {}
     public user: User = null;
 
     public get isLoggedIn() : boolean {

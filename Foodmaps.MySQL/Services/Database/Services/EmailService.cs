@@ -54,7 +54,7 @@ namespace Foodmaps.MySQL.Services.Database.Services
                     message.IsBodyHtml = true;
                     client.Send(message);
                 }
-            }
+            } 
         }
 
 
@@ -62,7 +62,7 @@ namespace Foodmaps.MySQL.Services.Database.Services
         public static string PasswordResetBody(string token)
         {
             StringBuilder body = new StringBuilder();
-            body.AppendFormat("<h1>Projeto FODMAP</h1>");
+            body.AppendFormat("<h1>FODMAP Project</h1>");
             body.AppendFormat("<br />");
             body.AppendFormat("<h3>Recuperação de senha</h3>");
             body.AppendFormat("<br />");

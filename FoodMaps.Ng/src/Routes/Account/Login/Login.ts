@@ -87,6 +87,10 @@ export class LoginComponent implements OnInit {
                 if (t.user.addressId == null || t.user.addressId == 0 || t.user.university == null || t.user.university == "" || t.user.jobId == null || t.user.jobId == 0) {
                     this.router.navigateByUrl("conta/update");
                 }
+                else if (this.storage.returnUrl) {
+                    this.router.navigateByUrl(this.storage.returnUrl);
+                    this.storage.returnUrl = null;
+                }
                 else {
                     this.router.navigateByUrl("conta/perfil");
                 }

@@ -89,7 +89,6 @@ export class QuestionnaireDashboardComponent implements OnInit {
         });
 
         if (this.guid != 'exemplo') {
-            console.log('not an example...');
             this.getQuestionnaire();
         }
 
@@ -117,7 +116,6 @@ export class QuestionnaireDashboardComponent implements OnInit {
     getQuestionnaire() {
         // Gets patients from user
         if (navigator.onLine) {
-            console.log('trying to get questionnaire...');
             this.net.get<GetQuestionnaireModel>(`Questionnaire/GetByGuid/` + this.guid).subscribe(t => {
                 if (t != null && t.questionnaire != null) {
                     this.questionnaire = t.questionnaire;
@@ -206,7 +204,6 @@ export class QuestionnaireDashboardComponent implements OnInit {
         if (this.questionnaire && this.questionnaire.type == 'pesquisa') {
             this.showDashboard = false;
             this.showPatientQuestion = true;
-            console.log(this.showPatientQuestion);
         }
 
         // Patients

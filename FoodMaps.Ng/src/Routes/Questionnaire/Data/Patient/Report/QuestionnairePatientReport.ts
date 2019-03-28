@@ -129,11 +129,10 @@ export class QuestionnairePatientReportComponent implements OnInit {
         // Updating Frutose according to 
         for (let d of this.data) {
             if (d && d.food && d.answer) {
-                var actualGrams = d.answer.value / d.answer.multiplier
-                frutoseCount = frutoseCount + (d.food.frutose * actualGrams / d.food.standardPortion);
-                lactoseCount = lactoseCount + (d.food.lactose * actualGrams / d.food.standardPortion);
-                oligoCount = oligoCount + (d.food.oligossacarideo * actualGrams / d.food.standardPortion);
-                poliolCount = poliolCount + (d.food.poliol * actualGrams / d.food.standardPortion);
+                frutoseCount = frutoseCount + (d.food.frutose * d.answer.value / d.answer.multiplier);
+                lactoseCount = lactoseCount + (d.food.lactose * d.answer.value / d.answer.multiplier);
+                oligoCount = oligoCount + (d.food.oligossacarideo * d.answer.value / d.answer.multiplier);
+                poliolCount = poliolCount + (d.food.poliol * d.answer.value / d.answer.multiplier);
             }
         }
 
@@ -158,15 +157,11 @@ export class QuestionnairePatientReportComponent implements OnInit {
         if (!this.data || this.data.length <= 0)
             return;
 
-        // Iterator to retrieve top 5 values
-        var top = [0, 1, 2, 3, 4]
+        var fData = this.data.filter(d => d.food.frutose > 0);
+        var frutoseArray = fData.sort((d1, d2) => {
 
-        var frutoseArray = this.data.sort((d1, d2) => {
-            var actualGrams1 = d1.answer.value / d1.answer.multiplier
-            var actualGrams2 = d2.answer.value / d2.answer.multiplier
-
-            var d1Value = d1.food.frutose * actualGrams1 / d1.food.standardPortion;
-            var d2Value = d2.food.frutose * actualGrams2 / d2.food.standardPortion;
+            var d1Value = d1.food.frutose * d1.answer.value / d1.answer.multiplier;
+            var d2Value = d2.food.frutose * d2.answer.value / d2.answer.multiplier;
 
             if (d1Value > d2Value) {
                 return -1;
@@ -177,19 +172,20 @@ export class QuestionnairePatientReportComponent implements OnInit {
 
             return 0;
         });
-        for (let i of top) {
-            var actualGrams = frutoseArray[i].answer.value / frutoseArray[i].answer.multiplier;
-            this.frutoseData[i] = Number((frutoseArray[i].food.frutose * actualGrams / frutoseArray[i].food.standardPortion).toFixed(2));
-            this.frutoseLabels[i] = frutoseArray[i].food.name;
+        var i = 0;
+        for (let f of frutoseArray) {
+            if (i >= 5) { break; }
+            this.frutoseData[i] = Number((f.food.frutose * f.answer.value / f.answer.multiplier).toFixed(2));
+            this.frutoseLabels[i] = f.food.name;
+            i++;
         }
 
-        var lactoseArray = this.data.sort((d1, d2) => {
+        var lData = this.data.filter(d => d.food.lactose > 0);
+        var lactoseArray = lData.sort((d1, d2) => {
 
-            var actualGrams1 = d1.answer.value / d1.answer.multiplier
-            var actualGrams2 = d2.answer.value / d2.answer.multiplier
+            var d1Value = d1.food.lactose * d1.answer.value / d1.answer.multiplier;
+            var d2Value = d2.food.lactose * d2.answer.value / d2.answer.multiplier;
 
-            var d1Value = d1.food.lactose * actualGrams1 / d1.food.standardPortion;
-            var d2Value = d2.food.lactose * actualGrams2 / d2.food.standardPortion;
             if (d1Value > d2Value) {
                 return -1;
             }
@@ -199,18 +195,18 @@ export class QuestionnairePatientReportComponent implements OnInit {
 
             return 0;
         });
-        for (let i of top) {
-            var actualGrams = lactoseArray[i].answer.value / lactoseArray[i].answer.multiplier;
-            this.lactoseData[i] = Number((lactoseArray[i].food.lactose * actualGrams / lactoseArray[i].food.standardPortion).toFixed(2));
-            this.lactoseLabels[i] = lactoseArray[i].food.name;
+        var i = 0;
+        for (let f of lactoseArray) {
+            if (i >= 5) { break; }
+            this.lactoseData[i] = Number((f.food.lactose * f.answer.value / f.answer.multiplier).toFixed(2));
+            this.lactoseLabels[i] = f.food.name;
+            i++;
         }
+        var oData = this.data.filter(d => d.food.oligossacarideo > 0);
+        var oligoArray = oData.sort((d1, d2) => {
 
-        var oligoArray = this.data.sort((d1, d2) => {
-            var actualGrams1 = d1.answer.value / d1.answer.multiplier
-            var actualGrams2 = d2.answer.value / d2.answer.multiplier
-
-            var d1Value = d1.food.oligossacarideo * actualGrams1 / d1.food.standardPortion;
-            var d2Value = d2.food.oligossacarideo * actualGrams2 / d2.food.standardPortion;
+            var d1Value = d1.food.oligossacarideo * d1.answer.value / d1.answer.multiplier;
+            var d2Value = d2.food.oligossacarideo * d2.answer.value / d2.answer.multiplier;
             if (d1Value > d2Value) {
                 return -1;
             }
@@ -220,18 +216,18 @@ export class QuestionnairePatientReportComponent implements OnInit {
 
             return 0;
         });
-        for (let i of top) {
-            var actualGrams = oligoArray[i].answer.value / oligoArray[i].answer.multiplier;
-            this.oligoData[i] = Number((oligoArray[i].food.oligossacarideo * actualGrams / oligoArray[i].food.standardPortion).toFixed(2));
-            this.oligoLabels[i] = oligoArray[i].food.name;
+        var i = 0;
+        for (let f of oligoArray) {
+            if (i >= 5) { break; }
+            this.oligoData[i] = Number((f.food.oligossacarideo * f.answer.value / f.answer.multiplier).toFixed(2));
+            this.oligoLabels[i] = f.food.name;
+            i++;
         }
+        var pData = this.data.filter(d => d.food.poliol > 0);
+        var poliolArray = pData.sort((d1, d2) => {
+            var d1Value = d1.food.poliol * d1.answer.value / d1.answer.multiplier;
+            var d2Value = d2.food.poliol * d2.answer.value / d2.answer.multiplier;
 
-        var poliolArray = this.data.sort((d1, d2) => {
-            var actualGrams1 = d1.answer.value / d1.answer.multiplier
-            var actualGrams2 = d2.answer.value / d2.answer.multiplier
-
-            var d1Value = d1.food.poliol * actualGrams1 / d1.food.standardPortion;
-            var d2Value = d2.food.poliol * actualGrams2 / d2.food.standardPortion;
             if (d1Value > d2Value) {
                 return -1;
             }
@@ -241,10 +237,12 @@ export class QuestionnairePatientReportComponent implements OnInit {
 
             return 0;
         });
-        for (let i of top) {
-            var actualGrams = poliolArray[i].answer.value / poliolArray[i].answer.multiplier;
-            this.poliolData[i] = Number((poliolArray[i].food.poliol * actualGrams * poliolArray[i].food.standardPortion).toFixed(2));
-            this.poliolLabels[i] = poliolArray[i].food.name;
+        var i = 0;
+        for (let f of poliolArray) {
+            if (i >= 5) { break; }
+            this.poliolData[i] = Number((f.food.poliol * f.answer.value / f.answer.multiplier).toFixed(2));
+            this.poliolLabels[i] = f.food.name;
+            i++;
         }
     }
 

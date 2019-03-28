@@ -19,7 +19,6 @@ export class IsLoggedIn implements CanActivate {
             return true;
         }
         this.storage.returnUrl = state.url;
-        console.log(this.storage.returnUrl);
         this.router.navigate(['conta/login'], {
             queryParams: {
                 return: state.url

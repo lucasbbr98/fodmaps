@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, Router } from '@angular/router';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { DirectivesModule } from './../Directives/Directives';
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -38,12 +38,36 @@ export class AppComponent {
 
     constructor(
         private loaderService: LoaderService,
-        private storage: StorageService) {
+        private storage: StorageService,
+        private net: NetworkService,
+        private router: Router) {
     }
 
     ngOnInit() {
+        console.warn('FODMAP Project está sendo inicializado. Por favor usuário, para a sua própria segurança, nunca digite ou compartilhe informações resgatadas nessa tela. A utilização da mesma é exclusiva para desenvolvedores e qualquer compartilhamento de informações pode comprometer a segurança da sua conta pessoal e/ou infringir a sua privacidade. Nós do FODMAP Project jamais te pediremos para acessar essa página.')
         this.loaderService.status.subscribe((val: boolean) => {
             this.showLoader = val;
+        });
+        var email = this.storage.email;
+        var base64Password = btoa(this.storage.password);
+        if (!email || !base64Password || !this.storage.token) { return; }
+
+        this.loaderService.display(true);
+        this.net.get<LoginModel>(`Authentication/Login/${this.storage.email}/${base64Password}`).subscribe(t => {
+            this.storage.token = t.token;
+            this.storage.email = this.email;
+            this.storage.password = this.password;
+            this.storage.user = t.user;
+            this.loaderService.display(false);
+            if (t.user.addressId == null || t.user.addressId == 0 || t.user.university == null || t.user.university == "" || t.user.jobId == null || t.user.jobId == 0) {
+                this.router.navigateByUrl("conta/update");
+                return;
+            }
+            else if (this.storage.returnUrl) {
+                this.router.navigateByUrl(this.storage.returnUrl);
+                this.storage.returnUrl = null;
+                return;
+            }
         });
     }
 }

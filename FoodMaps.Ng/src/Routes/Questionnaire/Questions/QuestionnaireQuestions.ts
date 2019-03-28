@@ -102,7 +102,6 @@ export class QuestionnaireQuestionsComponent implements OnInit, AfterViewInit {
         item.active = true;
         this.optionSelected = item.value;
         this.answers[this.currentIndex].frequency = this.optionSelected;
-        console.log(this.optionSelected);
     }
     
     constructor(
@@ -148,32 +147,33 @@ export class QuestionnaireQuestionsComponent implements OnInit, AfterViewInit {
 
     }
 
-    next() {
+    next(q) {
+        if (!this.answers[this.currentIndex].value || this.answers[this.currentIndex].value < 0) { this.answers[this.currentIndex].value = 0; }
         if (this.optionSelected == 'dia' || this.optionSelected == 'mes' || this.optionSelected == 'semana') {
+            this.saveOnLocalStorage(q);
             this.currentIndex++;
-            this.saveOnLocalStorage();
             for (let v of this.frequencyValues) { v.active = false; }
             this.optionSelected = '';
         }
         else {
             this.toasterService.pop('error', 'Erro', 'Por favor, escolha uma frequência');
-            this.wizard.navigation.goToStep(this.currentIndex);
         }
     }
 
-    save() {
+    save(q) {
         if (this.optionSelected == 'dia' || this.optionSelected == 'mes' || this.optionSelected == 'semana') {
-            this.saveOnLocalStorage();
+            this.answers[this.currentIndex].foodId = q.id;
+            this.saveOnLocalStorage(q);
             this.router.navigate(['/questionario/painel', this.guid]);
             var storageAnswers = this.storage.getAnswers(this.category, this.guid);
-            console.log(storageAnswers);
         }
         else {
             this.toasterService.pop('error', 'Erro', 'Por favor, escolha uma frequência');
         }
     }
 
-    saveOnLocalStorage() {
+    saveOnLocalStorage(q) {
+        this.answers[this.currentIndex].foodId = q.id;
         this.selectedRadio = this.answers[this.currentIndex].value;
         this.answers[this.currentIndex].frequency = this.optionSelected;
         if (this.answers[this.currentIndex].frequency == 'dia') {
@@ -202,7 +202,6 @@ export class QuestionnaireQuestionsComponent implements OnInit, AfterViewInit {
     }
     onSelectChange() {
         this.answers[this.currentIndex].frequency = this.optionSelected;
-        console.log(this.answers[this.currentIndex]);
     }
     goTo(url: string) {
         if (navigator.onLine) {
@@ -245,13 +244,14 @@ export class QuestionnaireQuestionsComponent implements OnInit, AfterViewInit {
             }
         }
     }
+
     loadDefaultCategoryAnswers() {
         this.answers = this.buildAnswers(this.questions.length, this.questions[0].id);
     }
     buildAnswers(length: number, ii: number): Answer[] {
         var answers: Answer[] = [];
         for (var _i = 0; _i < length; _i++) {
-            var answ: Answer = { questionnaireId: 0, value: 0, frequency: 'dia', foodId: ii, answered: false, multiplier: 0 };
+            var answ: Answer = { questionnaireId: 0, value: 0, frequency: 'dia', foodId: 0, answered: false, multiplier: 0 };
             answers.push(answ);
             ii++;
         }
@@ -260,17 +260,16 @@ export class QuestionnaireQuestionsComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         var el12 = document.getElementsByClassName("steps-12")
-        console.log(el12);
         if (el12 && el12.length > 0) {
             el12[0].className = "steps-indicator steps-10";
         }
         var el16 = document.getElementsByClassName("steps-16")
-        console.log(el16);
         if (el16 && el16.length > 0) {
             el16[0].className = "steps-indicator steps-10";
         }
-        this._changeDetectionRef.detectChanges();
-        this.wizard.navigation.goToStep(this.currentIndex);
+        if (this.wizard) {
+            this.wizard.navigation.goToStep(this.currentIndex);
+        }
     }
 
     canExit() {

@@ -192,6 +192,7 @@ namespace Foodmaps.Web.Controllers.Api.Version1
             catch (Exception ex)
             {
                 fatalErrorService.Insert(new FatalError(ex.ToString(), $"{CONTROLLER_NAME} | SendResetPassword"));
+
                 return StatusCode(500, new
                 {
                     Message = ex.ToString()

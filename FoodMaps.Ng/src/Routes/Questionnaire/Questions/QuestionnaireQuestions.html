@@ -36,9 +36,9 @@
                                 </div>
                                 <div class="btn-group">
                                     <button style="margin-right:25px;" type="button" class="btn-control previous" (click)="previous()" *ngIf="!first" awPreviousStep>Voltar</button>
-                                    <button type="button" class="btn-control next" (click)="next()" *ngIf="!last && canExit()" awNextStep>Continuar</button>
-                                    <button type="button" class="btn-control next" (click)="next()" *ngIf="!last && !canExit()">Continuar</button>
-                                    <button type="button" class="btn-control next" (click)="save()" *ngIf="last">Finalizar</button>
+                                    <button type="button" class="btn-control next" (click)="next(q)" *ngIf="!last && canExit()" awNextStep>Continuar</button>
+                                    <button type="button" class="btn-control next" (click)="next(q)" *ngIf="!last && !canExit()">Continuar</button>
+                                    <button type="button" class="btn-control next" (click)="save(q)" *ngIf="last">Finalizar</button>
                                 </div>
                             </div>
                         </div>
@@ -80,9 +80,9 @@
 
                                 <div class="btn-group">
                                     <button style="margin-right:25px;" type="button" class="btn-control previous" (click)="previous()" *ngIf="!first" awPreviousStep>Voltar</button>
-                                    <button type="button" class="btn-control next" (click)="next()" *ngIf="!last && canExit()" awNextStep>Continuar</button>
-                                    <button type="button" class="btn-control next" (click)="next()" *ngIf="!last && !canExit()">Continuar</button>
-                                    <button type="button" class="btn-control next" (click)="save()" *ngIf="last">Finalizar</button>
+                                    <button type="button" class="btn-control next" (click)="next(q)" *ngIf="!last && canExit()" awNextStep>Continuar</button>
+                                    <button type="button" class="btn-control next" (click)="next(q)" *ngIf="!last && !canExit()">Continuar</button>
+                                    <button type="button" class="btn-control next" (click)="save(q)" *ngIf="last">Finalizar</button>
                                 </div>
                             </div>
                             <div class="col-xs-12" style="margin-top: 20px;">

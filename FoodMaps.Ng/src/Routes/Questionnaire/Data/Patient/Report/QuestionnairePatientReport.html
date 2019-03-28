@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="row" style="margin-top:25px;">
-        <div class="col-xs-12 col-md-6"><p><span class="h4">Oligossacarídeo:</span><span *ngFor="let i of top"> {{frutoseLabels[i]}}&nbsp;({{frutoseData[i]}}g)<span *ngIf="i < 4">, </span></span></p></div>
+        <div class="col-xs-12 col-md-6"><p><span class="h4">Oligossacarídeo:</span><span *ngFor="let i of top"> {{oligoLabels[i]}}&nbsp;({{oligoData[i]}}g)<span *ngIf="i < 4">, </span></span></p></div>
         <div class="col-xs-12 col-md-6"><p><span class="h4">Polióis:</span> <span *ngFor="let i of top">{{poliolLabels[i]}}&nbsp;({{poliolData[i]}}g)<span *ngIf="i < 4">, </span></span></p></div>
         <div class="col-xs-12 col-md-6"><p><span class="h4">Frutose: </span> <span *ngFor="let i of top">{{frutoseLabels[i]}}&nbsp;({{frutoseData[i]}}g)<span *ngIf="i < 4">, </span></span></p></div>
         <div class="col-xs-12 col-md-6"><p><span class="h4">Lactose: </span> <span *ngFor="let i of top">{{lactoseLabels[i]}}&nbsp;({{lactoseData[i]}}g)<span *ngIf="i < 4">, </span></span></p></div>
