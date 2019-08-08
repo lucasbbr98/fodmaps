@@ -4,7 +4,7 @@
     "profile" : "lucas",
     "region"  : "sa-east-1",
     "application" : "Fodmap Project",
-    "environment" : "FodmapProjectEnv",
+    "environment" : "FodmapProject",
     "iis-website" : "Default Web Site",
     "app-path"    : "/",
     "enable-xray" : false,
