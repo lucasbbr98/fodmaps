@@ -78,6 +78,7 @@ namespace Foodmaps
         {
             app.UseResponseCompression();
             app.UseAuthentication();
+            app.UseDefaultFiles();
 
             if (env.IsDevelopment())
             {
@@ -89,6 +90,7 @@ namespace Foodmaps
                         ctx.Context.Response.Headers.Add("Cache-Control", "public, max-age=600");
                     }
                 });
+
             }
             else
             {

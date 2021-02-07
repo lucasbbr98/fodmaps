@@ -39,6 +39,7 @@ export class AppComponent {
     constructor(
         private loaderService: LoaderService,
         private storage: StorageService) {
+        console.log('INIT');
     }
 
     ngOnInit() {

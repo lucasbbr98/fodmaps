@@ -34,7 +34,6 @@ if (process.env.NODE_ENV === 'production') {
     });
     plugins.push(
         //new AotPlugin({
-<<<<<<< HEAD
         //    tsConfigPath: 'tsconfig.json',
         //    entryModule: path.resolve(__dirname, './src/app/App#AppModule')}),
         new webpack.LoaderOptionsPlugin({
@@ -61,7 +60,6 @@ if (process.env.NODE_ENV === 'production') {
             },
             comments: false
         }),
-=======
         //    tsConfigPath: './tsconfig.json',
         //    entryModule: './src/app/App#AppModule'
         //}),
@@ -89,7 +87,6 @@ if (process.env.NODE_ENV === 'production') {
         //    },
         //    comments: false
         //}),
->>>>>>> 03316a89f478e659c8c47d1a23097233277841f5
     );
 }
 
