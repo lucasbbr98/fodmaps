@@ -1,0 +1,29 @@
+-- Github
+https://github.com/lucasbbr98/fodmaps
+
+-- Projeto Angular 7
+
+-Abrir CMD
+1. cd \fodmaps\FoodMaps.Ng
+2. npm install
+3. npm run build
+
+- Abrir Visual Studio
+4. Rodar .Web
+
+
+-- BANCO DE DADOS
+
+MySQL
+C:\Projects\fodmaps\Foodmaps.MySQL\SqlQueries.xml
+
+AWS
+-- Dados banco de dados antigos
+C:\Projects\fodmaps\aws\fodmaps.sql
+
+--Imagens antigas
+
+C:\Projects\fodmaps\aws\s3
+
+Basta criar um bucket:
+fodmaps, e com as estruturas iguais ao dos conteudos dentro da pasta S3
